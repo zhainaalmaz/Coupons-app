@@ -44,6 +44,7 @@
 a {
   text-decoration: none;
   color: #393939;
+  cursor: pointer;
 }
 
 .container {
