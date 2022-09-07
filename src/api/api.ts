@@ -6,12 +6,9 @@ export const getSubtitleTags = () => {
 };
 
 export function getHeaderPhone() {
-  return axios.get(BASE_URL + "networks")
+  return axios.get(BASE_URL + 'networks');
 }
-// export const getSubCategorie = () => {
-//   return axios.get(BASE_URL + '/coupons/subcategory/');
-// };
 
-export function  getCoupons  ():any  {
-return axios.get(BASE_URL + "coupons")
+export function getCoupons(): any {
+  return axios.get(BASE_URL + 'coupons');
 }

@@ -1,5 +1,5 @@
 .layout {
-  max-width: 919px;
+  max-width: 1168px;
   margin: 0 auto;
 }
 
@@ -11,7 +11,28 @@
 }
 
 .subtitles {
+  max-width: 919px;
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
 }
+
+.coupons {
+  display: flex;
+  flex-wrap: wrap;
+  padding-top: 24px;
+  gap: 24px 5px;
+  &_button {
+    padding: 12px;
+    text-align: center;
+  }
+}
+
+@media (max-width: 1200px) {
+  .coupons {
+    justify-content: center;
+  }
+  .subtitles {
+    max-width: 100%;
+  }
+} ;

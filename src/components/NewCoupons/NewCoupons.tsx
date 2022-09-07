@@ -61,19 +61,32 @@ const NewCoupons: FC = () => {
             id={item.id}
             backgroundColor={activeButtonId === item.id ? '#4B5FA5' : '#EDF1FD'}
             color={activeButtonId === item.id ? 'white' : '#4B5FA5'}
-            height="32px"
             radius="12px"
             fontSize="13px"
+            padding="8px 16px"
             onClick={() => subCategoryHandler(item.id)}
             children={item.title}
           />
         ))}
       </div>
-      <div>
+      <div className={styles.coupons}>
         {data?.results?.map((item: Icoupon) => (
-          <Card it={item} key={item.id}/>
+          <Card it={item} key={item.id} />
         ))}
       </div>
+      {data.results.length >= 8 && (
+        <div className={styles.coupons_button}>
+          <CouponsButton
+            backgroundColor="#4B5FA5"
+            color="#fff"
+            radius="12px"
+            padding="11.5px 20px"
+            fontSize="13px"
+            onClick={() => console.log('еще')}
+            children="Загрузить еще"
+          />
+        </div>
+      )}
     </div>
   );
 };
