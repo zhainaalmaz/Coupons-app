@@ -1,11 +1,15 @@
-import React from 'react';
-import Header from '../Header/Header';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Footer from "../Footer/Footer";
+import Header from "../Header/Header";
 // import { Counter } from '../Counter/Counter';
-import './App.css';
+import "./App.css";
 
 function App() {
   return (
-    <Header/>
+    <Router>
+      <Header />
+      <Footer />
+    </Router>
   );
 }
 

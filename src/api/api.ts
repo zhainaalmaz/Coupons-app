@@ -4,7 +4,7 @@ import axios from "axios";
 
 const baseURL = "http://185.178.44.117/api/v1/info/"
 
-export function getHeaderPhone() {
+export function getContactInfo() {
   return axios.get(baseURL + "networks")
 }
 

@@ -115,7 +115,7 @@ input:focus {
     right: 10px;
 }
 
-.searchIcon{
+.searchIcon {
     font-size: 2rem !important;
     background-color: transparent;
 }
@@ -126,6 +126,12 @@ input:focus {
 @media screen and (max-width: 900px) {
     .searchOutter {
         flex-grow: 0;
+    }
+
+
+    //remove that
+    .smallSearchInputs {
+        display: none;
     }
 
     .smallSearch {
