@@ -16,3 +16,4 @@ export function getContactInfo() {
 export function getCoupons() {
 return axios.get(BASE_URL + "coupons")
 }
+

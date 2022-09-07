@@ -9,6 +9,9 @@ import NewCouponsPage from "../../pages/NewCouponsPage";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 
+import Signup from '../auth/signup/Signup';
+
+
 function App() {
   const dispatch = useAppDispatch();
 
@@ -22,6 +25,7 @@ function App() {
         <Header />
         <div className="container">
           <Routes>
+            <Route path={"sign-in"} element={<Signup />} />
             <Route path={"/"} element={<Main />} />
             <Route path={"/new-coupons"} element={<NewCouponsPage />} />
           </Routes>
