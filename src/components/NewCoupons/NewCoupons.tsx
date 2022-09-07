@@ -2,6 +2,7 @@ import React, { FC, useEffect, useState } from 'react';
 import styles from './NewCoupons.module.scss';
 import CouponsButton from '../../UI/CoupunsButton/CouponsButton';
 import { useAppSelector } from '../../hooks';
+import Card from '../../UI/Card/Card';
 
 interface Itags {
   data: never[];
@@ -70,9 +71,7 @@ const NewCoupons: FC = () => {
       </div>
       <div>
         {data?.results?.map((item: Icoupon) => (
-          <div key={item.id}>
-            <h3>{item.title}</h3>
-          </div>
+          <Card it={item} key={item.id}/>
         ))}
       </div>
     </div>
