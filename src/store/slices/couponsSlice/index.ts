@@ -1,5 +1,4 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RootState, AppThunk } from '../../store';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import {getCoupons} from '../../../api/api';
 
 
@@ -22,7 +21,6 @@ const initialState: CouponState = {
 export const getCouponsAsync = createAsyncThunk<any, void, {}>(
     'coupons/getCoupons',
     async () => {
-        // console.log('asd')
         const response = await getCoupons();
         return response.data;
     }
@@ -31,18 +29,12 @@ export const getCouponsAsync = createAsyncThunk<any, void, {}>(
 export const couponsSlice = createSlice({
     name: 'CouponState',
     initialState,
-    reducers: {
-        // getCouponsAsync:((state, action) => {
-        //     state = {...action.payload.results}
-        // })
-    },
+    reducers: {},
     extraReducers: (builder) => {
         builder
         .addCase(getCouponsAsync.pending , (state) => {
-            // console.log(state, "state")
             state.status = "loading"
         }).addCase(getCouponsAsync.fulfilled , (state, action) => {
-            // console.log(action.payload, "action")
             state.status = "idle"
             state.coupon = action.payload.results
             state.next = action.payload.next
@@ -55,6 +47,5 @@ export const couponsSlice = createSlice({
     }
 
 });
-
 
 export default couponsSlice.reducer;

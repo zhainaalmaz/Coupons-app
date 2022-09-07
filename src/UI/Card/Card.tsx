@@ -1,5 +1,5 @@
 import React from 'react';
-import {Icoupon} from "../../pages/Main";
+import {Icoupon} from "../../pages/MainPage/Main";
 import styles from "../Card/Card.module.scss"
 import defaultpreview from "../../asets/couponsImg/defoltIMG.png"
 type Props = {

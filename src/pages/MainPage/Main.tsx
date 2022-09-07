@@ -1,8 +1,9 @@
 import React, {useEffect} from 'react';
-import {useAppDispatch, useAppSelector} from "../hooks";
-import {getCouponsAsync} from "../store/slices/couponsSlice";
-import Card from "../UI/Card/Card";
-import styles from "../pages/Main.module.scss"
+import {useAppDispatch, useAppSelector} from "../../hooks";
+import {getCouponsAsync} from "../../store/slices/couponsSlice";
+import Card from "../../UI/Card/Card";
+import styles from "./Main.module.scss"
+
 export interface Icoupon {
     company_logo: string,
     company_name: string,
@@ -17,7 +18,6 @@ export interface Icoupon {
     price: string,
     price_for_coupon: string,
     title: string
-
 }
 
 const Main = () => {
