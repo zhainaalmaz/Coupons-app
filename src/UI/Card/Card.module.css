@@ -3,7 +3,7 @@
   flex-direction: column;
   align-items: flex-start;
   padding: 0;
-  gap: 12px;
+  gap: 8.5px;
   width: 286px;
   height: 403px;
   background: #FFFFFF;
@@ -12,6 +12,14 @@
   flex: none;
   order: 0;
   flex-grow: 0;
+  position: relative;
+}
+
+.favoriteIcon {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  cursor: pointer;
 }
 
 .couponLogoBox {
@@ -22,7 +30,7 @@
 .couponLogoIMG {
   width: 100%;
   height: 100%;
-  border-radius: 12px;
+  border-radius: 8px 8px 0 0;
 }
 
 .companyTitile {
@@ -79,6 +87,11 @@
   order: 0;
   align-self: stretch;
   flex-grow: 0;
+}
+
+.description p {
+  padding: 0 0 0 12px;
+  margin: 0;
 }
 
 .price {
@@ -148,6 +161,19 @@
   flex: none;
   order: 0;
   flex-grow: 0;
+}
+
+.cardInfoBox {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.cardPriceBox {
+  display: flex;
+  flex-direction: column;
+  gap: 8px 0;
 }
 
 /*# sourceMappingURL=Card.module.css.map */
