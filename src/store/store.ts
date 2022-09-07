@@ -1,13 +1,13 @@
 import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
 import tagSlice from "./slices/tagSlice/tagSlice";
 import couponSlice from "./slices/couponsSlice";
-import headerSlice from "./slices/headerSlice"
+import contactSlice from "./slices/contactSlice"
 
 export const store = configureStore({
   reducer: {
     coupons: couponSlice,
     tag: tagSlice,
-    header: headerSlice,
+    contacts: contactSlice,
   }})
 
 export type AppDispatch = typeof store.dispatch;

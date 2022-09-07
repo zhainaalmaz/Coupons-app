@@ -6,7 +6,8 @@ import { asyncSubtitleTags } from "../../store/slices/tagSlice/tagSlice";
 import "./App.css";
 import Main from "../../pages/MainPage/Main";
 import NewCouponsPage from "../../pages/NewCouponsPage";
-import Header from '../Header/Header';
+import Header from "../Header/Header";
+import Footer from "../Footer/Footer";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -17,17 +18,17 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
-      <Header/>
+      <div className="App-header">
+        <Header />
         <div className="container">
           <Routes>
             <Route path={"/"} element={<Main />} />
             <Route path={"/new-coupons"} element={<NewCouponsPage />} />
           </Routes>
         </div>
-      </header>
+        <Footer />
+      </div>
     </div>
-
   );
 }
 

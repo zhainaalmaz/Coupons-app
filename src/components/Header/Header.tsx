@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Hidden, IconButton, SwipeableDrawer } from "@mui/material";
+import { Badge, Hidden, IconButton, SwipeableDrawer } from "@mui/material";
+
 import CloseIcon from "@mui/icons-material/Close";
 import styles from "./Header.module.scss";
 import logo from "../../assets/logo/zeon-logo.svg";
@@ -9,15 +10,14 @@ import logOut from "../../assets/headerIcons/log-in.svg";
 import Search from "../Search/Search";
 import BurgerIcon from "../../assets/headerIcons/burgerIcon.png";
 import { useAppDispatch, useAppSelector } from "../../hooks";
-import { getPhoneAsync } from "../../store/slices/headerSlice";
+import { getContactAsync } from "../../store/slices/contactSlice";
 
 const Header = () => {
   const [open, setOpen] = React.useState<boolean>(false);
-  const data = useAppSelector((s) => s);
   const dispatch = useAppDispatch();
-  const state = useAppSelector((state) => state.header);
+  const state = useAppSelector((state) => state.contacts);
   useEffect(() => {
-    dispatch(getPhoneAsync());
+    dispatch(getContactAsync());
   }, [dispatch]);
   return (
     <header>
@@ -31,14 +31,14 @@ const Header = () => {
                 <span>Новости</span>
               </div>
               <div className={styles.headerTopRight}>
-                <p>
+                <div>
                   <span>Тел. для справки:</span>
                   {state.status === "loading" ? (
                     <span>Loading...</span>
                   ) : (
                     <a href="tel:+996 500 123 456">{state.phone}</a>
                   )}
-                </p>
+                </div>
               </div>
             </div>
           </Hidden>
