@@ -12,6 +12,11 @@ export function getContactInfo() {
 export function getCoupons() {
   return axios.get(BASE_URL + "coupons");
 }
+
 export function getHeaderPhone() {
   return axios.get(BASE_URL + "networks");
+}
+
+export function getCategories() {
+    return axios.get(BASE_URL +"categories/")
 }
