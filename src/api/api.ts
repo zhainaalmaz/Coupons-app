@@ -6,12 +6,17 @@ export const getSubtitleTags = () => {
 };
 
 export function getContactInfo() {
-  return axios.get(BASE_URL + "info/networks");
+  return axios.get(BASE_URL + 'info/networks');
 }
 
 export function getCoupons() {
   return axios.get(BASE_URL + "coupons");
 }
+
 export function getHeaderPhone() {
   return axios.get(BASE_URL + "networks");
+}
+
+export function getHelpInfo() {
+  return axios.get(BASE_URL + 'info/faq');
 }

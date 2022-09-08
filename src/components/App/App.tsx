@@ -8,8 +8,11 @@ import Main from "../../pages/MainPage/Main";
 import NewCouponsPage from "../../pages/NewCouponsPage";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
+import ContactPage from "../../pages/ContactPage";
+import AboutPage from "../../pages/AboutUsPage/AboutPage";
+import HelpPage from "../../pages/HelpPage";
 
-import Signup from '../auth/signup/Signup';
+import Signup from "../auth/signup/Signup";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -22,11 +25,14 @@ function App() {
     <div className="App">
       <div className="App-header">
         <Header />
-          <Routes>
-            <Route path={"sign-in"} element={<Signup />} />
-            <Route path={"/"} element={<Main />} />
-            <Route path={"/new-coupons"} element={<NewCouponsPage />} />
-          </Routes>
+        <Routes>
+          <Route path={"sign-in"} element={<Signup />} />
+          <Route path={"/"} element={<Main />} />
+          <Route path={"/new-coupons"} element={<NewCouponsPage />} />
+          <Route path={"/about"} element={<AboutPage />} />
+          <Route path={"/contacts"} element={<ContactPage />} />
+          <Route path={"/help"} element={<HelpPage />} />
+        </Routes>
         <Footer />
       </div>
     </div>
