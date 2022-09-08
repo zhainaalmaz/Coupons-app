@@ -1,23 +1,15 @@
 import {
   Formik,
-  FormikHelpers,
-  FormikProps,
   Form,
   Field,
-  FieldProps,
   ErrorMessage,
 } from "formik";
 import React, { useState } from "react";
-import AuthButton from "../../UI/authButton/AuthButton";
+import AuthButton from "../../../UI/AuthButton/AuthButton";
 import styles from "./Signup.module.scss";
 import * as Yup from "yup";
 import { ReactComponent as EyeClose } from "../../../assets/auth-svg/eye-close.svg";
 import { ReactComponent as EyeOpen } from "../../../assets/auth-svg/eye-open.svg";
-// import PhoneInput from "react-phone-input-2";
-// import "react-phone-input-2/lib/style.css";
-
-// import "react-phone-number-input/style.css";
-// import PhoneInput from "react-phone-number-input";
 import PhoneInputField from "./PhoneInput/PhoneInput";
 
 export interface FormValues {
