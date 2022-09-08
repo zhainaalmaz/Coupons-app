@@ -1,0 +1,19 @@
+.layout {
+  max-width: 919px;
+  margin: 0 auto;
+}
+
+.title {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 29px;
+  color: #181818;
+}
+
+.subtitles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/*# sourceMappingURL=NewCoupons.module.css.map */

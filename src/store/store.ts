@@ -1,10 +1,11 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import couponSlice from './slices/couponsSlice';
+import categoriesSlice from "./slices/categoriesSlice";
 
 export const store = configureStore({
   reducer: {
     coupons: couponSlice,
-
+    categories: categoriesSlice
   },
 });
 

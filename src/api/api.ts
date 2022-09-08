@@ -16,3 +16,6 @@ export function  getCoupons  ():any  {
   return axios.get(baseURL + "coupons")
 }
 
+export function getCategories ():any {
+    return axios.get(baseURL +"categories/")
+}
