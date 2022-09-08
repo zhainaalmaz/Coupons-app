@@ -1,15 +1,20 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Main from "../../pages/MainPage/Main";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
-// import { Counter } from '../Counter/Counter';
+import SearchPage from "../SearchPage/SearchPage";
 import "./App.css";
 
 function App() {
   return (
-    <Router>
+    <div>
       <Header />
+      <Routes>
+        <Route path={"/"} element={<Main />} />
+        <Route path="/searchpage/:searchValue" element={<SearchPage />} />
+      </Routes>
       <Footer />
-    </Router>
+    </div>
   );
 }
 

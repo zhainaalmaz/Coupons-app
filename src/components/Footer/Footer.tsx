@@ -14,7 +14,7 @@ const Footer = () => {
   const state = useAppSelector((state) => state.contacts);
   useEffect(() => {
     dispatch(getContactAsync());
-  }, [dispatch]);
+  }, []);
   return (
     <footer>
       <div className="container">

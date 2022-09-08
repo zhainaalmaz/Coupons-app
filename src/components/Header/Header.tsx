@@ -17,7 +17,7 @@ const Header = () => {
   const state = useAppSelector((state) => state.contacts);
   useEffect(() => {
     dispatch(getContactAsync());
-  }, [dispatch]);
+  }, []);
   return (
     <header>
       <div className={styles.headerLines}>
