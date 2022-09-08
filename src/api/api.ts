@@ -6,13 +6,13 @@ export const getSubtitleTags = () => {
 };
 
 export function getContactInfo() {
-  return axios.get(BASE_URL + "info/networks")
+  return axios.get(BASE_URL + 'info/networks');
 }
 
-// export const getSubCategorie = () => {
-//   return axios.get(BASE_URL + '/coupons/subcategory/');
-// };
-
 export function getCoupons() {
-return axios.get(BASE_URL + "coupons")
+  return axios.get(BASE_URL + 'coupons');
+}
+
+export function getHelpInfo() {
+  return axios.get(BASE_URL + 'info/faq/');
 }

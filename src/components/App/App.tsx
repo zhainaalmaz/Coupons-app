@@ -1,13 +1,16 @@
-import React, { useEffect } from "react";
-import { Route, Routes } from "react-router-dom";
-import { useAppDispatch } from "../../hooks";
+import React, { useEffect } from 'react';
+import { Route, Routes } from 'react-router-dom';
+import { useAppDispatch } from '../../hooks';
 
-import { asyncSubtitleTags } from "../../store/slices/tagSlice/tagSlice";
-import "./App.css";
-import Main from "../../pages/MainPage/Main";
-import NewCouponsPage from "../../pages/NewCouponsPage";
-import Header from "../Header/Header";
-import Footer from "../Footer/Footer";
+import { asyncSubtitleTags } from '../../store/slices/tagSlice/tagSlice';
+import './App.css';
+import Main from '../../pages/MainPage/Main';
+import NewCouponsPage from '../../pages/NewCouponsPage';
+import Header from '../Header/Header';
+import Footer from '../Footer/Footer';
+import ContactPage from '../../pages/ContactPage';
+import AboutPage from '../../pages/AboutUsPage/AboutPage';
+import HelpPage from '../../pages/HelpPage';
 
 function App() {
   const dispatch = useAppDispatch();
@@ -20,12 +23,13 @@ function App() {
     <div className="App">
       <div className="App-header">
         <Header />
-        <div className="container">
-          <Routes>
-            <Route path={"/"} element={<Main />} />
-            <Route path={"/new-coupons"} element={<NewCouponsPage />} />
-          </Routes>
-        </div>
+        <Routes>
+          <Route path={'/'} element={<Main />} />
+          <Route path={'/new-coupons'} element={<NewCouponsPage />} />
+          <Route path={'/about'} element={<AboutPage />} />
+          <Route path={'/contacts'} element={<ContactPage />} />
+          <Route path={'/help'} element={<HelpPage />} />
+        </Routes>
         <Footer />
       </div>
     </div>

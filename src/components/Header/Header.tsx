@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from "react";
-import { Badge, Hidden, IconButton, SwipeableDrawer } from "@mui/material";
+import React, { useEffect, useState } from 'react';
+import { Badge, Hidden, IconButton, SwipeableDrawer } from '@mui/material';
 
-import CloseIcon from "@mui/icons-material/Close";
-import styles from "./Header.module.scss";
-import logo from "../../assets/logo/zeon-logo.svg";
-import heartIcon from "../../assets/headerIcons/heart.svg";
-import couponIcon from "../../assets/headerIcons/coupon.svg";
-import logOut from "../../assets/headerIcons/log-in.svg";
-import Search from "../Search/Search";
-import BurgerIcon from "../../assets/headerIcons/burgerIcon.png";
-import { useAppDispatch, useAppSelector } from "../../hooks";
-import { getContactAsync } from "../../store/slices/contactSlice";
+import CloseIcon from '@mui/icons-material/Close';
+import styles from './Header.module.scss';
+import logo from '../../assets/logo/zeon-logo.svg';
+import heartIcon from '../../assets/headerIcons/heart.svg';
+import couponIcon from '../../assets/headerIcons/coupon.svg';
+import logOut from '../../assets/headerIcons/log-in.svg';
+import Search from '../Search/Search';
+import BurgerIcon from '../../assets/headerIcons/burgerIcon.png';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { getContactAsync } from '../../store/slices/contactSlice';
 
 const Header = () => {
   const [open, setOpen] = React.useState<boolean>(false);
@@ -33,7 +33,7 @@ const Header = () => {
               <div className={styles.headerTopRight}>
                 <div>
                   <span>Тел. для справки:</span>
-                  {state.status === "loading" ? (
+                  {state.status === 'loading' ? (
                     <span>Loading...</span>
                   ) : (
                     <a href="tel:+996 500 123 456">{state.phone}</a>
@@ -110,9 +110,9 @@ const Header = () => {
               <div className={styles.iconWrapper}>
                 <img
                   style={{
-                    width: "20px",
-                    marginRight: "-1px",
-                    marginTop: "-3px",
+                    width: '20px',
+                    marginRight: '-1px',
+                    marginTop: '-3px',
                   }}
                   src={couponIcon}
                   alt="coupon"
