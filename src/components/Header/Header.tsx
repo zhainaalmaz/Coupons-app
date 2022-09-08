@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Badge, Hidden, IconButton, SwipeableDrawer } from "@mui/material";
+import React, { useEffect } from "react";
+import { Hidden, IconButton, SwipeableDrawer } from "@mui/material";
 
 import CloseIcon from "@mui/icons-material/Close";
 import styles from "./Header.module.scss";
@@ -11,6 +11,7 @@ import Search from "../Search/Search";
 import BurgerIcon from "../../assets/headerIcons/burgerIcon.png";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { getContactAsync } from "../../store/slices/contactSlice";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const [open, setOpen] = React.useState<boolean>(false);
@@ -26,9 +27,15 @@ const Header = () => {
           <Hidden mdDown>
             <div className={styles.headerTop}>
               <div className={styles.headerTopLeft}>
-                <span className={styles.links}>О нас</span>
-                <span>Коллекции</span>
-                <span>Новости</span>
+                <Link to="about">
+                  <span className={styles.links}>О нас</span>
+                </Link>
+                <Link to="help">
+                  <span className={styles.links}>Помощь</span>
+                </Link>
+                <Link to="news">
+                  <span className={styles.links}>Новости</span>
+                </Link>
               </div>
               <div className={styles.headerTopRight}>
                 <div>
@@ -52,24 +59,34 @@ const Header = () => {
                 <img src={BurgerIcon} alt="burger-icon" />
               </div>
             </Hidden>
-            <div className={styles.logo}>
-              <img src={logo} alt="the logo" />
-            </div>
+            <Link to="/">
+              <div className={styles.logo}>
+                <img src={logo} alt="the logo" />
+              </div>
+            </Link>
             <Search />
             <Hidden mdDown>
               <div className={styles.headerExtraInfo}>
-                <div className={styles.iconWrapper}>
-                  <img src={heartIcon} alt="heart-icon" />
-                  <span className={styles.headerOption}>Избранное</span>
-                </div>
-                <div className={styles.iconWrapper}>
-                  <img src={couponIcon} alt="coupon-icon" />
-                  <span className={styles.headerOption}>Мои купоны</span>
-                </div>
-                <div className={styles.iconWrapper}>
-                  <img src={logOut} alt="log-out" />
-                  <span className={styles.headerOptionLog}>Войти</span>
-                </div>
+                <Link to="favorites">
+                  <div className={styles.iconWrapper}>
+                    <img src={heartIcon} alt="heart-icon" />
+                    <span className={styles.headerOption}>Избранное</span>
+                  </div>
+                </Link>
+                <Link to="my-coupons">
+                  <div className={styles.iconWrapper}>
+                    <img src={couponIcon} alt="coupon-icon" />
+                    <span className={styles.headerOption}>Мои купоны</span>
+                  </div>
+                </Link>
+
+                <Link to="sign-up">
+                  {" "}
+                  <div className={styles.iconWrapper}>
+                    <img src={logOut} alt="log-out" />
+                    <span className={styles.headerOptionLog}>Войти</span>
+                  </div>
+                </Link>
               </div>
             </Hidden>
           </div>
@@ -96,9 +113,15 @@ const Header = () => {
             </div>
             <div className={styles.burgerTop}>
               <div className={styles.burgerTopLeft}>
-                <p className={styles.links}>О нас</p>
-                <p className={styles.links}>Новости</p>
-                <p className={styles.links}>Коллекции</p>
+                <Link to="about">
+                  <span className={styles.links}>О нас</span>
+                </Link>
+                <Link to="help">
+                  <span className={styles.links}>Помощь</span>
+                </Link>
+                <Link to="news">
+                  <span className={styles.links}>Новости</span>
+                </Link>
                 <hr className={styles.burgerLine} />
               </div>
             </div>

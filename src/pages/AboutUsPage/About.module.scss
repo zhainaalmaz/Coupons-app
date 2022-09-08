@@ -1,0 +1,32 @@
+.layout {
+  padding: 16px 0;
+  background-color: #e5e5e5;
+}
+
+.info {
+  padding: 60px 24px;
+  background: #ffffff;
+  border-radius: 12px;
+  max-width: 70%;
+}
+
+.wrapper {
+  display: flex;
+  gap: 10px;
+  min-height: 600px;
+}
+
+@media (max-width: 992px) {
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .info {
+    padding: 30px 18px;
+    max-width: 100%;
+    h2 {
+      text-align: center;
+    }
+  }
+}

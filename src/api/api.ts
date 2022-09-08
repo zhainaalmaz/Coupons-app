@@ -20,3 +20,7 @@ export function getHeaderPhone() {
 export function getCategories() {
     return axios.get(BASE_URL +"categories/")
 }
+
+export function getHelpInfo() {
+  return axios.get(BASE_URL + 'info/faq/');
+}
