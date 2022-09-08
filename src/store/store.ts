@@ -1,6 +1,8 @@
 import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
 import tagSlice from "./slices/tagSlice/tagSlice";
 import couponSlice from "./slices/couponsSlice";
+import confidentialSlice from './slices/confidentialSlice';
+
 import contactSlice from "./slices/contactSlice"
 import categoriesSlice from "./slices/categoriesSlice";
 import helpInfoSlice from './slices/helpInfoSlice/helpInfoSlice';
@@ -14,7 +16,10 @@ export const store = configureStore({
     help: helpInfoSlice,
     categories: categoriesSlice,
     search: searchSlice,
-  }})
+    confidential: confidentialSlice
+  },
+});
+
 
 export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;

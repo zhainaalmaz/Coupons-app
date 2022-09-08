@@ -28,3 +28,7 @@ export function getCategories() {
 export function getHelpInfo() {
   return axios.get(BASE_URL + 'info/faq/');
 }
+
+export function getConfidentials() {
+  return axios.get(BASE_URL + "info/privacy-policy/")
+}

@@ -8,6 +8,7 @@ import mail from "../../assets/footerIcons/mail.svg";
 import phone from "../../assets/footerIcons/phone.svg";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { getContactAsync } from "../../store/slices/contactSlice";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   const dispatch = useAppDispatch();
@@ -25,13 +26,18 @@ const Footer = () => {
             <h4>Покупателям</h4>
             <p>Как сделать заказ</p>
             <p>Способы оплаты</p>
-            <p>Вопросы и ответы</p>
-            <p>Политика конфиденциальности</p>
+            <Link to="help">
+            <p>Вопросы и ответы</p></Link>
+            <Link to="confidential">
+              <p>Политика конфиденциальности</p>
+            </Link>
           </div>
           <div className={styles.footerBlock}>
             <h4>Компания</h4>
-            <p>О нас</p>
-            <p>Контакты</p>
+            
+            <Link to="about"><p>О нас</p></Link>
+            <Link to="contacts"><p>Контакты</p></Link>
+  
           </div>
           <div className={styles.footerBlock}>
             <h4>Мы в соц сетях</h4>

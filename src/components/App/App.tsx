@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
-import { useAppDispatch } from "../../hooks";
 
-import { asyncSubtitleTags } from "../../store/slices/tagSlice/tagSlice";
+import Confidential from "../Confidential/Confidential";
+
 import "./App.css";
 import Main from "../../pages/MainPage/Main";
 import NewCouponsPage from "../../pages/NewCouponsPage";
@@ -14,18 +14,14 @@ import HelpPage from "../../pages/HelpPage";
 import SearchPage from "../../pages/SearchPage/SearchPage";
 
 import Signup from "../auth/signup/Signup";
+import ScrollToTop from "../ScrollToTop";
 
 function App() {
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    dispatch(asyncSubtitleTags());
-  }, [dispatch]);
-
   return (
     <div className="App">
       <div className="App-header">
         <Header />
+        <ScrollToTop />
         <Routes>
           <Route path={"/"} element={<Main />} />
           <Route path={"sign-up"} element={<Signup />} />
@@ -34,6 +30,7 @@ function App() {
           <Route path={"contacts"} element={<ContactPage />} />
           <Route path={"help"} element={<HelpPage />} />
           <Route path="/searchpage/:searchValue" element={<SearchPage />} />
+          <Route path={"/confidential"} element={<Confidential />} />
         </Routes>
 
         <Footer />
