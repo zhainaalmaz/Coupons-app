@@ -22,3 +22,7 @@ export function  getCoupons  ():any  {
   return axios.get(baseURL + "coupons")
 }
 
+export function getConfidentials() {
+  return axios.get(baseURL + "info/privacy-policy/")
+}
+
