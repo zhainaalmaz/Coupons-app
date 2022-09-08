@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { searchCoupons } from "../../api/api";
 import Card from "../../UI/Card/Card";
-import { ISearchItem } from "../Search/Search";
+import { ISearchItem } from "../../components/Search/Search";
 import styles from "./SearchPage.module.scss";
 
 const SearchPage = () => {
