@@ -11,9 +11,9 @@ const NewCouponsPage = () => {
   }, []);
 
   return (
-    <>
+    <div className="container">
       <NewCoupons />
-    </>
+    </div>
   );
 };
 
