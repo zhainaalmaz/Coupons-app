@@ -7,13 +7,13 @@ type Props = {
     it: Icoupon
 }
 
+
 const Card = ({ it }: Props) => {
     const [favorite, setFavorite] = useState(false)
 
     useEffect(() => {
-        const div = document.getElementById(it.id + "")
-        // @ts-ignore
-        div.innerHTML = it.conditions
+        const div: null | HTMLElement  = document.getElementById(it.id + "")
+        if(div) div.innerHTML = it.conditions
     }, [])
 
     return (

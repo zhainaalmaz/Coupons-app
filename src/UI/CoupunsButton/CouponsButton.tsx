@@ -1,20 +1,20 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 interface IProps {
   color: string;
   children?: React.ReactNode;
-  height: string;
   onClick: () => void;
   radius: string;
-  id: number;
+  id?: number;
   backgroundColor: string;
   fontSize: string;
+  padding?: string;
 }
 
 const CouponsButton: React.FC<IProps> = ({
+  padding,
   color,
   children,
-  height,
   onClick,
   radius,
   backgroundColor,
@@ -27,9 +27,9 @@ const CouponsButton: React.FC<IProps> = ({
         color: color,
         backgroundColor: backgroundColor,
         borderRadius: radius,
-        height,
+
         border: 'none',
-        padding: '8px 16px',
+        padding: padding,
         fontSize,
         cursor: 'pointer',
       }}
