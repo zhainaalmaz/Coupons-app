@@ -19,7 +19,7 @@ const Header = () => {
   const state = useAppSelector((state) => state.contacts);
   useEffect(() => {
     dispatch(getContactAsync());
-  }, [dispatch]);
+  }, []);
   return (
     <header>
       <div className={styles.headerLines}>
@@ -33,8 +33,8 @@ const Header = () => {
                 <Link to="help">
                   <span className={styles.links}>Помощь</span>
                 </Link>
-                <Link to="news">
-                  <span className={styles.links}>Новости</span>
+                <Link to="contacts">
+                  <span className={styles.links}>Контакты</span>
                 </Link>
               </div>
               <div className={styles.headerTopRight}>
@@ -119,8 +119,8 @@ const Header = () => {
                 <Link to="help">
                   <span className={styles.links}>Помощь</span>
                 </Link>
-                <Link to="news">
-                  <span className={styles.links}>Новости</span>
+                <Link to="contacts">
+                  <span className={styles.links}>Контакты</span>
                 </Link>
                 <hr className={styles.burgerLine} />
               </div>

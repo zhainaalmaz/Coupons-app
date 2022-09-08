@@ -11,6 +11,7 @@ import Footer from "../Footer/Footer";
 import ContactPage from "../../pages/ContactPage";
 import AboutPage from "../../pages/AboutUsPage/AboutPage";
 import HelpPage from "../../pages/HelpPage";
+import SearchPage from "../../pages/SearchPage/SearchPage";
 
 import Signup from "../auth/signup/Signup";
 
@@ -32,6 +33,7 @@ function App() {
           <Route path={"about"} element={<AboutPage />} />
           <Route path={"contacts"} element={<ContactPage />} />
           <Route path={"help"} element={<HelpPage />} />
+          <Route path="/searchpage/:searchValue" element={<SearchPage />} />
         </Routes>
 
         <Footer />

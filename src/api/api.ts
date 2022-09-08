@@ -13,6 +13,10 @@ export function getCoupons() {
   return axios.get(BASE_URL + "coupons");
 }
 
+export function searchCoupons(params: string) {
+  return axios.get(BASE_URL + "coupons/search/?search=" + params)
+}
+
 export function getHeaderPhone() {
   return axios.get(BASE_URL + "networks");
 }

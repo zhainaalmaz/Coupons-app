@@ -4,6 +4,7 @@ import couponSlice from "./slices/couponsSlice";
 import contactSlice from "./slices/contactSlice"
 import categoriesSlice from "./slices/categoriesSlice";
 import helpInfoSlice from './slices/helpInfoSlice/helpInfoSlice';
+import searchSlice from './slices/searchSlice';
 
 export const store = configureStore({
   reducer: {
@@ -11,7 +12,8 @@ export const store = configureStore({
     tag: tagSlice,
     contacts: contactSlice,
     help: helpInfoSlice,
-    categories: categoriesSlice
+    categories: categoriesSlice,
+    search: searchSlice,
   }})
 
 export type AppDispatch = typeof store.dispatch;

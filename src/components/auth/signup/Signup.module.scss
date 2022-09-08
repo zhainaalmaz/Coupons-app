@@ -1,6 +1,12 @@
 .signup {
   padding: 111px 0 109px 0;
   background-color: #e5e5e5;
+
+  * {
+    padding: 0;
+    box-sizing: border-box;
+  }
+
   .form {
     max-width: 316px;
     margin: 0 auto;
@@ -42,7 +48,7 @@
     .formItem input {
       padding: 13px;
       border: none;
-    //   outline: none;
+      //   outline: none;
       border-top-right-radius: 12px;
       border-bottom-right-radius: 12px;
     }

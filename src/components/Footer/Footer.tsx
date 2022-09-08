@@ -16,7 +16,7 @@ const Footer = () => {
   useEffect(() => {
     dispatch(getContactAsync());
   }, []);
-  
+
   return (
     <footer>
       <div className="container">

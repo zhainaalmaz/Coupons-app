@@ -1,5 +1,6 @@
 .searchOutter {
     flex-grow: 1;
+    position: relative;
 }
 
 .searchInputs {
@@ -34,41 +35,40 @@ input:focus {
 }
 
 .dataResultOutter {
-    width: 683px;
     height: 309px;
     position: absolute;
-    top: 9.3%;
-    left: 27%;
+    top: 71%;
+    left: 0;
+    right: 0;
     z-index: 5;
     border: 1px solid #D3D3D3;
     background-color: white;
+    border-radius: 12px;
 }
 
 .dataResult {
-    width: 634px;
     height: 250px;
     background-color: white;
     overflow: hidden;
     overflow-y: auto;
-    margin-top: 50px;
+    margin-top: 18px;
     padding: 0px 20px 0px 20px;
 }
 
 .dataResult::-webkit-scrollbar {
-    width: 3px;
+    width: 4px;
 }
 
 .dataResult::-webkit-scrollbar-thumb {
-    background: #979797;
-    opacity: 0.6;
+    background: #4F70E2;
     border-radius: 4px;
-    width: 3px;
-    height: 45px;
+    width: 4px;
+    height: 43px;
 }
 
 .dataResult::-webkit-scrollbar-track {
-    background: #EEEEEE;
-    border: 1px solid #EEEEEE;
+    background: #EDF1FD;
+    border: 1px solid #EDF1FD;
     border-radius: 4px;
 }
 
@@ -82,13 +82,23 @@ input:focus {
     font-weight: 400;
     font-size: 14px;
     text-decoration: none;
-    border-bottom: 1px solid #EEEEEE;
+    border-bottom: 1px solid #EDF1FD;
+    cursor: pointer;
+
+    &:hover {
+        color: #4B5FA5;
+    }
 }
 
 
 .smallSearch {
     display: none;
     position: relative;
+}
+
+.smallSearchInputs {
+    display: flex;
+    justify-content: space-between;
 }
 
 .smallSearchInputs input {
@@ -103,24 +113,10 @@ input:focus {
     right: -1px;
 }
 
-.smallSearchIcon {
-    width: 30px;
-    background-color: #F8F8F8;
-    display: grid;
-    place-items: center;
-    height: 46px;
-    z-index: 5;
-    position: absolute;
-    top: 64px;
-    right: 10px;
-}
-
 .searchIcon {
     font-size: 2rem !important;
     background-color: transparent;
 }
-
-
 
 
 @media screen and (max-width: 900px) {
@@ -128,39 +124,86 @@ input:focus {
         flex-grow: 0;
     }
 
+    .smallSearchOutter {
+        top: 78px;
+        position: fixed;
+        background-color: #00000097;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        z-index: 20;
+        overflow-y: auto;
+    }
 
-    //remove that
     .smallSearchInputs {
-        display: none;
+        display: block;
+        position: relative;
     }
 
     .smallSearch {
         display: block;
     }
 
+    .smallSearchInputs input {
+        height: 44px;
+        width: 77%;
+        border: 0;
+        background-color: #F8F8F8;
+        padding-left: 10px;
+        position: fixed;
+        z-index: 5;
+        top: 82px;
+        left: 10%;
+        right: 10%;
+        border-radius: 12px;
+    }
+
+    .smallSearchIcon {
+        width: 30px;
+        background-color: #F8F8F8;
+        display: grid;
+        place-items: center;
+        height: 46px;
+        z-index: 5;
+        position: fixed;
+        top: 82px;
+        right: 13%;
+    }
+
     .search {
         display: none;
     }
 
+
     .dataResultOutter {
-        width: 292px;
+        z-index: 50;
         height: 306px;
-        position: absolute;
-        top: 81px;
-        left: 12px;
-        z-index: 4;
+        position: fixed;
+        top: 128px;
+        left: 10%;
+        right: 12%;
         border: 1px solid #D3D3D3;
         background-color: white;
     }
 
     .dataResult {
-        width: 242px;
         height: 240px;
-        background-color: white;
-        overflow: hidden;
-        overflow-y: auto;
-        margin-top: 50px;
+        position: fixed;
+        top: 104px;
+        left: 11%;
+        right: 14%;
+        margin-top: 30px;
         padding: 0px 20px 0px 20px;
     }
 
+    .dataResult .dataItem {
+        min-height: 62px;
+    }
+
+}
+
+@media screen and (max-width: 576px){
+    .dataResultOutter {
+        right: 10%;
+    }
 }
