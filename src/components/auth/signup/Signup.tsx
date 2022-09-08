@@ -8,7 +8,7 @@ import {
   ErrorMessage,
 } from "formik";
 import React, { useState } from "react";
-import AuthButton from "../../UI/authButton/AuthButton";
+import AuthButton from "../../../UI/AuthButton/AuthButton";
 import styles from "./Signup.module.scss";
 import * as Yup from "yup";
 import { ReactComponent as EyeClose } from "../../../assets/auth-svg/eye-close.svg";
