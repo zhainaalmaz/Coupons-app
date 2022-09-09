@@ -3,6 +3,7 @@ import tagSlice from './slices/tagSlice/tagSlice';
 import couponSlice from './slices/couponsSlice';
 import contactSlice from './slices/contactSlice';
 import helpInfoSlice from './slices/helpInfoSlice/helpInfoSlice';
+import favoriteSlice from './slices/favoriteSlice/favoriteSlice';
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
     tag: tagSlice,
     contacts: contactSlice,
     help: helpInfoSlice,
+    favorite: favoriteSlice,
   },
 });
 
