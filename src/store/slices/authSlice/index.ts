@@ -41,7 +41,6 @@ const authSlice = createSlice({
 
             }).addCase(authThunk.fulfilled, (state, action) => {
                 state.status = "fulfilled"
-                
             }).addCase(authThunk.rejected, (state, action) => {
                 state.status = "rejected"
                 state.error = action.error.message

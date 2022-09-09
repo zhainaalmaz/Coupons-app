@@ -25,7 +25,7 @@ const initialValues: IConfCode = {
 const Enter: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { error } = useAppSelector((state) => state.login);
+  const { error, status } = useAppSelector((state) => state.login);
   const [userPhone, setUserPhone] = useState(
     JSON.parse(localStorage.getItem("user") || "")
   );
@@ -44,17 +44,23 @@ const Enter: React.FC = () => {
                 password: values.password,
               })
             );
-            error != "Request failed with status code 401" && navigate("/");
-            // console.log(actions);
-            // console.log({ values, actions });
-            // alert(JSON.stringify(values, null, 2));
+            // status === "fulfilled" && navigate("/");
+            console.log("try");
+console.log(status);
+
+            if (status === "rejected") {
+              console.log("rejected");
+
+              navigate("/");
+            }
+
             actions.setSubmitting(false);
           }}
         >
           <Form className={styles.form}>
             <div className={styles.inputsWrapper}>
               <Field
-                type="tel"
+                type="password"
                 name="password"
                 className={styles.formItem}
                 placeholder="Введите код подтверждения"

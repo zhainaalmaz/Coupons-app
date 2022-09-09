@@ -29,7 +29,10 @@ const initialValues: FormValue = {
 const Signin: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { error } = useAppSelector((state) => state.check);
+  const { error, statusCode } = useAppSelector((state) => state.check);
+  if (statusCode) {
+    navigate("/enter");
+  }
   return (
     <div className={styles.signin}>
       <div className="container">
@@ -45,14 +48,9 @@ const Signin: React.FC = () => {
                   phone: values.phone,
                 })
               );
-              {
-                error === "Такой номер телефона существует" &&
-                  navigate("/enter");
-              }
-              navigate("/enter");
               localStorage.setItem("user", JSON.stringify(values));
-              console.log(values);
-              actions.setSubmitting(false);
+              //   console.log(values);
+              //   actions.setSubmitting(false);
             }}
           >
             <Form className={styles.form}>
@@ -64,6 +62,9 @@ const Signin: React.FC = () => {
                   component={PhoneInputField}
                   placeholder="Введите номер телефона"
                 />
+                {error === "Request failed with status code 404" && (
+                  <div className={styles.errorCode}>Такого номера нет</div>
+                )}
                 <ErrorMessage
                   component="p"
                   className={styles.errorMessage}

@@ -15,7 +15,7 @@ export const loginThunk = createAsyncThunk(
     'login',
     async (data: object) => {
         // console.log(data);
-        
+
         const response = await login(data)
         // console.log(response);
         return response
@@ -32,13 +32,15 @@ const loginSlice = createSlice({
                 state.status = "loading"
             }).addCase(loginThunk.fulfilled, (state, action) => {
                 state.status = "fulfilled"
+                state.error = action.meta.requestStatus
+
                 localStorage.setItem('currentUser', JSON.stringify(action.payload))
-                
+
             }).addCase(loginThunk.rejected, (state, action) => {
                 state.status = "rejected"
                 state.error = action.error.message
-                console.log(action.error.message)
-                
+                console.log("login", action.error.message)
+
                 // Request failed with status code 400
             })
     },

@@ -41,7 +41,7 @@ const confirmSlice = createSlice({
             }).addCase(confirmThunk.rejected, (state, action) => {
                 state.status = "rejected"
                 state.error = action.error.message
-                console.log('confirm-error:',action.error.message)
+                // console.log('confirm-error:',action.error.message)
                 // Request failed with status code 403
                 // Request failed with status code 400
             })

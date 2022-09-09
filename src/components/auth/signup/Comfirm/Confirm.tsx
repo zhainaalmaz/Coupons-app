@@ -8,12 +8,11 @@ import { confirmThunk } from "../../../../store/slices/confirmSlice";
 import { loginThunk } from "../../../../store/slices/loginSlice";
 import { useNavigate } from "react-router-dom";
 
-
 const ConfirmSchema = Yup.object().shape({
   confirmation_code: Yup.string()
     .min(1, "Too Short!")
     .max(6, "Too Long!")
-    .required("Введите код")
+    .required("Введите код"),
 });
 
 interface IConfCode {
@@ -28,18 +27,23 @@ const Confirm = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { statusCode, error } = useAppSelector((state) => state.confirm);
-  const [user, setUser] = useState(
-    JSON.parse(localStorage.getItem("user") || "")
-  );
+  // const [user, setUser] = useState(
+  //   JSON.parse(localStorage.getItem("user") || "")
+  // );
+  const user = JSON.parse(localStorage.getItem("user") || "")
 
-  if (statusCode) {
-    dispatch(
-      loginThunk({
+  const login = async () => {
+    await dispatch(
+      loginThunk({  
         phone: user.phone,
         password: user.password,
       })
     );
     navigate("/login-success");
+  };
+
+  if (statusCode) {
+    login();
   }
 
   return (
@@ -55,9 +59,6 @@ const Confirm = () => {
                 confirmation_code: values.confirmation_code,
               })
             );
-            // console.log(actions);
-            // console.log({ values, actions });
-            // alert(JSON.stringify(values, null, 2));
             actions.setSubmitting(false);
           }}
         >

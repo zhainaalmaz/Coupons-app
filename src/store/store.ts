@@ -15,8 +15,10 @@ export const store = configureStore({
     auth: authSlice,
     confirm: confirmSlice,
     login: loginSlice,
-    check: checkSlice
-  }})
+    check: checkSlice,
+  },
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
+})
 
 export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;
