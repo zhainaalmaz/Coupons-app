@@ -1,5 +1,4 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RootState, AppThunk } from '../../store';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import {getCoupons} from '../../../api/api';
 
 

@@ -8,6 +8,14 @@
 # testing
 /coverage
 
+src/components/categories/categories.module.css
+src/components/categories/categories.module.css.map
+
+src/pages/MainPage/Main.module.css
+src/pages/MainPage/Main.module.css.map
+
+src/UI/Card/Card.module.css
+src/UI/Card/Card.module.css.map
 # production
 /build
 

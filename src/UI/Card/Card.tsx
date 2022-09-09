@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Icoupon} from "../../pages/Main";
+import {Icoupon} from "../../pages/MainPage/Main";
 import styles from "../Card/Card.module.scss"
 import defaultpreview from "../../asets/couponsImg/defoltIMG.png"
 type Props = {
@@ -8,11 +8,6 @@ type Props = {
 
 const Card = ({ it }: Props) => {
     const [favorite, setFavorite] = useState(false)
-    useEffect(() => {
-        const div = document.getElementById(it.id + "")
-       if(div) div.innerHTML = it.conditions
-    }, [])
-
     return (
         <div className={styles.contentBox}>
            <div onClick={() => setFavorite(!favorite)} className={styles.favoriteIcon}>
@@ -29,7 +24,7 @@ const Card = ({ it }: Props) => {
                 <p className={styles.companyTitile}>{it.company_name}</p>
             </div>
            <div className={styles.cardInfoBox}>
-               <div id={it.id + ""} className={styles.description}>
+               <div dangerouslySetInnerHTML={{ __html: it.conditions }}  className={styles.description}>
 
                </div>
                <div className={styles.cardPriceBox}>
