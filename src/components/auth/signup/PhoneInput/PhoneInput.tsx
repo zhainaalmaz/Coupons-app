@@ -1,8 +1,8 @@
-import React, { useCallback } from "react";
+import React from "react";
 import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
 import { FormValues } from "../Signup";
-import styles from "./PhoneInput.module.scss";
+// import styles from "./PhoneInput.module.scss";
 
 interface IFieldObject {
   name: string;
@@ -11,11 +11,11 @@ interface IFieldObject {
   onChange: (value: any) => string;
 }
 interface IErrors {
-  firstName?: string;
-  surname?: string;
+  first_name?: string;
+  last_name?: string;
   phone?: string;
   password?: string;
-  password_confirm?: string;
+  password2?: string;
 }
 interface IForm {
   values: FormValues;
@@ -30,6 +30,7 @@ interface IPhoneInput {
   className: string;
   type: string;
   id: string;
+  placeholder: string;
 }
 
 const PhoneInputField: React.FC<IPhoneInput> = ({
@@ -37,6 +38,7 @@ const PhoneInputField: React.FC<IPhoneInput> = ({
   form,
   className,
   id,
+  placeholder,
   type,
 }) => {
   //   const blurHandler = () => {
@@ -48,7 +50,6 @@ const PhoneInputField: React.FC<IPhoneInput> = ({
     delete form.errors.phone;
     form.setErrors({ ...form.errors, phone: "" });
     form.values.phone = e;
-    console.log(form);
   }
 
   return (
@@ -57,7 +58,7 @@ const PhoneInputField: React.FC<IPhoneInput> = ({
         autoComplete="off"
         defaultCountry="KG"
         onChange={onChange}
-        placeholder="Номер телефона"
+        placeholder={placeholder}
         name={field.name}
         type={type}
         id={id}

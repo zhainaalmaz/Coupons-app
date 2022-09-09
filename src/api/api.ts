@@ -1,22 +1,60 @@
-// A mock function to mimic making an async request for data
-// export function fetchCount(amount = 1) {
-//     return new Promise<{ data: number }>((resolve) =>
-//       setTimeout(() => resolve({ data: amount 
-//       }), 500)
-//     );
-//   }
+import axios from 'axios';
+const BASE_URL = 'http://185.178.44.117/api/v1/';
 
-  // import * as axios from "axios"
+export const getSubtitleTags = () => {
+  return axios.get(BASE_URL + 'tags');
+};
 
-  // const instance = axios.create({
-  //     baseURL: 'http://185.178.44.117/api/v1/',
-  // });
+export function getContactInfo() {
+  return axios.get(BASE_URL + "info/networks")
+}
 
 
-  // export function auth() {
-  //   return instance.get()
-  //     .then((response) => {
-  //       return response.data
-  //     })
+export function getCoupons() {
+  return axios.get(BASE_URL + "coupons")
+}
 
-  // }
+// auth
+
+export function auth(data: object) {
+  return axios({
+    method: 'post',
+    url: BASE_URL + 'users/auth/',
+    data: data
+  })
+    .then((response) => {
+      return response.data
+    })
+}
+
+export function confirm(data: object) {
+  return axios({
+    method: 'post',
+    url: BASE_URL + 'users/login-confirm/',
+    data: data
+  }).then((response) => {
+    return response
+  })
+}
+
+export function login(data: object) {
+  return axios({
+    method: 'post',
+    url: BASE_URL + 'users/login/',
+    data: data,
+  }).then((response)=>{
+
+     return response.data
+  })
+}
+export function checkUSer(data: object) {
+  return axios({
+    method: 'post',
+    url: BASE_URL + 'users/check-user/',
+    data: data,
+  }).then((response)=>{
+
+     return response.data
+  })
+}
+

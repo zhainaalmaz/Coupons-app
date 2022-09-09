@@ -1,35 +1,53 @@
-import { FormValues } from "../../../components/auth/signup/Signup";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-// import { auth } from "../../../api/api";
+import { auth } from "../../../api/api";
 
+interface IInitialState {
+    firstName: string;
+    surname: string;
+    phone?: string;
+    password: string;
+    password_confirm: string;
+    status: string;
+    error?: string;
+}
 
-const initialState: FormValues = {
+const initialState: IInitialState = {
     firstName: '',
     surname: '',
     phone: '',
     password: '',
     password_confirm: '',
+    status: 'loading',
+    error: ''
 };
 
-
-const authThunk = createAsyncThunk(
+export const authThunk = createAsyncThunk(
     'signup',
-    async () => {
-        try {
-            // const res = await auth()
-        } catch (err) {
-            console.error(err)
-        }
+    async (data: object) => {
+        const response = await auth(data)
+        console.log(response);
+        return response
     }
-
 )
-
 
 const authSlice = createSlice({
     name: "signup",
     initialState,
     reducers: {},
-    extraReducers: {},
+    extraReducers: (builder) => {
+        builder
+            .addCase(authThunk.pending, (state) => {
+                state.status = "loading"
+
+            }).addCase(authThunk.fulfilled, (state, action) => {
+                state.status = "fulfilled"
+                
+            }).addCase(authThunk.rejected, (state, action) => {
+                state.status = "rejected"
+                state.error = action.error.message
+                // Request failed with status code 400
+            })
+    },
 
 })
 
