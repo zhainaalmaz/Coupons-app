@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
+import { Favorite } from "@mui/icons-material";
 
 import ScrollToTop from "../ScrollToTop";
 import Error from "../Error/Error";
@@ -14,6 +15,7 @@ import AboutPage from "../../pages/AboutUsPage/AboutPage";
 import Confidential from "../Confidential/Confidential";
 import HelpPage from "../../pages/HelpPage";
 import SearchPage from "../../pages/SearchPage/SearchPage";
+import FavoritesPage from "../../pages/Favorites/Favorites";
 
 import Signup from "../auth/signup/Signup";
 import Confirm from "../auth/signup/Comfirm/Confirm";
@@ -38,6 +40,7 @@ function App() {
           <Route path={"about"} element={<AboutPage />} />
           <Route path={"contacts"} element={<ContactPage />} />
           <Route path={"help"} element={<HelpPage />} />
+          <Route path={"favorites"} element={<FavoritesPage />} />
           <Route path={"confidential"} element={<Confidential />} />
           <Route path="searchpage/:searchValue" element={<SearchPage />} />
           <Route path="*" element={<Error />} />
