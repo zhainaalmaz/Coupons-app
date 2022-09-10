@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 
 import ScrollToTop from "../ScrollToTop";
+import Error from "../Error/Error";
 
 import "./App.css";
 import Main from "../../pages/MainPage/Main";
@@ -29,16 +30,17 @@ function App() {
         <Routes>
           <Route path={"/"} element={<Main />} />
           <Route path={"sign-up"} element={<Signup />} />
-          <Route path={"/enter"} element={<Enter />} />
-          <Route path={"/sign-in"} element={<Signin />} />
-          <Route path={"/login-success"} element={<LoginSuccess />} />
-          <Route path={"/confirm"} element={<Confirm />} />
+          <Route path={"enter"} element={<Enter />} />
+          <Route path={"sign-in"} element={<Signin />} />
+          <Route path={"login-success"} element={<LoginSuccess />} />
+          <Route path={"confirm"} element={<Confirm />} />
           <Route path={"new-coupons"} element={<NewCouponsPage />} />
           <Route path={"about"} element={<AboutPage />} />
           <Route path={"contacts"} element={<ContactPage />} />
           <Route path={"help"} element={<HelpPage />} />
-          <Route path="/searchpage/:searchValue" element={<SearchPage />} />
-          <Route path={"/confidential"} element={<Confidential />} />
+          <Route path={"confidential"} element={<Confidential />} />
+          <Route path="searchpage/:searchValue" element={<SearchPage />} />
+          <Route path="*" element={<Error />} />
         </Routes>
         <Footer />
       </div>
