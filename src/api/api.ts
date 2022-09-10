@@ -14,7 +14,7 @@ export function getCoupons() {
 }
 
 export function searchCoupons(params: string) {
-  return axios.get(BASE_URL + "coupons/search/?search=" + params)
+  return axios.get(BASE_URL + "coupons/search/?search=" + params);
 }
 
 export function getHeaderPhone() {
@@ -22,13 +22,53 @@ export function getHeaderPhone() {
 }
 
 export function getCategories() {
-    return axios.get(BASE_URL +"categories/")
+  return axios.get(BASE_URL + "categories/");
 }
 
 export function getHelpInfo() {
-  return axios.get(BASE_URL + 'info/faq/');
+  return axios.get(BASE_URL + "info/faq/");
 }
 
 export function getConfidentials() {
-  return axios.get(BASE_URL + "info/privacy-policy/")
+  return axios.get(BASE_URL + "info/privacy-policy/");
+}
+
+// Auth
+export function auth(data: object) {
+  return axios({
+    method: "post",
+    url: BASE_URL + "users/auth/",
+    data: data,
+  }).then((response) => {
+    return response.data;
+  });
+}
+
+export function confirm(data: object) {
+  return axios({
+    method: "post",
+    url: BASE_URL + "users/login-confirm/",
+    data: data,
+  }).then((response) => {
+    return response;
+  });
+}
+
+export function login(data: object) {
+  return axios({
+    method: "post",
+    url: BASE_URL + "users/login/",
+    data: data,
+  }).then((response) => {
+    return response.data;
+  });
+}
+export function checkUSer(data: object) {
+  return axios({
+    method: "post",
+    url: BASE_URL + "users/check-user/",
+    data: data,
+  }).then((response) => {
+    return response.data;
+  });
 }

@@ -1,0 +1,75 @@
+.signin {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #e5e5e5;
+  padding: 100px 0;
+  h3 {
+    margin-bottom: 23px;
+  }
+  .form {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 316px;
+    gap: 18px;
+    .inputWrapper {
+      width: 100%;
+      position: relative;
+    }
+    .formItem {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding-left: 16px;
+
+      width: 100%;
+      height: 44px;
+
+      background: #ffffff;
+      border: 1px solid #f7f1fe;
+      border-radius: 12px;
+      //   border-color: red;
+    }
+    .formItem input {
+      padding: 13px;
+      border: none;
+      //   outline: none;
+      border-top-right-radius: 12px;
+      border-bottom-right-radius: 12px;
+    }
+    .errorMessage {
+      font-family: "Inter";
+      font-style: normal;
+      font-weight: 400;
+      font-size: 12px;
+      line-height: 14px;
+      color: red;
+      text-align: start;
+      position: absolute;
+      padding-left: 12px;
+    }
+    .errorCode {
+      font-family: "Inter";
+      font-style: normal;
+      font-weight: 400;
+      font-size: 12px;
+      line-height: 14px;
+      color: red;
+      text-align: start;
+      // position: absolute;
+      padding-left: 12px;
+    }
+  }
+  .signup {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 21px;
+    text-align: center;
+    color: #4b5fa5;
+    margin-top: 19px;
+  }
+}

@@ -11,21 +11,24 @@ import * as Yup from "yup";
 import { ReactComponent as EyeClose } from "../../../assets/auth-svg/eye-close.svg";
 import { ReactComponent as EyeOpen } from "../../../assets/auth-svg/eye-open.svg";
 import PhoneInputField from "./PhoneInput/PhoneInput";
+import { authThunk } from "../../../store/slices/authSlice";
+import { useAppDispatch, useAppSelector } from "../../../hooks";
+import { useNavigate } from "react-router-dom";
 
 export interface FormValues {
-  firstName: string;
-  surname: string;
   phone: string;
   password: string;
-  password_confirm: string;
+  first_name: string;
+  last_name: string;
+  password2: string;
 }
 
 const SignupSchema = Yup.object().shape({
-  firstName: Yup.string()
+    first_name: Yup.string()
     .min(1, "Too Short!")
     .max(70, "Too Long!")
     .required("Введите имя"),
-  surname: Yup.string()
+    last_name: Yup.string()
     .min(1, "Too Short!")
     .max(70, "Too Long!")
     .required("Введите фамилию"),
@@ -37,14 +40,17 @@ const SignupSchema = Yup.object().shape({
     .min(1, "Too Short!")
     .max(70, "Too Long!")
     .required("Введите пароль"),
-    password_confirm: Yup.string()
-    .oneOf([Yup.ref('password'), null], "Пароли должны совпадать")
+    password2: Yup.string()
+    .oneOf([Yup.ref("password"), null], "Пароли должны совпадать")
     .required("Подтвердите пароль"),
 });
 
 const Signup: React.FC = () => {
   const [show, setShow] = useState(false);
   const [show2, setShow2] = useState(false);
+    const navigate = useNavigate()
+  const dispatch = useAppDispatch();
+   
 
   function eyeHandler(e: { stopPropagation: () => void }) {
     e.stopPropagation();
@@ -56,13 +62,12 @@ const Signup: React.FC = () => {
   }
 
   const initialValues: FormValues = {
-    firstName: "",
-    surname: "",
+    first_name: "",
+    last_name: "",
     phone: "",
     password: "",
-    password_confirm: "",
+    password2: "",
   };
-
 
   return (
     <div className={styles.signup}>
@@ -71,8 +76,9 @@ const Signup: React.FC = () => {
           initialValues={initialValues}
           validationSchema={SignupSchema}
           onSubmit={(values, actions) => {
-            console.log({ values, actions });
-            alert(JSON.stringify(values, null, 2));
+            dispatch(authThunk(values));
+            navigate('/confirm')
+            localStorage.setItem('user', JSON.stringify(values))
             actions.setSubmitting(false);
           }}
         >
@@ -82,27 +88,27 @@ const Signup: React.FC = () => {
               <div className={styles.inputWrapper}>
                 <Field
                   className={styles.formItem}
-                  id="firstName"
-                  name="firstName"
+                  id="first_name"
+                  name="first_name"
                   placeholder="Имя"
                 />
                 <ErrorMessage
                   component="p"
                   className={styles.errorMessage}
-                  name="firstName"
+                  name="first_name"
                 />
               </div>
               <div className={styles.inputWrapper}>
                 <Field
                   className={styles.formItem}
-                  id="surname"
-                  name="surname"
+                  id="last_name"
+                  name="last_name"
                   placeholder="Фамилия"
                 />
                 <ErrorMessage
                   component="p"
                   className={styles.errorMessage}
-                  name="surname"
+                  name="last_name"
                 />
               </div>
               <div className={styles.inputWrapper}>
@@ -146,7 +152,7 @@ const Signup: React.FC = () => {
                   className={styles.formItem}
                   type={show2 ? "text" : "password"}
                   id="password2"
-                  name="password_confirm"
+                  name="password2"
                   placeholder="Повторите пароль"
                 />
                 {show2 ? (
@@ -163,7 +169,7 @@ const Signup: React.FC = () => {
                 <ErrorMessage
                   component="p"
                   className={styles.errorMessage}
-                  name="password_confirm"
+                  name="password2"
                 />
               </div>
               <AuthButton type="submit">
