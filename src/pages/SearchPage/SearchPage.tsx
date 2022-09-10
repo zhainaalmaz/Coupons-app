@@ -72,14 +72,14 @@ const SearchPage = () => {
             onClick={() => setSortModal(true)}
             className={styles.sort}
           >
-            <p>Сортировать по</p>
-            <span>&#9660;</span>
+            <div className={styles.p}>Сортировать по</div>
+            <span className={styles.span}>&#9660;</span>
             {sortModal && (
               <div className={styles.sortBox}>
                 <div className={styles.sortBoxInner}>
                   <div className={styles.sorts}>
-                    <p>Сортировать по</p>
-                    <span>&#9660;</span>
+                    <div className={styles.p}>Сортировать по</div>
+                    <span className={styles.span}>&#9660;</span>
                   </div>
                   <button
                     onClick={() => {

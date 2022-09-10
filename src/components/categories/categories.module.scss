@@ -1,0 +1,33 @@
+.categoriesIconBox{
+  border-radius: 69px;
+  width: 90px;
+  height: 90px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin-bottom: 6px;
+}
+.categoriesSvgBox{
+  border-radius: 69px;
+  width: 90px;
+  height: 90px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin-bottom: 6px;
+}
+.categoriesSvgBox svg path{
+  fill: white;
+}
+.categoriesBox{
+  text-align: center;
+  cursor: pointer;
+}
+.categoriesBox p{
+  padding: 0;
+  margin: 0;
+}

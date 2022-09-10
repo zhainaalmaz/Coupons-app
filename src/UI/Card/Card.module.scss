@@ -1,36 +1,32 @@
-.contentBox{
+.contentBox {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  padding: 0;
+  padding: 0 0 15px 0;
   gap: 8.5px;
   width: 286px;
   height: 403px;
-  background: #FFFFFF;
-  border: 1px solid #EDF1FD;
+  background: #ffffff;
+  border: 1px solid #edf1fd;
   border-radius: 12px;
-  flex: none;
-  order: 0;
-  flex-grow: 0;
   position: relative;
 }
-.favoriteIcon{
+.favoriteIcon {
   position: absolute;
   top: 8px;
   right: 8px;
   cursor: pointer;
 }
-.couponLogoBox{
+.couponLogoBox {
   width: 100%;
   height: 164px;
 }
-.couponLogoIMG{
+.couponLogoIMG {
   width: 100%;
   height: 100%;
   border-radius: 8px 8px 0 0;
 }
-.companyTitile{
-  font-family: 'Inter', "sans-serif";
+.companyTitile {
+  font-family: "Inter", "sans-serif";
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
@@ -41,12 +37,12 @@
   align-self: stretch;
   flex-grow: 0;
 }
-.companyInfo{
+.companyInfo {
   display: flex;
   margin-top: -20px;
 }
 
-.companyLogo{
+.companyLogo {
   margin-top: -12px;
   width: 48px;
   height: 48px;
@@ -54,8 +50,8 @@
   border-radius: 12px;
   margin-left: 12px;
 }
-.companyTitile{
-  font-family: 'Inter',sans-serif;
+.companyTitile {
+  font-family: "Inter", sans-serif;
   font-style: normal;
   font-weight: 700;
   font-size: 15px;
@@ -65,11 +61,11 @@
   order: 0;
   flex-grow: 1;
 }
-.description{
+.description {
   overflow-y: hidden;
   width: 262px;
   max-height: 42px;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
@@ -84,58 +80,53 @@
   padding: 0 0 0 12px;
   margin: 0;
 }
-.price{
+.price {
   display: flex;
   justify-content: start;
   align-items: center;
   text-align: start;
   flex-direction: row;
-  padding: 8px 12px;
+  padding: 8px 30px;
   gap: 12px;
-  width: 262px;
   height: 55px;
-  border: 1px solid #F2F2F2;
+  border: 1px solid #f2f2f2;
   border-radius: 8px;
-  flex: none;
-  order: 0;
-  align-self: stretch;
-  flex-grow: 0;
 }
-.priceSVG{
+.priceSVG {
   width: 24px;
   height: 24px;
   margin-right: 12px;
 }
-.priceContentText{
-  font-family: 'Inter', sans-serif;
+.priceContentText {
+  font-family: "Inter", sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 13px;
   line-height: 16px;
   display: flex;
   align-items: flex-end;
-  color: #98949E;
+  color: #98949e;
   flex: none;
   order: 0;
   flex-grow: 0;
   padding: 0;
   margin: 0;
 }
-.priceContentPrice{
+.priceContentPrice {
   display: flex;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   font-style: normal;
   font-weight: 800;
   font-size: 16px;
   line-height: 19px;
-  color: #2C29A5;
+  color: #2c29a5;
   order: 0;
   flex-grow: 0;
 }
-.priceContentSpan{
+.priceContentSpan {
   margin-left: 4px;
   padding-bottom: 4px;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 13px;
@@ -143,19 +134,21 @@
   display: flex;
   align-items: flex-end;
   text-decoration-line: line-through;
-  color: #4F70E2;
+  color: #4f70e2;
   flex: none;
   order: 0;
   flex-grow: 0;
 }
-.cardInfoBox{
+.cardInfoBox {
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  margin-top: -15px;
 }
-.cardPriceBox{
+.cardPriceBox {
   display: flex;
   flex-direction: column;
-  gap:8px 0;
+  gap: 8px 0;
+  margin: 10px auto;
 }

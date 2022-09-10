@@ -26,15 +26,16 @@
     margin: 0 28px 0 0;
     position: relative;
     justify-content: right;
+    cursor: pointer;
 }
 
-p {
+.p {
     font-weight: 500;
     font-size: 15px;
     margin: 24px 0px 16px 0;
 }
 
-span {
+.span {
     display: inline-block;
     margin: 11px 0 0 6px;
 }
