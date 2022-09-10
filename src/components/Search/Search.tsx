@@ -130,7 +130,7 @@ const Search = () => {
         <div className={styles.dataResultOutter}>
           <div className={styles.dataResult}>
             {state.searchedCoupons.map((item: ISearchItem, index: number) => (
-              <SearchCard value={item} key={index} clearInput={clearInput} />
+              <SearchCard value={item} key={index} clearInput={clearInput} setShowInput={setShowInput} />
             ))}
           </div>
         </div>

@@ -6,19 +6,21 @@ import styles from "./Search.module.scss";
 type Props = {
   value: ISearchItem;
   clearInput: () => void;
+  setShowInput: (value: boolean) => void;
 };
 
-const SearchCard = ({ value, clearInput }: Props) => {  
-    const navigate = useNavigate()
-    function checkDetails() {
-        navigate(`/details/${value.id}`);
-        clearInput()
-    }
-    return (
-        <span key={value.id} onClick={checkDetails} className={styles.dataItem}>
-        {value.title}
-      </span>
-    );
+const SearchCard = ({ value, clearInput, setShowInput }: Props) => {
+  const navigate = useNavigate();
+  function checkDetails() {
+    navigate(`/details/${value.id}`);
+    clearInput();
+    setShowInput(false);
+  }
+  return (
+    <span key={value.id} onClick={checkDetails} className={styles.dataItem}>
+      {value.title}
+    </span>
+  );
 };
 
 export default SearchCard;
