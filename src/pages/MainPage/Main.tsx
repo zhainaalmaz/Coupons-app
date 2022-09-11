@@ -4,7 +4,7 @@ import { getCouponsAsync } from "../../store/slices/couponsSlice";
 import Card from "../../UI/Card/Card";
 import styles from "./Main.module.scss";
 import { getCategoriesAsync } from "../../store/slices/categoriesSlice";
-import Categories from "../../components/Categories/Categories";
+import Categories from "../../components/Categories/categories";
 
 export interface Icoupon {
   company_logo: string;

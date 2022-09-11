@@ -12,6 +12,7 @@ import confirmSlice from "./slices/confirmSlice";
 import loginSlice from "./slices/loginSlice";
 import checkSlice from "./slices/checkSlice";
 import favoriteSlice from "./slices/favoriteSlice/favoriteSlice";
+import couponDetailsSlice from "./slices/couponDetailsSlice";
 
 export const store = configureStore({
   reducer: {
@@ -27,6 +28,7 @@ export const store = configureStore({
     login: loginSlice,
     check: checkSlice,
     favorite: favoriteSlice,
+    couponDetails: couponDetailsSlice
   },
 
   middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
