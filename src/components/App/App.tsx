@@ -13,7 +13,6 @@ import AboutPage from '../../pages/AboutUsPage/AboutPage';
 import HelpPage from '../../pages/HelpPage';
 
 import Signup from '../auth/signup/Signup';
-import { Favorite } from '@mui/icons-material';
 import Favorites from '../../pages/Favorites/Favorites';
 
 function App() {
