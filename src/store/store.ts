@@ -1,11 +1,15 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import couponSlice from './slices/couponsSlice';
-import categoriesSlice from "./slices/categoriesSlice";
+import categoriesSlice from "./slices/CategoriesSlice/categoriesSlice";
+import carouselSice from "./slices/CarouselSlice/CarouselSlice";
+import mainImgSlice from "./slices/MainImgSlice/MainImgSlice";
 
 export const store = configureStore({
   reducer: {
     coupons: couponSlice,
-    categories: categoriesSlice
+    categories: categoriesSlice,
+    carousel: carouselSice,
+    mainImg: mainImgSlice
   },
 });
 

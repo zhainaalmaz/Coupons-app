@@ -19,3 +19,9 @@ export function  getCoupons  ():any  {
 export function getCategories ():any {
     return axios.get(baseURL +"categories/")
 }
+
+export function getCarousel () :any {
+    return axios.get(baseURL +"/info/image-slider/")
+}export function getMainImg () :any {
+    return axios.get(baseURL +"/info/image-block/")
+}

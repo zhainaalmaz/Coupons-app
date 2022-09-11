@@ -8,6 +8,7 @@
   justify-content: center;
   cursor: pointer;
   margin-bottom: 6px;
+  transition: 5s;
 }
 .categoriesSvgBox{
   border-radius: 69px;
@@ -22,6 +23,7 @@
 }
 .categoriesSvgBox svg path{
   fill: white;
+  transition: 0.5s;
 }
 .categoriesBox{
   text-align: center;

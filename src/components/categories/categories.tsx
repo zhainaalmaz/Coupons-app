@@ -1,4 +1,4 @@
-import React, {ReactNode, useState} from 'react';
+import React, {ReactNode} from 'react';
 import {Icategories} from "../../pages/MainPage/Main"
 import styles from "../../components/categories/categories.module.scss";
 
@@ -19,10 +19,12 @@ const Categories = ({ it, color,setToggleCategoriesId, toggleCategoriesId ,handl
 
     return (
         <div onClick={() => {
-            setToggleCategoriesId(choosed)
-            handleChangeCategories(it.id)
+            if(!choosed) {
+                setToggleCategoriesId(choosed)
+                handleChangeCategories(it.id)
+            }
         }} className={styles.categoriesBox} >
-            <div style={{border: `2px solid ${color.color}`, background: `${choosed? `${color.color}` : "none"}`}}  className={!choosed ? styles.categoriesIconBox : styles.categoriesSvgBox} >
+            <div style={{border: `2px solid ${color.color}`,transition:"1s", background: `${!!choosed? `${color.color}` : "none"}`}}  className={!choosed ? styles.categoriesIconBox : styles.categoriesSvgBox} >
                 {color.icon}
             </div>
             <p>{it.title}</p>
