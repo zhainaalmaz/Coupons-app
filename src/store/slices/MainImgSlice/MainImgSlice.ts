@@ -15,7 +15,6 @@ export const getMainImgAsinc = createAsyncThunk<any, void, {}>(
     "mainImg/getMainImg",
     async () => {
         const response = await getMainImg()
-        console.log(response, "resp")
         return response.data
     }
 )

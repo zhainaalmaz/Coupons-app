@@ -21,8 +21,9 @@ const Header = () => {
   const favoriteCoupons = useAppSelector(
     (state) => state.favorite.favoriteCoupons
   );
-  const userName = localStorage.getItem("user");
+  const userName = JSON.parse(localStorage.getItem("currentUser") || "") 
   console.log(userName);
+  
   useEffect(() => {
     dispatch(getContactAsync());
   }, []);
@@ -103,7 +104,7 @@ const Header = () => {
                   <Link to="/">
                     <div className={styles.iconWrapperUser}>
                       <img src={logOut} alt="log-out" />
-                      <span className={styles.user}>{userName}</span>
+                      <span className={styles.user}>{userName.first_name}</span>
                     </div>
                   </Link>
                 ) : (
@@ -186,7 +187,7 @@ const Header = () => {
                 <Link to="/">
                   <div className={styles.smallIconWrapper}>
                     <img src={logOut} alt="log-out" />
-                    <span className={styles.user}>{userName}</span>
+                    <span className={styles.user}>{userName.first_name}</span>
                   </div>
                 </Link>
               ) : (
