@@ -26,7 +26,6 @@ const Main = () => {
     dispatch(getCouponsAsync());
   }, [dispatch]);
   const state = useAppSelector((state) => state.coupons);
-  console.log(state);
 
   return (
     <div className={styles.container}>

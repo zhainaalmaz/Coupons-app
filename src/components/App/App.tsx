@@ -15,6 +15,7 @@ import SearchPage from "../../pages/SearchPage/SearchPage";
 
 import Signup from "../auth/signup/Signup";
 import ScrollToTop from "../ScrollToTop";
+import BreadCrumps from "../BreadCrumps/BreadCrumps";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
       <div className="App-header">
         <Header />
         <ScrollToTop />
+        <BreadCrumps/>
         <Routes>
           <Route path={"/"} element={<Main />} />
           <Route path={"sign-up"} element={<Signup />} />
@@ -32,7 +34,6 @@ function App() {
           <Route path="/searchpage/:searchValue" element={<SearchPage />} />
           <Route path={"/confidential"} element={<Confidential />} />
         </Routes>
-
         <Footer />
       </div>
     </div>
