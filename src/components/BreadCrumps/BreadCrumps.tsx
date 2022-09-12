@@ -6,6 +6,7 @@ import styles from "./BreadCrumps.module.scss";
 function titleRussianCase(str: string) {
   if (str === "confidential") return "Политика конфиденциальности";
   if (str === "searchpage") return "Результаты поиска";
+  if (str === "profile") return "Профиль";
   if (str === "favorites") return "Избранные";
   if (str === "my-coupons") return "Мои купоны";
   if (str === "about") return "О нас";
@@ -18,7 +19,7 @@ function titleRussianCase(str: string) {
 const BreadCrumps = () => {
   let location = useLocation();
   const pathnames = location.pathname.split("/").filter((x) => x);
-  
+
   return (
     <div className="container">
       {pathnames.length > 0 && (
@@ -41,7 +42,10 @@ const BreadCrumps = () => {
                 </Typography>
               ) : (
                 <Typography style={{ color: "#4F70E2" }} key={index}>
-                  {titleRussianCase(value)}
+                  {/* {titleRussianCase(value)} */}
+                  <RouterLink style={{ color: "#4F70E2" }} to="/new-coupons">
+                    Купоны
+                  </RouterLink>
                 </Typography>
               );
             })

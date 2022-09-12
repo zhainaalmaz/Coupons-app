@@ -21,7 +21,11 @@ const Header = () => {
   const favoriteCoupons = useAppSelector(
     (state) => state.favorite.favoriteCoupons
   );
-  const userName = JSON.parse(localStorage.getItem("currentUser") || "") 
+  const userName = localStorage.getItem("currentUser") &&  JSON.parse(localStorage.getItem("currentUser") || "") 
+
+  const user = useAppSelector(state => state.user)
+  console.log(user);
+  
   
   useEffect(() => {
     dispatch(getContactAsync());
@@ -100,14 +104,14 @@ const Header = () => {
                   </div>
                 </Link>
                 {userName ? (
-                  <Link to="/">
+                  <Link to="profile">
                     <div className={styles.iconWrapperUser}>
                       <img src={logOut} alt="log-out" />
                       <span className={styles.user}>{userName.first_name}</span>
                     </div>
                   </Link>
                 ) : (
-                  <Link to="sign-up">
+                  <Link to="sign-in">
                     <div className={styles.iconWrapper}>
                       <img src={logOut} alt="log-out" />
                       <span className={styles.headerOptionLog}>Войти</span>
@@ -183,14 +187,14 @@ const Header = () => {
                 </div>
               </Link>
               {userName ? (
-                <Link to="/">
+                <Link to="profile">
                   <div className={styles.smallIconWrapper}>
                     <img src={logOut} alt="log-out" />
                     <span className={styles.user}>{userName.first_name}</span>
                   </div>
                 </Link>
               ) : (
-                <Link to="sign-up">
+                <Link to="sign-in">
                   <div className={styles.smallIconWrapper}>
                     <img src={logOut} alt="log-out" />
                     <span className={styles.burgerSpans}>Войти</span>

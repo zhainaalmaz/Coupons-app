@@ -1,6 +1,5 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import React from "react";
-import { loginThunk } from "../../../store/slices/loginSlice";
 import styles from "./Signin.module.scss";
 import * as Yup from "yup";
 import { useAppDispatch, useAppSelector } from "../../../hooks";
@@ -49,8 +48,6 @@ const Signin: React.FC = () => {
                 })
               );
               localStorage.setItem("user", JSON.stringify(values));
-              //   console.log(values);
-              //   actions.setSubmitting(false);
             }}
           >
             <Form className={styles.form}>

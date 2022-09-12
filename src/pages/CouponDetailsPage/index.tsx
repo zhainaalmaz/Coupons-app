@@ -13,7 +13,7 @@ const CouponDetailsPage = () => {
 
   useEffect(() => {
     dispatch(getCouponAsync(id));
-  }, []);
+  }, [id]);
 
   return (
     <>

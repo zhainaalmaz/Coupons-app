@@ -72,7 +72,7 @@ const NewCoupons: FC = () => {
       </div>
       <div className={styles.coupons}>
         {data?.results?.map((item: Icoupon) => (
-          <Link to={"/coupon" + item.id}>
+          <Link to={"/coupon/" + item.id}>
             <Card it={item} key={item.id} />
           </Link>
         ))}

@@ -7,6 +7,7 @@ import styles from "./Main.module.scss";
 import Categories from "../../components/Categories/categories";
 import Carousel from "../../components/Carusel/Carousel";
 import { getMainImgAsinc } from "../../store/slices/MainImgSlice/MainImgSlice";
+import { Link } from "react-router-dom";
 
 export interface Icoupon {
   company_logo: string;
@@ -38,7 +39,7 @@ interface ImainImg {
 const Main = () => {
   const categoriesColors = [
     {
-      color: '#0888FD',
+      color: "#0888FD",
       icon: (
         <svg
           width="44"
@@ -55,7 +56,7 @@ const Main = () => {
       ),
     },
     {
-      color: '#FD9B08',
+      color: "#FD9B08",
       icon: (
         <svg
           width="44"
@@ -76,7 +77,7 @@ const Main = () => {
       ),
     },
     {
-      color: '#26AD5C',
+      color: "#26AD5C",
       icon: (
         <svg
           width="44"
@@ -93,7 +94,7 @@ const Main = () => {
       ),
     },
     {
-      color: '#E31B4B',
+      color: "#E31B4B",
       icon: (
         <svg
           width="44"
@@ -114,7 +115,7 @@ const Main = () => {
       ),
     },
     {
-      color: '#FF9162',
+      color: "#FF9162",
       icon: (
         <svg
           width="44"
@@ -135,7 +136,7 @@ const Main = () => {
       ),
     },
     {
-      color: '#1AB5BF',
+      color: "#1AB5BF",
       icon: (
         <svg
           width="44"
@@ -156,7 +157,7 @@ const Main = () => {
       ),
     },
     {
-      color: '#6A52FF',
+      color: "#6A52FF",
       icon: (
         <svg
           width="44"
@@ -173,7 +174,7 @@ const Main = () => {
       ),
     },
     {
-      color: '#FC69FF',
+      color: "#FC69FF",
       icon: (
         <svg
           width="44"
@@ -206,7 +207,7 @@ const Main = () => {
       ),
     },
     {
-      color: '#CE2BBE',
+      color: "#CE2BBE",
       icon: (
         <svg
           width="44"
@@ -223,7 +224,7 @@ const Main = () => {
       ),
     },
     {
-      color: '#FF3998',
+      color: "#FF3998",
       icon: (
         <svg
           width="44"
@@ -244,7 +245,7 @@ const Main = () => {
       ),
     },
     {
-      color: '#1C08FD',
+      color: "#1C08FD",
       icon: (
         <svg
           width="44"
@@ -305,9 +306,14 @@ const Main = () => {
 
       <h3 className={styles.mainTitle}>Новые купоны</h3>
       <div className={styles.cardFlexContainer}>
-        {coupons.coupon.slice(0, 8).map((it: Icoupon) => {
-          return <Card key={it.id} it={it} />;
-        })}
+        {coupons.coupon &&
+          coupons.coupon.slice(0, 8).map((it: Icoupon) => {
+            return (
+              <Link to={"/coupon/" + it.id}>
+                <Card key={it.id} it={it} />;
+              </Link>
+            );
+          })}
       </div>
 
       <button className={styles.mainBtn}>Посмотреть все</button>
@@ -319,7 +325,7 @@ const Main = () => {
           return (
             <>
               <div className="mainImg">
-                <img src={it.image} alt="Image"/>
+                <img src={it.image} alt="Image" />
               </div>
             </>
           );

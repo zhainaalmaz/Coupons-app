@@ -60,6 +60,7 @@ const SearchPage = () => {
         <div className="container">
           <div className={styles.searchTop}>
             <h2 className={styles.searchTitle}>Результаты поиска</h2>
+
             <div
               ref={modalRef}
               onClick={() => setSortModal(true)}
@@ -105,7 +106,9 @@ const SearchPage = () => {
             <>
               <div className={styles.cardFlexContainer}>
                 {searchedCoupons.slice(0, count).map((it: ISearchItem) => (
-                  <Card key={it.id} it={it} />
+                  <Link to={"/coupon/" + it.id}>
+                    <Card key={it.id} it={it} />;
+                  </Link>
                 ))}
               </div>
               {count < searchedCoupons.length && (

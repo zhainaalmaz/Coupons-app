@@ -35,6 +35,22 @@ interface ICoupon {
   map_locations: ILocation[];
 }
 
+interface ISimilar {
+  company_logo: string;
+  company_name: string;
+  conditions: string;
+  description: string;
+  discount_percent: number;
+  id: number;
+  is_active: true;
+  old_price: string;
+  order: number;
+  preview_image: string;
+  price: string;
+  price_for_coupon: string;
+  title: string;
+}
+
 const CouponDetailsPage = ({ coupon }: Props) => {
   console.log(coupon);
 
@@ -43,7 +59,11 @@ const CouponDetailsPage = ({ coupon }: Props) => {
       <div className={styles.heading}>
         <div className={styles.images}>
           <div className={styles.imagePreview}>
-            <img src={coupon.preview_image} alt="Logo" />
+            <img
+              src={coupon.preview_image}
+              className={styles.previewImage}
+              alt="Logo"
+            />
           </div>
           <div className={styles.images}></div>
         </div>
@@ -72,12 +92,18 @@ const CouponDetailsPage = ({ coupon }: Props) => {
       <p dangerouslySetInnerHTML={{ __html: coupon.description }}></p>
 
       <div className={styles.similar_products}>
-        {coupon.similar_products.map((product, index) => {
-          return <Card it={product} key={index} />;
-        })}
+        {coupon.similar_products &&
+          coupon.similar_products.map((product: ISimilar, index) => {
+            console.log(product);
+            return (
+              <Link to={"/coupon/" + product.id}>
+                <Card it={product} key={index} />
+              </Link>
+            );
+          })}
       </div>
 
-      {coupon.map_locations.length > 0 && (
+      {coupon.map_locations && coupon.map_locations.length > 0 && (
         <div className={styles.map}>
           <div className={styles.geolocation}></div>
           <div className={styles?.adresses}>

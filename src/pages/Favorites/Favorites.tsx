@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import BreadCrumps from "../../components/BreadCrumps/BreadCrumps";
 import { useAppSelector } from "../../hooks";
 import Card from "../../UI/Card/Card";
@@ -61,7 +62,9 @@ const Favorites = () => {
               {favoriteCoupons
                 .filter((i: any, card: any) => card < limit)
                 .map((item: Icoupon) => (
-                  <Card it={item} key={item.id} />
+                  <Link to={"/coupon/" + item.id}>
+                    <Card it={item} key={item.id} />
+                  </Link>
                 ))}
             </div>
           ) : (

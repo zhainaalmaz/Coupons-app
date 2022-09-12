@@ -10,7 +10,9 @@ const MyCoupons: FC = () => {
   const [data, setData] = useState([]);
 
   const getMyCoupons = async () => {
-    const token = JSON.parse(localStorage.getItem("currentUser") || "");
+    const token =
+      localStorage.getItem("currentUser") &&
+      JSON.parse(localStorage.getItem("currentUser") || "");
     return axios({
       url: "http://185.178.44.117/api/v1/coupons/my-stocks/?status=expired",
       headers: {
@@ -72,7 +74,6 @@ const MyCoupons: FC = () => {
                   Истекшие
                 </button>
               </div>
-              <div>Чтобы увидеть Активные купоны авторизуйтесь</div>
             </div>
           </div>
         </div>
