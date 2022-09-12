@@ -3,7 +3,8 @@ import { useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { getCouponAsync } from "../../store/slices/couponDetailsSlice";
 import styles from "./CouponDetailsPage.module.scss";
-import CouponDetails from "../../components/CouponDetails/CouponDetails"
+import CouponDetails from "../../components/CouponDetails/CouponDetails";
+import BreadCrumps from "../../components/BreadCrumps/BreadCrumps";
 
 const CouponDetailsPage = () => {
   const { id } = useParams();
@@ -15,9 +16,16 @@ const CouponDetailsPage = () => {
   }, []);
 
   return (
-    <div className="container">
-      {status === "loading" ? <div>LOADING</div> : <CouponDetails coupon={coupon}/>}
-    </div>
+    <>
+      <BreadCrumps />
+      <div className="container">
+        {status === "loading" ? (
+          <div>LOADING</div>
+        ) : (
+          <CouponDetails coupon={coupon} />
+        )}
+      </div>
+    </>
   );
 };
 

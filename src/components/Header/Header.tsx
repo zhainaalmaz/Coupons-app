@@ -22,7 +22,6 @@ const Header = () => {
     (state) => state.favorite.favoriteCoupons
   );
   const userName = JSON.parse(localStorage.getItem("currentUser") || "") 
-  console.log(userName);
   
   useEffect(() => {
     dispatch(getContactAsync());

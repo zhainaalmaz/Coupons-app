@@ -302,6 +302,7 @@ const Main = () => {
           );
         })}
       </div>
+
       <h3 className={styles.mainTitle}>Новые купоны</h3>
       <div className={styles.cardFlexContainer}>
         {coupons.coupon.slice(0, 8).map((it: Icoupon) => {
@@ -318,7 +319,7 @@ const Main = () => {
           return (
             <>
               <div className="mainImg">
-                <img src={it.image} alt="" />
+                <img src={it.image} alt="Image"/>
               </div>
             </>
           );

@@ -28,6 +28,7 @@ function App() {
     <div className="App">
       <Header />
       <ScrollToTop />
+     
       <Routes>
         <Route path={"/"} element={<Main />} />
         <Route path={"sign-up"} element={<Signup />} />
@@ -35,10 +36,12 @@ function App() {
         <Route path={"sign-in"} element={<Signin />} />
         <Route path={"login-success"} element={<LoginSuccess />} />
         <Route path={"confirm"} element={<Confirm />} />
+
         <Route path={"new-coupons"} element={<NewCouponsPage />} />
         <Route path={"about"} element={<AboutPage />} />
         <Route path={"contacts"} element={<ContactPage />} />
         <Route path={"help"} element={<HelpPage />} />
+        
         <Route path={"favorites"} element={<FavoritesPage />} />
         <Route path={"confidential"} element={<Confidential />} />
         <Route path={"coupon/:id"} element={<CouponDetailsPage />} />

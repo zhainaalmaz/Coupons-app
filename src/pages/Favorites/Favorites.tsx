@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { useAppSelector } from '../../hooks';
-import Card from '../../UI/Card/Card';
-import styles from './Favorites.module.scss';
+import React, { useEffect, useState } from "react";
+import BreadCrumps from "../../components/BreadCrumps/BreadCrumps";
+import { useAppSelector } from "../../hooks";
+import Card from "../../UI/Card/Card";
+import styles from "./Favorites.module.scss";
 
 export interface Icoupon {
   company_logo: string;
@@ -40,32 +41,35 @@ const Favorites = () => {
   };
 
   useEffect(() => {
-    document.addEventListener('scroll', scrollHandler);
+    document.addEventListener("scroll", scrollHandler);
     return function () {
-      document.removeEventListener('scroll', scrollHandler);
+      document.removeEventListener("scroll", scrollHandler);
     };
   }, []);
 
   return (
-    <div className={styles.favorite}>
-      <div className="container">
-        <div className={styles.header}>
-          <h2>Избранное</h2>
-          {favoriteCoupons.length > 0 && <div>Sort</div>}
-        </div>
-        {favoriteCoupons.length > 0 ? (
-          <div className={styles.favorite_cards}>
-            {favoriteCoupons
-              .filter((i: any, card: any) => card < limit)
-              .map((item: Icoupon) => (
-                <Card it={item} key={item.id} />
-              ))}
+    <>
+      <BreadCrumps />
+      <div className={styles.favorite}>
+        <div className="container">
+          <div className={styles.header}>
+            <h2>Избранное</h2>
+            {favoriteCoupons.length > 0 && <div>Sort</div>}
           </div>
-        ) : (
-          <p>У Вас пока нет избранных товаров</p>
-        )}
+          {favoriteCoupons.length > 0 ? (
+            <div className={styles.favorite_cards}>
+              {favoriteCoupons
+                .filter((i: any, card: any) => card < limit)
+                .map((item: Icoupon) => (
+                  <Card it={item} key={item.id} />
+                ))}
+            </div>
+          ) : (
+            <p>У Вас пока нет избранных товаров</p>
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
