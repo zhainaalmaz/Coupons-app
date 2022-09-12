@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { getCouponsAsync } from "../../store/slices/couponsSlice";
-import { getCategoriesAsync } from "../../store/slices/categoriesSlice/categoriesSlice";
+import { getCategoriesAsync } from "../../store/slices/CategoriesSlice/categoriesSlice";
 import Card from "../../UI/Card/Card";
 import styles from "./Main.module.scss";
 import Categories from "../../components/Categories/categories";
 import Carousel from "../../components/Carusel/Carousel";
-import { getMainImgAsinc } from "../../store/slices/mainImgSlice/MainImgSlice";
+import { getMainImgAsinc } from "../../store/slices/MainImgSlice/MainImgSlice";
 
 export interface Icoupon {
   company_logo: string;
@@ -30,6 +30,7 @@ export interface Icategories {
   sub_subcategories: [];
   title: string;
 }
+
 interface ImainImg {
   image: string;
 }
@@ -288,7 +289,7 @@ const Main = () => {
   return (
     <div className={styles.container}>
       <div className={styles.categoriesFlexContainer}>
-        {categories?.subcategories?.map((it: Icategories, idx: number) => {
+        {categories?.img?.map((it: Icategories, idx: number) => {
           return (
             <Categories
               key={it.id}

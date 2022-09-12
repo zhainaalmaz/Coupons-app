@@ -6,7 +6,7 @@ import "./Carousel.scss";
 import "swiper/css/autoplay"
 import {useEffect, useId} from "react";
 import {useAppDispatch, useAppSelector} from "../../hooks";
-import {getCarouselAsync} from "../../store/slices/carouselSlice/CarouselSlice";
+import {getCarouselAsync} from "../../store/slices/CarouselSlice/CarouselSlice";
 const Carousel = () => {
   interface ICarousel{
         image:string,
