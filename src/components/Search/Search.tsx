@@ -1,12 +1,12 @@
-import React, { useRef, useState } from "react";
-import SearchIcon from "@mui/icons-material/Search";
-import styles from "./Search.module.scss";
-import { useAppDispatch, useAppSelector } from "../../hooks";
-import { getSearchedCouponsAsync } from "../../store/slices/searchSlice";
-import { useNavigate } from "react-router-dom";
-import SearchCard from "./SearchCard";
-import CloseIcon from "@mui/icons-material/Close";
-import { clearState } from "../../store/slices/searchSlice";
+import React, { useRef, useState } from 'react';
+import SearchIcon from '@mui/icons-material/Search';
+import styles from './Search.module.scss';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { getSearchedCouponsAsync } from '../../store/slices/searchSlice';
+import { useNavigate } from 'react-router-dom';
+import SearchCard from './SearchCard';
+import CloseIcon from '@mui/icons-material/Close';
+import { clearState } from '../../store/slices/searchSlice';
 
 export interface ISearchItem {
   company_logo: string;
@@ -29,7 +29,7 @@ const Search = () => {
   let state = useAppSelector((state) => state.search);
   const [show, setShow] = useState(false);
   const [showInput, setShowInput] = useState(false);
-  const [searchValue, setSearchValue] = useState("");
+  const [searchValue, setSearchValue] = useState('');
   const navigate = useNavigate();
   const ref = React.useRef<HTMLInputElement>(null);
   const handleSearch = (event: any) => {
@@ -44,14 +44,14 @@ const Search = () => {
     }
   };
   const clearInput = () => {
-    setSearchValue("");
+    setSearchValue('');
     if (ref.current) {
-      ref.current.value = "";
+      ref.current.value = '';
     }
   };
 
   const handleNavigate = () => {
-    setSearchValue("");
+    setSearchValue('');
     navigate(`/searchpage/${searchValue}`);
     clearInput();
     setShow(false);
@@ -59,13 +59,13 @@ const Search = () => {
   };
 
   const inputHandler = () => {
-    if (searchValue !== "") {
+    if (searchValue !== '') {
       setShow(true);
     }
   };
 
   const enterHandler = (e: React.KeyboardEvent<HTMLDivElement>) => {
-    if (e.key === "Enter") {
+    if (e.key === 'Enter') {
       handleNavigate();
     }
   };
@@ -73,6 +73,7 @@ const Search = () => {
   const clearCouponsArray = () => {
     dispatch(clearState());
   };
+
   return (
     <div className={styles.searchOutter}>
       <div className={styles.search}>
@@ -130,7 +131,12 @@ const Search = () => {
         <div className={styles.dataResultOutter}>
           <div className={styles.dataResult}>
             {state.searchedCoupons.map((item: ISearchItem, index: number) => (
-              <SearchCard value={item} key={index} clearInput={clearInput} setShowInput={setShowInput} />
+              <SearchCard
+                value={item}
+                key={index}
+                clearInput={clearInput}
+                setShowInput={setShowInput}
+              />
             ))}
           </div>
         </div>
