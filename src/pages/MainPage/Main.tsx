@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { useAppDispatch, useAppSelector } from "../../hooks";
-import { getCouponsAsync } from "../../store/slices/couponsSlice";
-import Card from "../../UI/Card/Card";
-import styles from "./Main.module.scss";
-import { getCategoriesAsync } from "../../store/slices/categoriesSlice";
-import Categories from "../../components/Categories/Categories";
+import React, { useEffect, useState } from 'react';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { getCouponsAsync } from '../../store/slices/couponsSlice';
+import Card from '../../UI/Card/Card';
+import styles from './Main.module.scss';
+import { getCategoriesAsync } from '../../store/slices/categoriesSlice';
+import Categories from '../../components/categories/categories';
 
 export interface Icoupon {
   company_logo: string;
@@ -32,7 +32,7 @@ export interface Icategories {
 const Main = () => {
   const categoriesColors = [
     {
-      color: "#0888FD",
+      color: '#0888FD',
       icon: (
         <svg
           width="44"
@@ -49,7 +49,7 @@ const Main = () => {
       ),
     },
     {
-      color: "#FD9B08",
+      color: '#FD9B08',
       icon: (
         <svg
           width="44"
@@ -70,7 +70,7 @@ const Main = () => {
       ),
     },
     {
-      color: "#26AD5C",
+      color: '#26AD5C',
       icon: (
         <svg
           width="44"
@@ -87,7 +87,7 @@ const Main = () => {
       ),
     },
     {
-      color: "#E31B4B",
+      color: '#E31B4B',
       icon: (
         <svg
           width="44"
@@ -108,7 +108,7 @@ const Main = () => {
       ),
     },
     {
-      color: "#FF9162",
+      color: '#FF9162',
       icon: (
         <svg
           width="44"
@@ -129,7 +129,7 @@ const Main = () => {
       ),
     },
     {
-      color: "#1AB5BF",
+      color: '#1AB5BF',
       icon: (
         <svg
           width="44"
@@ -150,7 +150,7 @@ const Main = () => {
       ),
     },
     {
-      color: "#6A52FF",
+      color: '#6A52FF',
       icon: (
         <svg
           width="44"
@@ -167,7 +167,7 @@ const Main = () => {
       ),
     },
     {
-      color: "#FC69FF",
+      color: '#FC69FF',
       icon: (
         <svg
           width="44"
@@ -200,7 +200,7 @@ const Main = () => {
       ),
     },
     {
-      color: "#CE2BBE",
+      color: '#CE2BBE',
       icon: (
         <svg
           width="44"
@@ -217,7 +217,7 @@ const Main = () => {
       ),
     },
     {
-      color: "#FF3998",
+      color: '#FF3998',
       icon: (
         <svg
           width="44"
@@ -238,7 +238,7 @@ const Main = () => {
       ),
     },
     {
-      color: "#1C08FD",
+      color: '#1C08FD',
       icon: (
         <svg
           width="44"

@@ -51,15 +51,19 @@ const Favorites = () => {
       <div className="container">
         <div className={styles.header}>
           <h2>Избранное</h2>
-          <div>Sort</div>
+          {favoriteCoupons.length > 0 && <div>Sort</div>}
         </div>
-        <div className={styles.favorite_cards}>
-          {favoriteCoupons
-            .filter((i: any, card: any) => card < limit)
-            .map((item: Icoupon) => (
-              <Card it={item} key={item.id} />
-            ))}
-        </div>
+        {favoriteCoupons.length > 0 ? (
+          <div className={styles.favorite_cards}>
+            {favoriteCoupons
+              .filter((i: any, card: any) => card < limit)
+              .map((item: Icoupon) => (
+                <Card it={item} key={item.id} />
+              ))}
+          </div>
+        ) : (
+          <p>У Вас пока нет избранных товаров</p>
+        )}
       </div>
     </div>
   );
