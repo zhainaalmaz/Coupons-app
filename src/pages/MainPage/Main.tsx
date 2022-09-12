@@ -4,7 +4,7 @@ import {getCouponsAsync} from "../../store/slices/couponsSlice";
 import {getCategoriesAsync} from "../../store/slices/CategoriesSlice/categoriesSlice";
 import Card from "../../UI/Card/Card";
 import styles from "./Main.module.scss"
-import Categories from "../../components/categories/categories";
+import Categories from "../../components/Categories/categories";
 import Carousel from "../../components/Carusel/Carousel";
 import {getMainImgAsinc} from "../../store/slices/MainImgSlice/MainImgSlice";
 export interface Icoupon {

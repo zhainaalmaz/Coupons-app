@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Icoupon } from "../../pages/MainPage/Main";
-import styles from "../Card/Card.module.scss";
-import defaultpreview from "../../assets/couponsImg/defoltIMG.png";
+import styles from "./Card.module.scss";
+import defaultpreview from "../../asets/couponsImg/defoltIMG.png";
 import { useAppDispatch, useAppSelector } from "../../hooks";
-import {
-  addFavorite,
-  removeFromFavorite,
-} from "../../store/slices/favoriteSlice/favoriteSlice";
+// import {
+//   addFavorite,
+//   removeFromFavorite,
+// } from "../../store/slices/";
 
 type Props = {
   it: Icoupon;
@@ -16,16 +16,16 @@ const Card = ({ it }: Props) => {
   const dispatch = useAppDispatch();
 
   const favoriteItems = useAppSelector(
-    (state) => state.favorite.favoriteCoupons
+    (state) => state
   );
-  const isFavorite = favoriteItems.find((el: any) => el.id === it.id);
+  const isFavorite = true
 
   const onAddFavoriteHandler = () => {
-    if (isFavorite) {
-      dispatch(removeFromFavorite(it));
-    } else {
-      dispatch(addFavorite(it));
-    }
+    // if (isFavorite) {
+    //   dispatch(removeFromFavorite(it));
+    // } else {
+    //   dispatch(addFavorite(it));
+    // }
   };
 
   return (

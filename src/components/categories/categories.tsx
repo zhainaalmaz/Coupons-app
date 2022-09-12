@@ -1,6 +1,6 @@
 import React, {ReactNode} from 'react';
 import {Icategories} from "../../pages/MainPage/Main"
-import styles from "../../components/categories/categories.module.scss";
+import styles from "./categories.module.scss";
 
 interface Props {
     it:Icategories,
