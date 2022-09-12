@@ -14,6 +14,7 @@ import Confirm from "../auth/signup/Comfirm/Confirm";
 import LoginSuccess from "../auth/signin/LoginSuccess/LoginSuccess";
 import Signin from "../auth/signin/Signin";
 import Enter from "../auth/signin/Enter/Enter";
+import ChangePassword from "../auth/signin/ChangePassword/ChangePassword";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -28,6 +29,7 @@ function App() {
         <Header />
         <Routes>
           <Route path={"/sign-up"} element={<Signup />} />
+          <Route path={"/change-password"} element={<ChangePassword />} />
           <Route path={"/enter"} element={<Enter />} />
           <Route path={"/sign-in"} element={<Signin />} />
           <Route path={"/login-success"} element={<LoginSuccess />} />

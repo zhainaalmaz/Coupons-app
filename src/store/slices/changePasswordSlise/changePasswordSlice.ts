@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { login } from "../../../api/api";
+import { changePassword } from "../../../api/api";
 
 interface IInitialState {
     status: string;
@@ -11,37 +11,32 @@ const initialState: IInitialState = {
     error: ''
 };
 
-export const loginThunk = createAsyncThunk(
-    'login',
+export const changePasswordThunk = createAsyncThunk(
+    'changePassword',
     async (data: object) => {
-        // console.log(data);
-
-        const response = await login(data)
-        // console.log(response);
+        const response = await changePassword(data)
         return response
     }
 )
 
-const loginSlice = createSlice({
-    name: "login",
+const changePasswordSlice = createSlice({
+    name: "changePassword",
     initialState,
     reducers: {},
     extraReducers: (builder) => {
         builder
-            .addCase(loginThunk.pending, (state) => {
+            .addCase(changePasswordThunk.pending, (state) => {
                 state.status = "loading"
-            }).addCase(loginThunk.fulfilled, (state, action) => {
+            }).addCase(changePasswordThunk.fulfilled, (state, action) => {
                 state.status = "fulfilled"
                 state.error = action.meta.requestStatus
                 console.log('fulfilled');
-                
-                localStorage.setItem('currentUser', JSON.stringify(action.payload))
 
-            }).addCase(loginThunk.rejected, (state, action) => {
+                // localStorage.setItem('currentUser', JSON.stringify(action.payload))
+
+            }).addCase(changePasswordThunk.rejected, (state, action) => {
                 state.status = "rejected"
                 state.error = action.error.message
-                console.log("login", action.error.message)
-                console.log('rejected');
                 
 
                 // Request failed with status code 400
@@ -51,5 +46,5 @@ const loginSlice = createSlice({
 })
 
 
-export const loginmAction = loginSlice.actions;
-export default loginSlice.reducer;
+export const changePasswordAction = changePasswordSlice.actions;
+export default changePasswordSlice.reducer;

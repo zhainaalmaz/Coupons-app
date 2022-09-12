@@ -42,9 +42,9 @@ export function login(data: object) {
     method: 'post',
     url: BASE_URL + 'users/login/',
     data: data,
-  }).then((response)=>{
+  }).then((response) => {
 
-     return response.data
+    return response.data
   })
 }
 export function checkUSer(data: object) {
@@ -52,9 +52,25 @@ export function checkUSer(data: object) {
     method: 'post',
     url: BASE_URL + 'users/check-user/',
     data: data,
-  }).then((response)=>{
-
-     return response.data
+  }).then((response) => {
+    return response.data
   })
 }
 
+export function changePassword(data: object) {
+  const token = JSON.parse(localStorage.getItem('currentUser') || "")
+  console.log(token);
+
+  return axios({
+    method: 'put',
+    url: BASE_URL + 'users/change-password/',
+    data: data,
+    headers: {
+      'Authorization': "Bearer " + token.access,
+      // "accept": "application/json",
+      // "Content-Type": "application/json"
+    }
+  }).then((response) => {
+    return response.data
+  })
+}
