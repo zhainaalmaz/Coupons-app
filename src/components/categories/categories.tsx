@@ -1,6 +1,6 @@
-import React, {ReactNode, useState} from 'react';
+import React, {ReactNode} from 'react';
 import {Icategories} from "../../pages/MainPage/Main"
-import styles from "./categories.module.scss";
+import styles from "./Categories.module.scss";
 
 interface Props {
     it:Icategories,
