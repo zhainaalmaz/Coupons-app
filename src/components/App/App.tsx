@@ -22,31 +22,31 @@ import Confirm from "../auth/signup/Comfirm/Confirm";
 import LoginSuccess from "../auth/signin/LoginSuccess/LoginSuccess";
 import Signin from "../auth/signin/Signin";
 import Enter from "../auth/signin/Enter/Enter";
+import CouponDetailsPage from "../../pages/CouponDetailsPage";
 
 function App() {
   return (
     <div className="App">
-      <div className="App-header">
-        <Header />
-        <ScrollToTop />
-        <Routes>
-          <Route path={"/"} element={<Main />} />
-          <Route path={"sign-up"} element={<Signup />} />
-          <Route path={"enter"} element={<Enter />} />
-          <Route path={"sign-in"} element={<Signin />} />
-          <Route path={"login-success"} element={<LoginSuccess />} />
-          <Route path={"confirm"} element={<Confirm />} />
-          <Route path={"new-coupons"} element={<NewCouponsPage />} />
-          <Route path={"about"} element={<AboutPage />} />
-          <Route path={"contacts"} element={<ContactPage />} />
-          <Route path={"help"} element={<HelpPage />} />
-          <Route path={"favorites"} element={<FavoritesPage />} />
-          <Route path={"confidential"} element={<Confidential />} />
-          <Route path="searchpage/:searchValue" element={<SearchPage />} />
-          <Route path="*" element={<Error />} />
-        </Routes>
-        <Footer />
-      </div>
+      <Header />
+      <ScrollToTop />
+      <Routes>
+        <Route path={"/"} element={<Main />} />
+        <Route path={"sign-up"} element={<Signup />} />
+        <Route path={"enter"} element={<Enter />} />
+        <Route path={"sign-in"} element={<Signin />} />
+        <Route path={"login-success"} element={<LoginSuccess />} />
+        <Route path={"confirm"} element={<Confirm />} />
+        <Route path={"new-coupons"} element={<NewCouponsPage />} />
+        <Route path={"about"} element={<AboutPage />} />
+        <Route path={"contacts"} element={<ContactPage />} />
+        <Route path={"help"} element={<HelpPage />} />
+        <Route path={"favorites"} element={<FavoritesPage />} />
+        <Route path={"confidential"} element={<Confidential />} />
+        <Route path={"coupon/:id"} element={<CouponDetailsPage />} />
+        <Route path="searchpage/:searchValue" element={<SearchPage />} />
+        <Route path="*" element={<Error />} />
+      </Routes>
+      <Footer />
     </div>
   );
 }

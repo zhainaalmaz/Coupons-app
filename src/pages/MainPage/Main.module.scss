@@ -1,11 +1,11 @@
 .cardFlexContainer{
   display: flex;
   gap: 12px 8px;
-  flex-wrap: wrap;
   margin-bottom: 24px;
+  flex-wrap: wrap;
 }
 .container{
- max-width: 1200px;
+  max-width: 1200px;
   margin:0 auto;
   padding: 0 16px;
 }
@@ -13,6 +13,7 @@
   display: flex;
   gap: 0 16px;
   margin-bottom:24px;
+  padding: 24px 0 0 0;
   overflow-x: auto;
 }
 .categoriesFlexContainer::-webkit-scrollbar {
@@ -57,4 +58,14 @@
   flex-wrap: nowrap;
   gap: 14px;
   padding-bottom: 101px;
+
+  flex: 1 1 30%;
+
+  img {
+    width: 100%;
+  }
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 }

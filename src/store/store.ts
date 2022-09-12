@@ -12,6 +12,7 @@ import confirmSlice from "./slices/confirmSlice";
 import loginSlice from "./slices/loginSlice";
 import checkSlice from "./slices/checkSlice";
 import favoriteSlice from "./slices/favoriteSlice/favoriteSlice";
+import couponDetailsSlice from "./slices/couponDetailsSlice";
 
 import carouselSice from "./slices/carouselSlice/CarouselSlice";
 import mainImgSlice from "./slices/mainImgSlice/MainImgSlice";
@@ -31,8 +32,8 @@ export const store = configureStore({
     check: checkSlice,
     favorite: favoriteSlice,
     carousel: carouselSice,
-    mainImg: mainImgSlice
-
+    mainImg: mainImgSlice,
+    couponDetails: couponDetailsSlice
   },
 
   middleware: (getDefaultMiddleware) => getDefaultMiddleware(),

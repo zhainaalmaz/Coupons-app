@@ -1,0 +1,39 @@
+.heading {
+  display: flex;
+  gap: 1em;
+
+  margin-top: 1em;
+}
+
+.company {
+  display: flex;
+  gap: 10px;
+}
+
+.logo {
+  width: 50px;
+  border-radius: 10px;
+}
+
+.title {
+  font-weight: bold;
+}
+
+.descriptionDiscount {
+  color: rgba(128, 128, 128, 0.781);
+}
+
+.descriptionInfo {
+  font-weight: bold;
+  font-size: 13px;
+}
+
+.similar_products {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+
+    & > div {
+        flex: 0 1 auto;
+    }
+}

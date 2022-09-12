@@ -33,6 +33,10 @@ export function getConfidentials() {
   return axios.get(BASE_URL + "info/privacy-policy/");
 }
 
+export function getCouponDetails(id: string) {
+  return axios.get(BASE_URL + `coupons/${id}/`)
+}
+
 // Auth
 export function auth(data: object) {
   return axios({
