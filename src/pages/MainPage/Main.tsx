@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { useAppDispatch, useAppSelector } from "../../hooks";
-import { getCouponsAsync } from "../../store/slices/couponsSlice";
+import React, {useEffect, useState} from 'react';
+import {useAppDispatch, useAppSelector} from "../../hooks";
+import {getCouponsAsync} from "../../store/slices/couponsSlice";
+import {getCategoriesAsync} from "../../store/slices/categoriesSlice/categoriesSlice";
 import Card from "../../UI/Card/Card";
-import styles from "./Main.module.scss";
-import { getCategoriesAsync } from "../../store/slices/categoriesSlice";
-import Categories from "../../components/Categories/Categories";
+import styles from "./Main.module.scss"
+import Categories from "../../components/Categories/categories";
+import Carousel from "../../components/Carusel/Carousel";
+import {getMainImgAsinc} from "../../store/slices/mainImgSlice/MainImgSlice";
 
 export interface Icoupon {
   company_logo: string;
@@ -27,6 +29,9 @@ export interface Icategories {
   id: number;
   sub_subcategories: [];
   title: string;
+}
+interface ImainImg {
+    image:string
 }
 
 const Main = () => {
@@ -269,41 +274,61 @@ const Main = () => {
   >(1);
   const dispatch = useAppDispatch();
 
-  useEffect(() => {
-    dispatch(getCouponsAsync());
-    dispatch(getCategoriesAsync());
-  }, [dispatch]);
+    useEffect(() => {
+        dispatch(getCouponsAsync())
+        dispatch(getCategoriesAsync())
+        dispatch(getMainImgAsinc())
+    }, [dispatch])
 
-  const { coupons, categories } = useAppSelector((state) => state);
+    const {coupons, categories, mainImg} = useAppSelector(state => state)
+    console.log(mainImg)
+    const handleChangeCategories = (id:number|boolean) => {setToggleCategoriesId(toggleCategoriesId === id ? false : id )}
 
-  const handleChangeCategories = (id: number | boolean) => {
-    setToggleCategoriesId(toggleCategoriesId === id ? false : id);
-  };
+    return (
+        <div className={styles.container}>
+            <div className={styles.categoriesFlexContainer}>
+                {categories?.subcategories?.map((it:Icategories, idx:number) => {
+                    return (
+                        <Categories
+                            key={it.id}
+                            it={it}
+                            handleChangeCategories={handleChangeCategories}
+                            setToggleCategoriesId={setToggleCategoriesId}
+                            color={categoriesColors[idx]}
+                            toggleCategoriesId={toggleCategoriesId}/>
+                    )
+                })}
+            </div>
+            <h3 className={styles.mainTitle}>Новые купоны</h3>
+           <div className={styles.cardFlexContainer} >
+               {
+                   coupons.coupon.slice(0,8).map((it:Icoupon) => {
+                       return (
+                           <Card key={it.id} it={it}/>
+                       )
+                   })
+               }
+           </div>
 
-  return (
-    <div className={styles.container}>
-      <div className={styles.categoriesFlexContainer}>
-        {categories.subcategories.map((it: Icategories, idx: number) => {
-          return (
-            <Categories
-              key={it.id}
-              it={it}
-              handleChangeCategories={handleChangeCategories}
-              setToggleCategoriesId={setToggleCategoriesId}
-              color={categoriesColors[idx]}
-              toggleCategoriesId={toggleCategoriesId}
-            />
-          );
-        })}
-      </div>
+            <button className={styles.mainBtn}>Посмотреть все</button>
 
-      <div className={styles.cardFlexContainer}>
-        {coupons.coupon.map((it: Icoupon) => {
-          return <Card key={it.id} it={it} />;
-        })}
-      </div>
-    </div>
-  );
+            <Carousel/>
+
+            <div className={styles.mainImgBox}>
+                {
+                    mainImg.img.map((it:ImainImg) => {
+                        return (
+                            <>
+                                <div className="mainImg">
+                                    <img src={it.image} alt=""/>
+                                </div>
+                            </>
+                        )
+                    })
+                }
+            </div>
+        </div>
+    );
 };
 
 export default Main;

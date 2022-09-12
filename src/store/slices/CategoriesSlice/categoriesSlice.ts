@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import {getCategories} from "../../api/api";
+import {getCategories} from "../../../api/api";
 
 export interface CategoriesState {
     id: number,

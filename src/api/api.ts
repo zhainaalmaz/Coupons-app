@@ -72,3 +72,10 @@ export function checkUSer(data: object) {
     return response.data;
   });
 }
+
+export function getCarousel() {
+    return axios.get(BASE_URL +"/info/image-slider/")
+
+}export function getMainImg() {
+    return axios.get(BASE_URL +"/info/image-block/")
+}

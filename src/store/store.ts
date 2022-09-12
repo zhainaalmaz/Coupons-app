@@ -4,7 +4,7 @@ import couponSlice from "./slices/couponsSlice";
 import confidentialSlice from "./slices/confidentialSlice";
 
 import contactSlice from "./slices/contactSlice";
-import categoriesSlice from "./slices/categoriesSlice";
+import categoriesSlice from "./slices/categoriesSlice/categoriesSlice";
 import helpInfoSlice from "./slices/helpInfoSlice/helpInfoSlice";
 import searchSlice from "./slices/searchSlice";
 import authSlice from "./slices/authSlice";
@@ -12,6 +12,9 @@ import confirmSlice from "./slices/confirmSlice";
 import loginSlice from "./slices/loginSlice";
 import checkSlice from "./slices/checkSlice";
 import favoriteSlice from "./slices/favoriteSlice/favoriteSlice";
+
+import carouselSice from "./slices/carouselSlice/CarouselSlice";
+import mainImgSlice from "./slices/mainImgSlice/MainImgSlice";
 
 export const store = configureStore({
   reducer: {
@@ -27,6 +30,9 @@ export const store = configureStore({
     login: loginSlice,
     check: checkSlice,
     favorite: favoriteSlice,
+    carousel: carouselSice,
+    mainImg: mainImgSlice
+
   },
 
   middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
