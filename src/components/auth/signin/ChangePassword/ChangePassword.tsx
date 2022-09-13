@@ -58,11 +58,7 @@ const ChangePassword = () => {
                   new_password_repeat: values.new_password_repeat,
                 })
               );
-              console.log(values);
 
-              //   navigate("/confirm");
-              //   localStorage.setItem("user", JSON.stringify(values));
-              //   actions.setSubmitting(false);
             }}
           >
             <Form className={styles.form}>

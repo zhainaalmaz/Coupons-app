@@ -87,7 +87,6 @@ export function getMainImg() {
 
 export function changePassword(data: object) {
   const token = JSON.parse(localStorage.getItem("currentUser") || "");
-  console.log(token);
 
   return axios({
     method: "put",

@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Card from "../../UI/Card/Card";
 import styles from "./CouponDetails.module.scss";
+import defaultImage from "../../assets/couponsImg/defoltIMG.png";
 
 type Props = {
   coupon: ICoupon;
@@ -52,7 +53,6 @@ interface ISimilar {
 }
 
 const CouponDetailsPage = ({ coupon }: Props) => {
-  console.log(coupon);
 
   return (
     <div className={styles.coupon}>
@@ -60,7 +60,7 @@ const CouponDetailsPage = ({ coupon }: Props) => {
         <div className={styles.images}>
           <div className={styles.imagePreview}>
             <img
-              src={coupon.preview_image}
+              src={coupon.preview_image ? coupon.preview_image : defaultImage}
               className={styles.previewImage}
               alt="Logo"
             />
@@ -94,7 +94,6 @@ const CouponDetailsPage = ({ coupon }: Props) => {
       <div className={styles.similar_products}>
         {coupon.similar_products &&
           coupon.similar_products.map((product: ISimilar, index) => {
-            console.log(product);
             return (
               <Link to={"/coupon/" + product.id}>
                 <Card it={product} key={index} />

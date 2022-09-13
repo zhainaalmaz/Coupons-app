@@ -21,12 +21,11 @@ const Header = () => {
   const favoriteCoupons = useAppSelector(
     (state) => state.favorite.favoriteCoupons
   );
-  const userName = localStorage.getItem("currentUser") &&  JSON.parse(localStorage.getItem("currentUser") || "") 
 
-  const user = useAppSelector(state => state.user)
+  // const user = localStorage.getItem("currentUser") &&  JSON.parse(localStorage.getItem("currentUser") || "")
+  const user = useAppSelector((state) => state.user);
   console.log(user);
-  
-  
+
   useEffect(() => {
     dispatch(getContactAsync());
   }, []);
@@ -103,11 +102,11 @@ const Header = () => {
                     <span className={styles.headerOption}>Мои купоны</span>
                   </div>
                 </Link>
-                {userName ? (
+                {user.userName ? (
                   <Link to="profile">
                     <div className={styles.iconWrapperUser}>
                       <img src={logOut} alt="log-out" />
-                      <span className={styles.user}>{userName.first_name}</span>
+                      <span className={styles.user}>{user.userName}</span>
                     </div>
                   </Link>
                 ) : (
@@ -186,11 +185,11 @@ const Header = () => {
                   <span className={styles.burgerSpans}>Мои купоны</span>
                 </div>
               </Link>
-              {userName ? (
+              {user.userName ? (
                 <Link to="profile">
                   <div className={styles.smallIconWrapper}>
                     <img src={logOut} alt="log-out" />
-                    <span className={styles.user}>{userName.first_name}</span>
+                    <span className={styles.user}>{user.userName}</span>
                   </div>
                 </Link>
               ) : (

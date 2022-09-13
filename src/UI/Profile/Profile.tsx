@@ -28,6 +28,7 @@ export default function Profile() {
   const quit = () => {
     localStorage.removeItem("currentUser");
     localStorage.removeItem("user");
+    
     dispatch(clearUser());
     navigate("/");
   };

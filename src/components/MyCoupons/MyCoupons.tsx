@@ -19,8 +19,6 @@ const MyCoupons: FC = () => {
         Authorization: "Bearer " + token.access,
       },
     }).then((response) => {
-      console.log(response.data);
-
       return response.data;
     });
   };

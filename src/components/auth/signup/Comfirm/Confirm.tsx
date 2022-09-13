@@ -7,6 +7,7 @@ import * as Yup from "yup";
 import { confirmThunk } from "../../../../store/slices/confirmSlice";
 import { loginThunk } from "../../../../store/slices/loginSlice";
 import { useNavigate } from "react-router-dom";
+import { setUser } from "../../../../store/slices/userSlice";
 
 const ConfirmSchema = Yup.object().shape({
   confirmation_code: Yup.string()
@@ -36,6 +37,7 @@ const Confirm = () => {
         password: user.password,
       })
     );
+    dispatch(setUser());
     navigate("/login-success");
   };
 

@@ -16,12 +16,6 @@ export const userSlice = createSlice({
       const user =
         localStorage.getItem("currentUser") &&
         JSON.parse(localStorage.getItem("currentUser") || "");
-        
-      console.log(user, "SLICE");
-
-      setTimeout(() => {
-        console.log(user, "SLICE");
-      });
       state.userName = user.first_name;
     },
     clearUser: (state) => {

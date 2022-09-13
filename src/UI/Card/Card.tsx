@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Icoupon } from "../../pages/MainPage/Main";
 import styles from "../Card/Card.module.scss";
 import defaultpreview from "../../assets/couponsImg/defoltIMG.png";
@@ -24,7 +24,10 @@ const Card = ({ it }: Props) => {
   );
   const isFavorite = favoriteItems.find((el: any) => el.id === it.id);
 
-  const onAddFavoriteHandler = () => {
+  const onAddFavoriteHandler = (e: React.MouseEvent<HTMLElement>) => {
+    e.stopPropagation();
+    e.preventDefault();
+
     if (isFavorite) {
       dispatch(removeFromFavorite(it));
     } else {

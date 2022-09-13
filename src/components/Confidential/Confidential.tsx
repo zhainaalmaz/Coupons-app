@@ -10,7 +10,6 @@ const Confidential = () => {
   useEffect(() => {
     dispatch(getConfidentialtAsync());
   }, []);
-  console.log(state, "state");
   return (
     <>
       <BreadCrumps />

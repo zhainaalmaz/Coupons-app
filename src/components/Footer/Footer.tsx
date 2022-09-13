@@ -18,26 +18,38 @@ const Footer = () => {
     dispatch(getContactAsync());
   }, []);
 
+  const scroll = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
     <footer>
       <div className="container">
         <div className={styles.footerInner}>
           <div className={styles.footerBlock}>
             <h4>Покупателям</h4>
-            <p>Как сделать заказ</p>
-            <p>Способы оплаты</p>
-            <Link to="help">
-            <p>Вопросы и ответы</p></Link>
+            <Link to="help" onClick={scroll}>
+              <p>Как сделать заказ</p>
+            </Link>
+            <Link to="help" onClick={scroll}>
+              <p>Способы оплаты</p>
+            </Link>
+            <Link to="help" onClick={scroll}>
+              <p>Вопросы и ответы</p>
+            </Link>
             <Link to="confidential">
               <p>Политика конфиденциальности</p>
             </Link>
           </div>
           <div className={styles.footerBlock}>
             <h4>Компания</h4>
-            
-            <Link to="about"><p>О нас</p></Link>
-            <Link to="contacts"><p>Контакты</p></Link>
-  
+
+            <Link to="about">
+              <p>О нас</p>
+            </Link>
+            <Link to="contacts">
+              <p>Контакты</p>
+            </Link>
           </div>
           <div className={styles.footerBlock}>
             <h4>Мы в соц сетях</h4>
