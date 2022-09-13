@@ -41,10 +41,6 @@ const PhoneInputField: React.FC<IPhoneInput> = ({
   placeholder,
   type,
 }) => {
-  //   const blurHandler = () => {
-  //     console.log('[pbluerr');
-  //     form.setErrors({ phone: "Введите номер" });
-  //   };
 
   function onChange(e: string) {
     delete form.errors.phone;

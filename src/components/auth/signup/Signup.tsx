@@ -1,9 +1,4 @@
-import {
-  Formik,
-  Form,
-  Field,
-  ErrorMessage,
-} from "formik";
+import { Formik, Form, Field, ErrorMessage } from "formik";
 import React, { useState } from "react";
 import AuthButton from "../../UI/authButton/AuthButton";
 import styles from "./Signup.module.scss";
@@ -19,6 +14,9 @@ import PhoneInputField from "./PhoneInput/PhoneInput";
 import { authThunk } from "../../../store/slices/authSlice";
 import { useAppDispatch, useAppSelector } from "../../../hooks";
 import { useNavigate } from "react-router-dom";
+import NameInput from "../AuthComponents/NameInput/NameInput";
+import SurnameInput from "../AuthComponents/SurnameInput/SurnameInput";
+import CreatePassword from "../AuthComponents/CreatePassword/CreatePassword";
 
 export interface FormValues {
   phone: string;
@@ -29,11 +27,11 @@ export interface FormValues {
 }
 
 const SignupSchema = Yup.object().shape({
-    first_name: Yup.string()
+  first_name: Yup.string()
     .min(1, "Too Short!")
     .max(70, "Too Long!")
     .required("Введите имя"),
-    last_name: Yup.string()
+  last_name: Yup.string()
     .min(1, "Too Short!")
     .max(70, "Too Long!")
     .required("Введите фамилию"),
@@ -45,7 +43,7 @@ const SignupSchema = Yup.object().shape({
     .min(1, "Too Short!")
     .max(70, "Too Long!")
     .required("Введите пароль"),
-    password2: Yup.string()
+  password2: Yup.string()
     .oneOf([Yup.ref("password"), null], "Пароли должны совпадать")
     .required("Подтвердите пароль"),
 });
@@ -53,18 +51,17 @@ const SignupSchema = Yup.object().shape({
 const Signup: React.FC = () => {
   const [show, setShow] = useState(false);
   const [show2, setShow2] = useState(false);
-    const navigate = useNavigate()
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
-   
 
-  function eyeHandler(e: { stopPropagation: () => void }) {
-    e.stopPropagation();
-    setShow(!show);
-  }
-  function eyeHandler2(e: { stopPropagation: () => void }) {
-    e.stopPropagation();
-    setShow2(!show2);
-  }
+  // function eyeHandler(e: { stopPropagation: () => void }) {
+  //   e.stopPropagation();
+  //   setShow(!show);
+  // }
+  // function eyeHandler2(e: { stopPropagation: () => void }) {
+  //   e.stopPropagation();
+  //   setShow2(!show2);
+  // }
 
   const initialValues: FormValues = {
     first_name: "",
@@ -82,8 +79,8 @@ const Signup: React.FC = () => {
           validationSchema={SignupSchema}
           onSubmit={(values, actions) => {
             dispatch(authThunk(values));
-            navigate('/confirm')
-            localStorage.setItem('user', JSON.stringify(values))
+            navigate("/confirm");
+            localStorage.setItem("user", JSON.stringify(values));
             actions.setSubmitting(false);
           }}
         >
@@ -93,9 +90,10 @@ const Signup: React.FC = () => {
               <div className={styles.inputWrapper}>
                 <Field
                   className={styles.formItem}
-                  id="first_name"
+                  // id="first_name"
                   name="first_name"
                   placeholder="Имя"
+                  component={NameInput}
                 />
                 <ErrorMessage
                   component="p"
@@ -106,6 +104,7 @@ const Signup: React.FC = () => {
               <div className={styles.inputWrapper}>
                 <Field
                   className={styles.formItem}
+                  component={SurnameInput}
                   id="last_name"
                   name="last_name"
                   placeholder="Фамилия"
@@ -133,19 +132,12 @@ const Signup: React.FC = () => {
               <div className={styles.inputWrapper}>
                 <Field
                   className={styles.formItem}
-                  type={show ? "text" : "password"}
+                  type="password"
                   id="password"
+                  component={CreatePassword}
                   name="password"
                   placeholder="Придумайте пароль"
                 />
-                {show ? (
-                  <EyeOpen onClick={eyeHandler} className={styles.eyeHandler} />
-                ) : (
-                  <EyeClose
-                    onClick={eyeHandler}
-                    className={styles.eyeHandler}
-                  />
-                )}
                 <ErrorMessage
                   component="p"
                   className={styles.errorMessage}
@@ -160,7 +152,7 @@ const Signup: React.FC = () => {
                   name="password2"
                   placeholder="Повторите пароль"
                 />
-                {show2 ? (
+                {/* {show2 ? (
                   <EyeOpen
                     onClick={eyeHandler2}
                     className={styles.eyeHandler}
@@ -170,7 +162,7 @@ const Signup: React.FC = () => {
                     onClick={eyeHandler2}
                     className={styles.eyeHandler}
                   />
-                )}
+                )} */}
                 <ErrorMessage
                   component="p"
                   className={styles.errorMessage}

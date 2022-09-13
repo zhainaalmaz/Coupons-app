@@ -1,5 +1,5 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
-import React from "react";
+import React, { useEffect } from "react";
 import { loginThunk } from "../../../store/slices/loginSlice";
 import styles from "./Signin.module.scss";
 import * as Yup from "yup";
@@ -30,9 +30,12 @@ const Signin: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { error, statusCode } = useAppSelector((state) => state.check);
-  if (statusCode) {
-    navigate("/enter");
-  }
+  useEffect(() => {
+    if (statusCode) {
+      navigate("/enter");
+    }
+    
+  }, [statusCode]);
   return (
     <div className={styles.signin}>
       <div className="container">

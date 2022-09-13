@@ -1,5 +1,5 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
-import React, { useEffect, useState } from "react";
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../../../hooks";
 import AuthButton from "../../../UI/authButton/AuthButton";
 import styles from "./Comfirm.module.scss";
@@ -7,6 +7,7 @@ import * as Yup from "yup";
 import { confirmThunk } from "../../../../store/slices/confirmSlice";
 import { loginThunk } from "../../../../store/slices/loginSlice";
 import { useNavigate } from "react-router-dom";
+import SuccessPage from "../../AuthComponents/SuccessPage/SuccessPage";
 
 const ConfirmSchema = Yup.object().shape({
   confirmation_code: Yup.string()
@@ -23,23 +24,29 @@ const initialValues: IConfCode = {
   confirmation_code: "",
 };
 
-const Confirm = () => {
+interface IProps {
+  setTitle: Function;
+}
+
+const Confirm: React.FC<IProps> = ({ setTitle }) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { statusCode, error } = useAppSelector((state) => state.confirm);
   // const [user, setUser] = useState(
   //   JSON.parse(localStorage.getItem("user") || "")
   // );
-  const user = JSON.parse(localStorage.getItem("user") || "")
+  const user = JSON.parse(localStorage.getItem("user") || "");
 
   const login = async () => {
     await dispatch(
-      loginThunk({  
+      loginThunk({
         phone: user.phone,
         password: user.password,
       })
     );
-    navigate("/login-success");
+    // <SuccessPage title="Телефон подтвержден" />;
+    setTitle("Телефон подтвержден");
+    navigate("/success-page")
   };
 
   if (statusCode) {
