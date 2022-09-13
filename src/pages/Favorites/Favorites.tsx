@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import BreadCrumps from '../../components/BreadCrumps/BreadCrumps';
-import { useAppSelector } from '../../hooks';
+import { useAppSelector, useAutoFetchData } from '../../hooks';
 import Card from '../../UI/Card/Card';
+import Select from '../../UI/Sort/SortItem';
 import styles from './Favorites.module.scss';
 
 export interface Icoupon {
@@ -34,29 +35,39 @@ const Favorites = () => {
     (state) => state.favorite.authFavoriteCoupons
   );
 
-  const state = user ? AuthFavoriteCoupons : favoriteCoupons;
+  const [state, setState] = useState(
+    user ? AuthFavoriteCoupons : favoriteCoupons
+  );
   const [limit, setLimit] = useState(0);
 
   useEffect(() => {
     setLimit(8);
+    applyFilters();
   }, []);
 
   const changeLimit = (num: number) => {
     setLimit((prev) => prev + num);
   };
 
-  const scrollHandler = (e: any) => {
-    e.target.documentElement.scrollHeight -
-      (e.target.documentElement.scrollTop + window.innerHeight) <
-      100 && changeLimit(4);
-  };
+  useAutoFetchData(changeLimit);
 
-  useEffect(() => {
-    document.addEventListener('scroll', scrollHandler);
-    return function () {
-      document.removeEventListener('scroll', scrollHandler);
-    };
-  }, []);
+  function applyFilters(_sorted = 'name') {
+    const sortedState = state.slice().sort((a: Icoupon, b: Icoupon) => {
+      switch (_sorted) {
+        case 'priceDesc':
+          return +b.price - +a.price;
+        case 'priceAsc':
+          return +a.price - +b.price;
+        default:
+          return a.company_name.localeCompare(b.company_name);
+      }
+    });
+    setState(sortedState);
+  }
+
+  const handleChange = (sorted: any) => {
+    applyFilters(sorted.target.value);
+  };
 
   return (
     <>
@@ -65,15 +76,38 @@ const Favorites = () => {
         <div className="container">
           <div className={styles.header}>
             <h2>Избранное</h2>
-            {/* {state.length > 0 && <div>Sort</div>} */}
+
+            {state.length > 0 && (
+              <div className={styles.select}>
+                <Select
+                  onChange={handleChange}
+                  label="Сортировать по"
+                  name="sort"
+                  options={[
+                    {
+                      label: 'Name',
+                      value: 'name',
+                    },
+                    {
+                      label: 'Price High',
+                      value: 'priceDesc',
+                    },
+                    {
+                      label: 'Price Low',
+                      value: 'priceAsc',
+                    },
+                  ]}
+                />
+              </div>
+            )}
           </div>
           {state.length > 0 ? (
             <div className={styles.favorite_cards}>
               {state
                 .filter((i: any, card: any) => card < limit)
                 .map((item: Icoupon) => (
-                  <Link to={'/coupon/' + item.id}>
-                    <Card it={item} key={item.id} />
+                  <Link to={'/coupon/' + item.id} key={item.id}>
+                    <Card it={item} />
                   </Link>
                 ))}
             </div>
