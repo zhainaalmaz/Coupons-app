@@ -1,4 +1,4 @@
-.categoriesIconBox{
+.categoriesIconBox {
   border-radius: 69px;
   width: 80px;
   height: 80px;
@@ -10,7 +10,7 @@
   margin-bottom: 6px;
   transition: 5s;
 }
-.categoriesSvgBox{
+.categoriesSvgBox {
   border-radius: 69px;
   width: 80px;
   height: 80px;
@@ -21,15 +21,15 @@
   cursor: pointer;
   margin-bottom: 6px;
 }
-.categoriesSvgBox svg path{
+.categoriesSvgBox svg path {
   fill: white;
   transition: 0.5s;
 }
-.categoriesBox{
+.categoriesBox {
   text-align: center;
   cursor: pointer;
 }
-.categoriesBox p{
+.categoriesBox p {
   padding: 0;
   margin: 0;
 }

@@ -4,8 +4,12 @@ export interface IUser {
   userName: string;
 }
 
+const user =
+  localStorage.getItem("currentUser") &&
+  JSON.parse(localStorage.getItem("currentUser") || "");
+
 const initialState: IUser = {
-  userName: "",
+  userName: user?.first_name || "",
 };
 
 export const userSlice = createSlice({

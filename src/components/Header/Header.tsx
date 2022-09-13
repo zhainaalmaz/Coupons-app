@@ -18,13 +18,23 @@ const Header = () => {
   const [open, setOpen] = React.useState<boolean>(false);
   const dispatch = useAppDispatch();
   const state = useAppSelector((state) => state.contacts);
+
+  // const user = localStorage.getItem("currentUser") &&  JSON.parse(localStorage.getItem("currentUser") || "")
+  const user = useAppSelector((state) => state.user);
+
+  const isAuth =
+    localStorage.getItem("currentUser") &&
+    JSON.parse(localStorage.getItem("currentUser") || "");
+
   const favoriteCoupons = useAppSelector(
     (state) => state.favorite.favoriteCoupons
   );
 
-  // const user = localStorage.getItem("currentUser") &&  JSON.parse(localStorage.getItem("currentUser") || "")
-  const user = useAppSelector((state) => state.user);
-  console.log(user);
+  const AuthFavoriteCoupons = useAppSelector(
+    (state) => state.favorite.authFavoriteCoupons
+  );
+
+  const stateCoupons = isAuth ? AuthFavoriteCoupons : favoriteCoupons;
 
   useEffect(() => {
     dispatch(getContactAsync());
@@ -77,7 +87,7 @@ const Header = () => {
             <Search />
             <Hidden mdDown>
               <div className={styles.headerExtraInfo}>
-                {favoriteCoupons.length > 0 ? (
+                {stateCoupons.length > 0 ? (
                   <Link to="favorites">
                     <div className={styles.iconWrapper}>
                       <img
@@ -156,7 +166,7 @@ const Header = () => {
               </div>
             </div>
             <div>
-              {favoriteCoupons.length > 0 ? (
+              {stateCoupons.length > 0 ? (
                 <Link to="favorites">
                   <div className={styles.smallIconWrapper}>
                     <img width="23px" src={redHeartIcon} alt="red-heart-icon" />

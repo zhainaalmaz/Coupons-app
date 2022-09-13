@@ -3,31 +3,41 @@ import { Icoupon } from "../../pages/MainPage/Main";
 import styles from "../Card/Card.module.scss";
 import defaultpreview from "../../assets/couponsImg/defoltIMG.png";
 import { useAppDispatch, useAppSelector } from "../../hooks";
+
 import {
   addFavorite,
   removeFromFavorite,
-} from "../../store/slices/favoriteSlice/favoriteSlice";
-import { ReactComponent as FavoriteIcon } from "../../assets/card/favorite.svg";
-import { ReactComponent as FavoritedIcon } from "../../assets/card/favorited.svg";
-import { ReactComponent as DiscountIcon } from "../../assets/card/discount.svg";
-import { ReactComponent as PriceIcon } from "../../assets/card/price.svg";
+} from '../../store/slices/favoriteSlice/favoriteSlice';
+import { ReactComponent as FavoriteIcon } from '../../assets/card/favorite.svg';
+import { ReactComponent as FavoritedIcon } from '../../assets/card/favorited.svg';
+import { ReactComponent as DiscountIcon } from '../../assets/card/discount.svg';
+import { ReactComponent as PriceIcon } from '../../assets/card/price.svg';
 
 type Props = {
   it: Icoupon;
 };
 
 const Card = ({ it }: Props) => {
+  const isAuth =
+    localStorage.getItem('currentUser') &&
+    JSON.parse(localStorage.getItem('currentUser') || '');
   const dispatch = useAppDispatch();
 
   const favoriteItems = useAppSelector(
     (state) => state.favorite.favoriteCoupons
   );
-  const isFavorite = favoriteItems.find((el: any) => el.id === it.id);
+
+  const AuthFavoriteItems = useAppSelector(
+    (state) => state.favorite.authFavoriteCoupons
+  );
+
+  const state = isAuth ? AuthFavoriteItems : favoriteItems;
+  const isFavorite = state.find((el: any) => el.id === it.id);
 
   const onAddFavoriteHandler = (e: React.MouseEvent<HTMLElement>) => {
     e.stopPropagation();
     e.preventDefault();
-
+    
     if (isFavorite) {
       dispatch(removeFromFavorite(it));
     } else {
@@ -64,7 +74,7 @@ const Card = ({ it }: Props) => {
             <div className="priceContent">
               <p className={styles.priceContentText}>Цена скидки с купоном:</p>
               <div className={styles.priceContentPrice}>
-                {it.price}{" "}
+                {it.price}
                 <span className={styles.priceContentSpan}>{it.old_price}</span>
               </div>
             </div>
@@ -83,6 +93,6 @@ const Card = ({ it }: Props) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 export default Card;

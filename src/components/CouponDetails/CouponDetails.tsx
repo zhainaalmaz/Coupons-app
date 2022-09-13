@@ -53,7 +53,6 @@ interface ISimilar {
 }
 
 const CouponDetailsPage = ({ coupon }: Props) => {
-
   return (
     <div className={styles.coupon}>
       <div className={styles.heading}>
@@ -98,7 +97,7 @@ const CouponDetailsPage = ({ coupon }: Props) => {
               <Link to={"/coupon/" + product.id}>
                 <Card it={product} key={index} />
               </Link>
-            );
+            )
           })}
       </div>
 
