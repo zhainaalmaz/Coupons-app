@@ -1,5 +1,5 @@
 import axios from "axios";
-const BASE_URL = "http://185.178.44.117/api/v1/";
+export const BASE_URL = "http://185.178.44.117/api/v1/";
 
 export const getSubtitleTags = () => {
   return axios.get(BASE_URL + "tags");
@@ -31,6 +31,10 @@ export function getHelpInfo() {
 
 export function getConfidentials() {
   return axios.get(BASE_URL + "info/privacy-policy/");
+}
+
+export function getCouponDetails(id: string) {
+  return axios.get(BASE_URL + `coupons/${id}/`);
 }
 
 // Auth
@@ -68,6 +72,30 @@ export function checkUSer(data: object) {
     method: "post",
     url: BASE_URL + "users/check-user/",
     data: data,
+  }).then((response) => {
+    return response.data;
+  });
+}
+
+export function getCarousel() {
+  return axios.get(BASE_URL + "/info/image-slider/");
+}
+
+export function getMainImg() {
+  return axios.get(BASE_URL + "/info/image-block/");
+}
+
+export function changePassword(data: object) {
+  const token = JSON.parse(localStorage.getItem("currentUser") || "");
+  console.log(token);
+
+  return axios({
+    method: "put",
+    url: BASE_URL + "users/change-password/",
+    data: data,
+    headers: {
+      Authorization: "Bearer " + token.access,
+    },
   }).then((response) => {
     return response.data;
   });

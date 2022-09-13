@@ -27,14 +27,11 @@ const Confirm = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { statusCode, error } = useAppSelector((state) => state.confirm);
-  // const [user, setUser] = useState(
-  //   JSON.parse(localStorage.getItem("user") || "")
-  // );
-  const user = JSON.parse(localStorage.getItem("user") || "")
+  const user = JSON.parse(localStorage.getItem("user") || "");
 
   const login = async () => {
     await dispatch(
-      loginThunk({  
+      loginThunk({
         phone: user.phone,
         password: user.password,
       })

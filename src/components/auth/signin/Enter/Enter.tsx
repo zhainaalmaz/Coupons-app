@@ -1,11 +1,12 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./Enter.module.scss";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../../hooks";
 import AuthButton from "../../../../UI/AuthButton/AuthButton";
 import { loginThunk } from "../../../../store/slices/loginSlice";
+import { setUser } from "../../../../store/slices/userSlice";
 
 const EnterSchema = Yup.object().shape({
   password: Yup.string()
@@ -29,6 +30,14 @@ const Enter: React.FC = () => {
   const [userPhone, setUserPhone] = useState(
     JSON.parse(localStorage.getItem("user") || "")
   );
+
+  useEffect(() => {
+    if (status === "fulfilled") {
+      dispatch(setUser());
+      navigate("/");
+    }
+  }, [status]);
+
   return (
     <div className={styles.enter}>
       <div className={styles.wrapper}>
@@ -44,16 +53,6 @@ const Enter: React.FC = () => {
                 password: values.password,
               })
             );
-            // status === "fulfilled" && navigate("/");
-            console.log("try");
-console.log(status);
-
-            if (status === "rejected") {
-              console.log("rejected");
-
-              navigate("/");
-            }
-
             actions.setSubmitting(false);
           }}
         >

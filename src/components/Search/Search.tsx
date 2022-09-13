@@ -31,31 +31,31 @@ const Search = () => {
   const [showInput, setShowInput] = useState(false);
   const [searchValue, setSearchValue] = useState('');
   const navigate = useNavigate();
-  const ref = React.useRef<HTMLInputElement>(null);
-  const handleSearch = (event: any) => {
-    if (event.target.value) {
-      let searchText = event.target.value;
+
+  const handleSearch = (event: React.FormEvent<HTMLInputElement>) => {
+    if (event.currentTarget.value) {
+      let searchText = event.currentTarget.value;
       setSearchValue(searchText);
       dispatch(getSearchedCouponsAsync(searchText));
       setShow(true);
     } else {
       setShow(false);
       dispatch(clearState());
+      setSearchValue('');
     }
   };
   const clearInput = () => {
     setSearchValue('');
-    if (ref.current) {
-      ref.current.value = '';
-    }
   };
 
   const handleNavigate = () => {
-    setSearchValue('');
-    navigate(`/searchpage/${searchValue}`);
-    clearInput();
-    setShow(false);
-    setShowInput(false);
+    if (searchValue) {
+      setSearchValue('');
+      navigate(`/searchpage/${searchValue}`);
+      clearInput();
+      setShow(false);
+      setShowInput(false);
+    }
   };
 
   const inputHandler = () => {
@@ -70,6 +70,10 @@ const Search = () => {
     }
   };
 
+  const onBlur = () => {
+    setTimeout(() => setShow(false), 200);
+  };
+
   const clearCouponsArray = () => {
     dispatch(clearState());
   };
@@ -79,10 +83,10 @@ const Search = () => {
       <div className={styles.search}>
         <div className={styles.searchInputs}>
           <input
-            ref={ref}
-            onBlur={() => setTimeout(() => setShow(false), 200)}
-            onKeyDown={(e) => enterHandler(e)}
-            onClick={() => inputHandler()}
+            value={searchValue}
+            onBlur={onBlur}
+            onKeyDown={enterHandler}
+            onClick={inputHandler}
             onChange={handleSearch}
             placeholder="Поиск"
             type="text"
@@ -112,10 +116,10 @@ const Search = () => {
           <div className={styles.smallSearchOutter}>
             <div className={styles.smallSearchInputs}>
               <input
-                onBlur={() => setTimeout(() => setShow(false), 200)}
-                ref={ref}
-                onKeyDown={(e) => enterHandler(e)}
-                onClick={() => inputHandler()}
+                value={searchValue}
+                onBlur={onBlur}
+                onKeyDown={enterHandler}
+                onClick={inputHandler}
                 onChange={handleSearch}
                 placeholder="Поиск"
                 type="text"

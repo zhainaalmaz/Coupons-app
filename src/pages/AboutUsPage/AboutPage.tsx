@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import Navigation from '../../UI/Navigation/Navigation';
-import styles from './About.module.scss';
+import React, { useEffect, useState } from "react";
+import BreadCrumps from "../../components/BreadCrumps/BreadCrumps";
+import Navigation from "../../UI/Navigation/Navigation";
+import styles from "./About.module.scss";
 
 interface IAboutInfo {
   data: {};
@@ -27,17 +28,20 @@ const AboutPage = () => {
   }, []);
 
   return (
-    <div className={styles.layout}>
-      <div className="container">
-        <div className={styles.wrapper}>
-          <Navigation />
-          <div className={styles.info}>
-            <h2>О нас</h2>
-            <div>{data.description}</div>
+    <>
+      <BreadCrumps />
+      <div className={styles.layout}>
+        <div className="container">
+          <div className={styles.wrapper}>
+            <Navigation />
+            <div className={styles.info}>
+              <h2>О нас</h2>
+              <div>{data.description}</div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
