@@ -1,18 +1,26 @@
-.cardFlexContainer{
-  display: flex;
-  gap: 12px 8px;
+.cardFlexContainer {
+  display: grid;
   margin-bottom: 24px;
-  flex-wrap: wrap;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 300px));
+  place-content: center;
+  padding-top: 24px;
+  gap: 12px 8px;
+  @media (min-width: 800px) {
+    grid-template-columns: repeat(3, minmax(250px, 1fr));
+  }
+  @media (min-width: 1061px) {
+    grid-template-columns: repeat(4, minmax(250px, 1fr));
+  }
 }
-.container{
+.container {
   max-width: 1200px;
-  margin:0 auto;
+  margin: 0 auto;
   padding: 0 16px;
 }
-.categoriesFlexContainer{
+.categoriesFlexContainer {
   display: flex;
   gap: 0 16px;
-  margin-bottom:24px;
+  margin-bottom: 24px;
   padding: 24px 0 0 0;
   overflow-x: auto;
 }
@@ -20,8 +28,8 @@
   width: 0;
   height: 0;
 }
-.mainTitle{
-  font-family: 'Inter',sans-serif;
+.mainTitle {
+  font-family: "Inter", sans-serif;
   font-style: normal;
   font-weight: 700;
   font-size: 24px;
@@ -33,8 +41,8 @@
   flex-grow: 0;
   margin-bottom: 24px;
 }
-.mainBtn{
-  font-family: 'Inter', sans-serif;
+.mainBtn {
+  font-family: "Inter", sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
@@ -42,10 +50,10 @@
   display: flex;
   align-items: flex-end;
   text-align: center;
-  color: #FFFFFF;
+  color: #ffffff;
   flex: none;
   order: 1;
-  background: #4B5FA5;
+  background: #4b5fa5;
   flex-grow: 0;
   padding: 11px 20px;
   border: none;
@@ -53,7 +61,7 @@
   margin: 0 auto 64px;
   cursor: pointer;
 }
-.mainImgBox{
+.mainImgBox {
   display: flex;
   flex-wrap: nowrap;
   gap: 14px;

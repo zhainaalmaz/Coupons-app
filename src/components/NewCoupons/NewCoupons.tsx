@@ -35,6 +35,8 @@ const NewCoupons: FC = () => {
   const [activeButtonId, setActiveButtonId] = useState(4);
   const tags = useAppSelector((state) => state.tag);
 
+  console.log(tags);
+
   const subCategoryHandler = async (id: number) => {
     try {
       const response = await fetch(
@@ -71,11 +73,15 @@ const NewCoupons: FC = () => {
         ))}
       </div>
       <div className={styles.coupons}>
-        {data?.results?.map((item: Icoupon) => (
-          <Link to={"/coupon/" + item.id}>
-            <Card it={item} key={item.id} />
-          </Link>
-        ))}
+        {data.results.length === 0 ? (
+          <div>В данной категории нет товаров</div>
+        ) : (
+          data?.results?.map((item: Icoupon) => (
+            <Link to={"/coupon/" + item.id}>
+              <Card it={item} key={item.id} />
+            </Link>
+          ))
+        )}
       </div>
       {data.results.length >= 8 && (
         <div className={styles.coupons_button}>
