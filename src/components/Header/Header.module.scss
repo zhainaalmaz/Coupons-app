@@ -1,226 +1,226 @@
 header {
-    font-weight: 400;
-    font-size: 15px;
+  font-weight: 400;
+  font-size: 15px;
 }
 
-
 .headerTop {
-    margin: 18px 0 7px 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  margin: 18px 0 7px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .headerLines {
-    border-bottom: 1px solid #E0E0E0;
-    position: relative;
+  border-bottom: 1px solid #f7f1fe;
+  position: relative;
 }
 
 .headerTopLeft span {
-    margin-right: 24px;
+  margin-right: 24px;
 }
 
-.headerTopRight span {
+.headerTopRight {
+  span {
     color: #979797;
+    
+  }
+  a {
+    color: black;
+    font-weight: bold;
+  }  
 }
-
 .headerBottom {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 50px;
-    margin: 16px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 50px;
+  margin: 16px 0;
 }
 
 .inputIcon {
-    margin: 0 34px;
-    border: 1px solid #E0E0E0;
-    background-color: #F8F8F8;
+  margin: 0 34px;
+  border: 1px solid #e0e0e0;
+  background-color: #f8f8f8;
 }
 
 .inputIcon span {
-    position: absolute;
+  position: absolute;
 }
 
 .icon {
-    padding: 5px 0 0px 625px;
+  padding: 5px 0 0px 625px;
 }
 
 .inputField {
-    width: 662px;
-    height: 44px;
-    border: 0.3px solid #F8F8F8;
+  width: 662px;
+  height: 44px;
+  border: 0.3px solid #f8f8f8;
 }
 
 .inputField::placeholder {
-    padding-left: 20px;
+  padding-left: 20px;
 }
 
-
 .headerExtraInfo {
-    display: flex;
-    align-items: center;
-    font-weight: 500px;
-    font-size: 15px;
+  display: flex;
+  align-items: center;
+  font-weight: 500px;
+  font-size: 15px;
 }
 
 .headerOption {
-    margin-right: 20px;
-    margin-left: 10px;
-    padding-right: 20px;
-    border-right: 1px solid #D3D3D3;
+  margin-right: 20px;
+  margin-left: 10px;
+  padding-right: 20px;
+  border-right: 1px solid #d3d3d3;
 }
 
 .burgerSpans {
-    margin-right: 20px;
-    margin-left: 10px;
-    padding-right: 20px;
+  margin-right: 20px;
+  margin-left: 10px;
+  padding-right: 20px;
 }
 
 .headerCart {
-    margin-left: 10px;
+  margin-left: 10px;
 }
 
-
 .menu {
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 20px;
-    padding: 0;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  padding: 0;
 }
 
 .burgerList {
-    display: flex;
-    flex-direction: column;
-    align-items: space-between;
-    justify-content: space-between;
-    height: 100%;
-    padding: 16px;
-    width: 250px;
+  display: flex;
+  flex-direction: column;
+  align-items: space-between;
+  justify-content: space-between;
+  height: 100%;
+  padding: 16px;
+  width: 250px;
 }
 
 .burgerTopLeft {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 
+  span {
+    display: block;
+    margin-bottom: 10px;
 
-    span {
-        display: block;
-        margin-bottom: 10px;
-
-        &:hover {
-            color: #4B5FA5;
-            cursor: pointer;
-        }
+    &:hover {
+      color: #4b5fa5;
+      cursor: pointer;
     }
+  }
 }
 
 .burgerTopLeft p {
-    font-weight: 400;
-    font-size: 15px;
-    line-height: 16px;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 16px;
 }
 
 .xsSearch {
-    display: none;
+  display: none;
 }
 
 .css-i4bv87-MuiSvgIcon-root {
-    padding: 5px 6px 2px 6px !important
+  padding: 5px 6px 2px 6px !important;
 }
 
 .iconWrapper {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 
-    p {
-        margin-left: 10px;
-    }
+  p {
+    margin-left: 10px;
+  }
 
-    &:hover {
-        color: #4B5FA5;
-        cursor: pointer;
-    }
+  &:hover {
+    color: #4b5fa5;
+    cursor: pointer;
+  }
 }
 
 .smallIconWrapper {
-    display: flex;
-    align-items: center;
-    margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
 
-    &:hover {
-        color: #4B5FA5;
-        cursor: pointer;
-    }
+  &:hover {
+    color: #4b5fa5;
+    cursor: pointer;
+  }
 }
 
 .closeWrapper {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 
-    p {
-        margin: 18px 0 18px 0px;
-    }
+  p {
+    margin: 18px 0 18px 0px;
+  }
 }
 
 .links {
-    color: #171717;
-    cursor: pointer;
+  color: #171717;
+  cursor: pointer;
 }
 
 .burgerLine {
-    width: 100px;
-    opacity: 0.6;
-    border: 1px solid #D3D3D3;
-    margin: 14px 0 14px 0;
+  width: 100px;
+  opacity: 0.6;
+  border: 1px solid #d3d3d3;
+  margin: 14px 0 14px 0;
 }
 
 .badgeHelper {
-    margin-right: 7px;
+  margin-right: 7px;
 }
 
 .burgerBottom p {
-    margin: 0px 0px 8px;
+  margin: 0px 0px 8px;
 }
 
 .logo img {
-    width: 114px;
+  width: 114px;
 }
 
 .user {
-    margin: 0 10px;
+  margin: 0 10px;
 }
 
 .iconWrapperUser {
-    display: flex;
-    align-items: center;
-    background-color: #F7F1FE;
-    border-radius: 12px;
-    padding: 10px;
+  display: flex;
+  align-items: center;
+  background-color: #f7f1fe;
+  border-radius: 12px;
+  padding: 10px;
 }
 
-
 @media screen and (max-width: 900px) {
-    .xsSearch {
-        display: block
-    }
+  .xsSearch {
+    display: block;
+  }
 
-    .search {
-        display: none;
-    }
+  .search {
+    display: none;
+  }
 
-    .headerBottom {
-        justify-content: space-between;
-        align-items: center;
-        gap: 0px;
-    }
+  .headerBottom {
+    justify-content: space-between;
+    align-items: center;
+    gap: 0px;
+  }
 
-    .logo img {
-        width: 99px;
-    }
+  .logo img {
+    width: 99px;
+  }
 
-    .headerBottom {
-        margin: 10.5px 0;
-    }
-
+  .headerBottom {
+    margin: 10.5px 0;
+  }
 }

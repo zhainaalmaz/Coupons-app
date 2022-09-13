@@ -5,6 +5,14 @@
   margin-top: 1em;
 }
 
+.images {
+  flex: 0 0 65%;
+}
+
+.info {
+  flex: 0 0 30%;
+}
+
 .company {
   display: flex;
   gap: 10px;
@@ -31,21 +39,27 @@
 .similar_products {
   display: flex;
   gap: 10px;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  overflow: auto hidden;
 
-  & > div {
-    flex: 0 1 auto;
+  & > a {
+    flex: 0 1 25%;
   }
 }
 
-.imagePreview {
-  width: 800px;
-  height: 400px;
-
+.similarTitle {
+  font-weight: bold;
+  font-size: 1.2rem;
+  padding: 10px 0;
 }
 
+.imagePreview {
+  
+}
+А
 .previewImage {
   width: 100%;
   height: 100%;
+  border-radius: 10px;
   object-fit: cover;
 }

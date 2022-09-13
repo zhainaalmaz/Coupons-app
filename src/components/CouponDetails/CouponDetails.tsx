@@ -90,6 +90,7 @@ const CouponDetailsPage = ({ coupon }: Props) => {
       <p dangerouslySetInnerHTML={{ __html: coupon.conditions }}></p>
       <p dangerouslySetInnerHTML={{ __html: coupon.description }}></p>
 
+      <div className={styles.similarTitle}>Похожие товары</div>
       <div className={styles.similar_products}>
         {coupon.similar_products &&
           coupon.similar_products.map((product: ISimilar, index) => {
