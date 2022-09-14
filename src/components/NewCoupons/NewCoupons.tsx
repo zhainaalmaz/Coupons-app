@@ -77,8 +77,8 @@ const NewCoupons: FC = () => {
           <div>В данной категории нет товаров</div>
         ) : (
           data?.results?.map((item: Icoupon) => (
-            <Link to={"/coupon/" + item.id}>
-              <Card it={item} key={item.id} />
+            <Link to={"/coupon/" + item.id} key={item.id}>
+              <Card it={item}  />
             </Link>
           ))
         )}

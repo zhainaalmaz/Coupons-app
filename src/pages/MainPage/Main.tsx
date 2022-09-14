@@ -82,8 +82,8 @@ const Main = () => {
         {coupons.coupon &&
           coupons.coupon.slice(0, 8).map((it: Icoupon) => {
             return (
-              <Link to={"/coupon/" + it.id}>
-                <Card key={it.id} it={it} />
+              <Link to={"/coupon/" + it.id} key={it.id}>
+                <Card it={it} />
               </Link>
             );
           })}

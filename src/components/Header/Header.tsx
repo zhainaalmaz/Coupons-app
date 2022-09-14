@@ -19,7 +19,6 @@ const Header = () => {
   const dispatch = useAppDispatch();
   const state = useAppSelector((state) => state.contacts);
 
-  // const user = localStorage.getItem("currentUser") &&  JSON.parse(localStorage.getItem("currentUser") || "")
   const user = useAppSelector((state) => state.user);
 
   const isAuth =
@@ -181,7 +180,7 @@ const Header = () => {
                   </div>
                 </Link>
               )}
-              <Link to="/">
+              <Link to="my-coupons">
                 <div className={styles.smallIconWrapper}>
                   <img
                     style={{

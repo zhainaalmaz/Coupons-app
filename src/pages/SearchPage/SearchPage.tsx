@@ -106,8 +106,8 @@ const SearchPage = () => {
             <>
               <div className={styles.cardFlexContainer}>
                 {searchedCoupons.slice(0, count).map((it: ISearchItem) => (
-                  <Link to={"/coupon/" + it.id}>
-                    <Card key={it.id} it={it} />
+                  <Link to={"/coupon/" + it.id} key={it.id}>
+                    <Card it={it} />
                   </Link>
                 ))}
               </div>

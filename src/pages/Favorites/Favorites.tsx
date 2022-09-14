@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import BreadCrumps from '../../components/BreadCrumps/BreadCrumps';
-import { useAppSelector } from '../../hooks';
-import Card from '../../UI/Card/Card';
-import styles from './Favorites.module.scss';
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import BreadCrumps from "../../components/BreadCrumps/BreadCrumps";
+import { useAppSelector } from "../../hooks";
+import Card from "../../UI/Card/Card";
+import styles from "./Favorites.module.scss";
 
 export interface Icoupon {
   company_logo: string;
@@ -23,8 +23,8 @@ export interface Icoupon {
 
 const Favorites = () => {
   const user =
-    localStorage.getItem('currentUser') &&
-    JSON.parse(localStorage.getItem('currentUser') || '');
+    localStorage.getItem("currentUser") &&
+    JSON.parse(localStorage.getItem("currentUser") || "");
 
   const favoriteCoupons = useAppSelector(
     (state) => state.favorite.favoriteCoupons
@@ -52,9 +52,9 @@ const Favorites = () => {
   };
 
   useEffect(() => {
-    document.addEventListener('scroll', scrollHandler);
+    document.addEventListener("scroll", scrollHandler);
     return function () {
-      document.removeEventListener('scroll', scrollHandler);
+      document.removeEventListener("scroll", scrollHandler);
     };
   }, []);
 
@@ -72,8 +72,8 @@ const Favorites = () => {
               {state
                 .filter((i: any, card: any) => card < limit)
                 .map((item: Icoupon) => (
-                  <Link to={'/coupon/' + item.id}>
-                    <Card it={item} key={item.id} />
+                  <Link to={"/coupon/" + item.id} key={item.id}>
+                    <Card it={item} />
                   </Link>
                 ))}
             </div>

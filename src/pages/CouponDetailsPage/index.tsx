@@ -11,6 +11,10 @@ const CouponDetailsPage = () => {
   const dispatch = useAppDispatch();
   const { coupon, status } = useAppSelector((state) => state.couponDetails);
 
+  const state = useAppSelector((state) => state.favorite);
+  const isFavorite = true;
+  console.log(state);
+
   useEffect(() => {
     dispatch(getCouponAsync(id));
   }, [id]);
@@ -22,7 +26,7 @@ const CouponDetailsPage = () => {
         {status === "loading" ? (
           <div>LOADING</div>
         ) : (
-          <CouponDetails coupon={coupon} />
+          <CouponDetails coupon={coupon} isFavorite={isFavorite} />
         )}
       </div>
     </>
