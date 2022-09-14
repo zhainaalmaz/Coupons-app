@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { getCouponAsync } from "../../store/slices/couponDetailsSlice";
 import styles from "./CouponDetailsPage.module.scss";
@@ -9,10 +9,16 @@ import {
   addFavorite,
   removeFromFavorite,
 } from "../../store/slices/favoriteSlice/favoriteSlice";
+import { ICoupon } from "../../components/CouponDetails/CouponDetails";
+import {
+  activateUsersCoupon,
+  buyUsersCoupon,
+} from "../../store/slices/usersCouponsSlice";
 
 const CouponDetailsPage = () => {
   const { id } = useParams();
   const dispatch = useAppDispatch();
+  const navigate = useNavigate()
   const { coupon, status } = useAppSelector((state) => state.couponDetails);
 
   const user =
@@ -28,9 +34,15 @@ const CouponDetailsPage = () => {
   );
 
   const state = user ? AuthFavoriteCoupons : favoriteCoupons;
+  const isFavorite = state.some((item: ICoupon) => item.id === coupon.id);
 
-  const isFavorite = state.some((item: any) => item.id === coupon.id);
-  console.log(isFavorite, "state");
+  const usersCoupons = useAppSelector(
+    (state) => state.usersCoupons.usersCoupons
+  );
+  console.log(usersCoupons);
+
+  const isBought = usersCoupons.some((item: ICoupon) => item.id === coupon.id);
+  console.log(isBought);
 
   const favoriteHandler = (e: React.MouseEvent<HTMLElement>) => {
     e.stopPropagation();
@@ -39,6 +51,20 @@ const CouponDetailsPage = () => {
     isFavorite
       ? dispatch(removeFromFavorite(coupon))
       : dispatch(addFavorite(coupon));
+  };
+
+  const couponHandler = (e: React.MouseEvent<HTMLElement>) => {
+    e.stopPropagation();
+    e.preventDefault();
+
+    if (!user) {
+      navigate("/sign-in")
+      return
+    }
+
+    isBought
+      ? dispatch(activateUsersCoupon(coupon))
+      : dispatch(buyUsersCoupon(coupon));
   };
 
   useEffect(() => {
@@ -55,7 +81,9 @@ const CouponDetailsPage = () => {
           <CouponDetails
             coupon={coupon}
             isFavorite={isFavorite}
+            isBought={isBought}
             favoriteHandler={favoriteHandler}
+            couponHandler={couponHandler}
           />
         )}
       </div>

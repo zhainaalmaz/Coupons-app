@@ -18,6 +18,7 @@ import CarouselSlice from './slices/carouselSlice/CarouselSlice';
 import MainImgSlice from './slices/mainImgSlice/MainImgSlice';
 import changePasswordSlice from './slices/changePasswordSlise/changePasswordSlice';
 import userSlice from './slices/userSlice';
+import usersCouponsSlice from './slices/usersCouponsSlice';
 
 export const store = configureStore({
   reducer: {
@@ -38,6 +39,7 @@ export const store = configureStore({
     couponDetails: couponDetailsSlice,
     changePassword: changePasswordSlice,
     user: userSlice,
+    usersCoupons: usersCouponsSlice
   },
 
   middleware: (getDefaultMiddleware) => getDefaultMiddleware(),

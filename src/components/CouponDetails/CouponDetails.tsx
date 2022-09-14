@@ -10,6 +10,8 @@ type Props = {
   coupon: ICoupon;
   isFavorite: boolean;
   favoriteHandler: any;
+  isBought: boolean | ICoupon;
+  couponHandler: any;
 };
 
 interface ILocation {
@@ -18,7 +20,7 @@ interface ILocation {
   geolocation: string;
 }
 
-interface ICoupon {
+export interface ICoupon {
   id: number;
   title: string;
   description: string;
@@ -56,7 +58,13 @@ interface ISimilar {
   title: string;
 }
 
-const CouponDetailsPage = ({ coupon, isFavorite, favoriteHandler }: Props) => {
+const CouponDetailsPage = ({
+  coupon,
+  isFavorite,
+  favoriteHandler,
+  couponHandler,
+  isBought,
+}: Props) => {
   return (
     <div className={styles.coupon}>
       <div className={styles.heading}>
@@ -98,13 +106,22 @@ const CouponDetailsPage = ({ coupon, isFavorite, favoriteHandler }: Props) => {
             <div className={styles.priceWithCoupon}>
               Цена с купоном
               <span>
-                от {coupon.price} сом <small>{coupon.old_price} сом</small>
+                от {coupon.price} сом
+                {coupon.old_price && <small>{coupon.old_price} сом</small>}
               </span>
             </div>
           </div>
 
           <div className={styles.buttons}>
-            <button className={styles.buttonBuy}>Купить купон</button>
+            {isBought ? (
+              <button onClick={couponHandler} className={styles.buttonActivate}>
+                Активирвать купон
+              </button>
+            ) : (
+              <button onClick={couponHandler} className={styles.buttonBuy}>
+                Купить купон
+              </button>
+            )}
             <button onClick={favoriteHandler} className={styles.buttonFavorite}>
               {isFavorite ? <FavoriteIcon /> : <FavoritedIcon />}
             </button>
