@@ -67,8 +67,21 @@ export function changePassword(data: object) {
     data: data,
     headers: {
       'Authorization': "Bearer " + token.access,
-      // "accept": "application/json",
-      // "Content-Type": "application/json"
+    }
+  }).then((response) => {
+    return response.data
+  })
+}
+export function recoveryPassword(data: object) {
+  const token = JSON.parse(localStorage.getItem('currentUser') || "")
+  console.log(token);
+
+  return axios({
+    method: 'put',
+    url: BASE_URL + 'users/recovery-password/',
+    data: data,
+    headers: {
+      'Authorization': "Bearer " + token.access,
     }
   }).then((response) => {
     return response.data

@@ -10,7 +10,7 @@ const SurnameInput: React.FC<IProps> = ({
   form,
 }) => {
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    delete form.errors.first_name;
+    delete form.errors.last_name;
     form.setErrors({ ...form.errors, last_name: "" });
     form.values.last_name = e.target.value;
   };

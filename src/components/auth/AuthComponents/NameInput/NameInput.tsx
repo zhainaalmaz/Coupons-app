@@ -30,14 +30,11 @@ const NameInput: React.FC<IProps> = ({
   type,
   form,
 }) => {
-  console.log(form);
-
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     delete form.errors.first_name;
     form.setErrors({ ...form.errors, first_name: "" });
     form.values.first_name = e.target.value;
   };
-
   return (
     <div className={styles.nameInput}>
       <input

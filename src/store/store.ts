@@ -7,6 +7,7 @@ import confirmSlice from "./slices/confirmSlice";
 import loginSlice from "./slices/loginSlice";
 import checkSlice from "./slices/checkSlice";
 import changePasswordSlice from "./slices/changePasswordSlise/changePasswordSlice";
+import recoveryPasswordSlise from "./slices/recoveryPasswordSlise/index";
 
 export const store = configureStore({
   reducer: {
@@ -17,7 +18,8 @@ export const store = configureStore({
     confirm: confirmSlice,
     login: loginSlice,
     check: checkSlice,
-    changePassword: changePasswordSlice
+    changePassword: changePasswordSlice,
+    recoveryRassword: recoveryPasswordSlise
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
 })

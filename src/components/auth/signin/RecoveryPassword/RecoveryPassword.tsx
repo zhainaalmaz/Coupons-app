@@ -1,12 +1,12 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import React, { useEffect } from "react";
-import styles from "./Signin.module.scss";
-import * as Yup from "yup";
-import { useAppDispatch, useAppSelector } from "../../../hooks";
 import { Link, useNavigate } from "react-router-dom";
-import PhoneInputField from "../signup/PhoneInput/PhoneInput";
-import AuthButton from "../../UI/authButton/AuthButton";
-import { checkThunk } from "../../../store/slices/checkSlice";
+import * as Yup from "yup";
+import { useAppDispatch, useAppSelector } from "../../../../hooks";
+import { checkThunk } from "../../../../store/slices/checkSlice";
+import AuthButton from "../../../UI/authButton/AuthButton";
+import PhoneInputField from "../../signup/PhoneInput/PhoneInput";
+import styles from "./RecoveryPassword.module.scss";
 
 const phoneRegExp = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/;
 const LoginSchema = Yup.object().shape({
@@ -21,37 +21,42 @@ interface FormValue {
   phone: string;
 }
 
-const initialValues: FormValue = {
-  phone: "",
-};
-
-const Signin: React.FC = () => {
+const RecoveryPassword = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { error, statusCode } = useAppSelector((state) => state.check);
-  useEffect(() => {
-    if (statusCode) {
-      navigate("/enter");
+  const {status, error} = useAppSelector((state) => state.check)
+
+  const initialValues: FormValue = {
+    phone: "",
+  };
+
+  const onSubmit = (values: FormValue) => {
+    dispatch(
+      checkThunk({
+        phone: values.phone,
+      })
+    );
+    localStorage.setItem("user", JSON.stringify(values));
+  };
+
+useEffect(()=>{
+    if(status === "fulfilled") {
+        navigate('/recovery-password/confirm')
     }
-  }, [statusCode]);
+},[status])
 
   return (
-    <div className={styles.signin}>
+    <div className={styles.recoveryPassword}>
       <div className="container">
         <div className="wrapper">
-          <h3 className={styles.title}>Войдите, чтобы продолжить</h3>
-
+          <h3 className={styles.title}>Восстановление пароля</h3>
+          <div className={styles.description}>
+            Введите номер телефона чтобы отправить код подтверждения
+          </div>
           <Formik
             initialValues={initialValues}
             validationSchema={LoginSchema}
-            onSubmit={(values, actions) => {
-              dispatch(
-                checkThunk({
-                  phone: values.phone,
-                })
-              );
-              localStorage.setItem("userPhone", JSON.stringify(values));
-            }}
+            onSubmit={(values) => onSubmit(values)}
           >
             <Form className={styles.form}>
               <div className={styles.inputWrapper}>
@@ -63,8 +68,8 @@ const Signin: React.FC = () => {
                   placeholder="Введите номер телефона"
                 />
                 {error === "Request failed with status code 404" && (
-                  <div className={styles.errorCode}>Такого номера нет</div>
-                )}
+                <div className={styles.errorCode}>Такого номера нет</div>
+              )}
                 <ErrorMessage
                   component="p"
                   className={styles.errorMessage}
@@ -77,13 +82,10 @@ const Signin: React.FC = () => {
               </AuthButton>
             </Form>
           </Formik>
-          <Link to="/sign-up">
-            <div className={styles.signup}>Зарегистрироваться</div>
-          </Link>
         </div>
       </div>
     </div>
   );
 };
 
-export default Signin;
+export default RecoveryPassword;

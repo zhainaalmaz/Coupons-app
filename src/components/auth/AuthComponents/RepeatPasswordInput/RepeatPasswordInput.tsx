@@ -1,33 +1,34 @@
 import React, { useState } from "react";
-import styles from "./CreatePassword.module.scss";
 import { IProps } from "../NameInput/NameInput";
+import styles from "./RepeatPasswordInput.module.scss";
+
 import { ReactComponent as EyeClose } from "../../../../assets/auth-svg/eye-close.svg";
 import { ReactComponent as EyeOpen } from "../../../../assets/auth-svg/eye-open.svg";
 
-const CreatePassword: React.FC<IProps> = ({
+const RepeatPasswordInput: React.FC<IProps> = ({
   name,
+  type,
   className,
   placeholder,
-  type,
   form,
 }) => {
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    delete form.errors.first_name;
-    form.setErrors({ ...form.errors, password: "" });
-    form.values.password = e.target.value;
-  };
-
   const [show, setShow] = useState(false);
   const eyeHandler = (e: { stopPropagation: () => void }) => {
     e.stopPropagation();
     setShow(!show);
   };
+
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    delete form.errors.password2;
+    form.setErrors({ ...form.errors, password2: "" });
+    form.values.password2 = e.target.value;
+  };
   return (
-    <div>
+    <div className={styles.repeatPassword}>
       <input
-        onChange={onChange}
         type={show ? "text" : type}
         className={className}
+        onChange={onChange}
         placeholder={placeholder}
         name={name}
       />
@@ -40,4 +41,4 @@ const CreatePassword: React.FC<IProps> = ({
   );
 };
 
-export default CreatePassword;
+export default RepeatPasswordInput;

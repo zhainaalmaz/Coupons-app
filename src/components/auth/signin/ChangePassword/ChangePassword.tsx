@@ -35,7 +35,7 @@ const passwordSchema = Yup.object().shape({
     .required("Подтвердите пароль"),
 });
 
-interface IProps {
+export interface IProps {
   setTitle: Function;
 }
 

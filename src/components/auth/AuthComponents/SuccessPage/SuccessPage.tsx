@@ -9,6 +9,7 @@ type IProps = {
 };
 
 const SuccessPage = ({ title }: IProps) => {
+
   return (
     <div className={styles.successPage}>
       <div className="container">
@@ -16,7 +17,7 @@ const SuccessPage = ({ title }: IProps) => {
           <Success />
           <h3>{title}</h3>
           <Link to="/">
-            <AuthButton type="button">
+            <AuthButton  type="submit">
               <p>На главную</p>
             </AuthButton>
           </Link>

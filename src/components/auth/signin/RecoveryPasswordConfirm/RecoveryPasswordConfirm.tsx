@@ -1,15 +1,14 @@
-import { ErrorMessage, Field, Form, Formik } from "formik";
-import React from "react";
-import { useAppDispatch, useAppSelector } from "../../../../hooks";
-import AuthButton from "../../../UI/authButton/AuthButton";
-import styles from "./Comfirm.module.scss";
+import React, { useEffect } from "react";
+import styles from "./RecoveryPasswordConfirm.module.scss";
 import * as Yup from "yup";
-import { confirmThunk } from "../../../../store/slices/confirmSlice";
-import { loginThunk } from "../../../../store/slices/loginSlice";
 import { useNavigate } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../../../hooks";
+import { ErrorMessage, Field, Form, Formik } from "formik";
+import { confirmThunk } from "../../../../store/slices/confirmSlice";
 import ComfirmInput, {
   FormValues,
 } from "../../AuthComponents/ConfirmInput/ComfirmInput";
+import AuthButton from "../../../UI/authButton/AuthButton";
 
 const ConfirmSchema = Yup.object().shape({
   confirmation_code: Yup.string()
@@ -26,40 +25,33 @@ const initialValues: IConfCode = {
   confirmation_code: "",
 };
 
-interface IProps {
-  setTitle: Function;
-}
-
-const Confirm: React.FC<IProps> = ({ setTitle }) => {
+const RecoveryPasswordConfirm = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { statusCode, error } = useAppSelector((state) => state.confirm);
+  const { status, error } = useAppSelector((state) => state.confirm);
   const user = JSON.parse(localStorage.getItem("user") || "");
 
-  const login = async () => {
-    await dispatch(
-      loginThunk({
-        phone: user.phone,
-        password: user.password,
-      })
-    );
-    setTitle("Телефон подтвержден");
-    navigate("/success-page");
-  };
-
-  if (statusCode) {
-    login();
-  }
+  useEffect(() => {
+    if (status === "fulfilled") {
+      navigate("/recovery-password/confirm/create-password");
+    }
+  }, [status]);
 
   const onSubmit = (values: FormValues) => {
+    // console.log(user);
+    // console.log(values.confirmation_code);
+
     dispatch(
       confirmThunk({
         ...user,
         confirmation_code: values.confirmation_code,
       })
     );
+    localStorage.setItem(
+      "confirmation_code",
+      JSON.stringify(values.confirmation_code)
+    );
   };
-
   return (
     <div className={styles.confirm}>
       <div className="container">
@@ -69,13 +61,10 @@ const Confirm: React.FC<IProps> = ({ setTitle }) => {
           onSubmit={(values) => onSubmit(values)}
         >
           <Form className={styles.form}>
-            <h3 className={styles.title}>Подтверждение номера телефона</h3>
-            <div>
-              <p className={styles.number}> {user.phone}</p>
-              <div className={styles.confirmationMessage}>
-                Неверный номер телефона?
-              </div>
-            </div>
+            <h3 className={styles.title}>Восстановление пароля</h3>
+            {/* <div className={styles.description}>
+              Введите номер телефона чтобы отправить код подтверждения
+            </div> */}
             <div className={styles.inputsWrapper}>
               <Field
                 type="tel"
@@ -97,12 +86,12 @@ const Confirm: React.FC<IProps> = ({ setTitle }) => {
               </AuthButton>
             </div>
 
-            <div>
+            {/* <div>
               <div className={styles.message}>Не пришло SMS подтверждение?</div>
               <button className={styles.resendMessageBtn}>
                 Отправить снова через 0:59
               </button>
-            </div>
+            </div> */}
           </Form>
         </Formik>
       </div>
@@ -110,4 +99,4 @@ const Confirm: React.FC<IProps> = ({ setTitle }) => {
   );
 };
 
-export default Confirm;
+export default RecoveryPasswordConfirm;

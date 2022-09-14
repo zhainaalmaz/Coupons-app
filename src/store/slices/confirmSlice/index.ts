@@ -17,7 +17,7 @@ export const confirmThunk = createAsyncThunk(
     'confirm',
     async (data: object) => {
         // console.log(data);
-        
+
         const response = await confirm(data)
         // console.log(response);
         return response
@@ -34,13 +34,15 @@ const confirmSlice = createSlice({
                 state.status = "loading"
             }).addCase(confirmThunk.fulfilled, (state, action) => {
                 state.status = "fulfilled"
-                // console.log(action);
+                console.log("fulfilled");
                 state.statusCode = action.payload.status
 
-                
+
             }).addCase(confirmThunk.rejected, (state, action) => {
                 state.status = "rejected"
                 state.error = action.error.message
+                console.log("rejected");
+
                 // console.log('confirm-error:',action.error.message)
                 // Request failed with status code 403
                 // Request failed with status code 400

@@ -12,6 +12,15 @@
     max-width: 316px;
     gap: 18px;
   }
+  .phone {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 22px;
+    color: #171717;
+    margin: 36px 0;
+  }
   .inputsWrapper {
     position: relative;
     width: 100%;
@@ -51,5 +60,14 @@
     text-align: start;
     // position: absolute;
     padding-left: 12px;
+  }
+  .recovery {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 21px;
+    cursor: pointer;
+    color: #4b5fa5;
   }
 }

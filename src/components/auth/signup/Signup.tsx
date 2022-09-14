@@ -1,30 +1,16 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import React, { useState } from "react";
+import React from "react";
 import AuthButton from "../../UI/authButton/AuthButton";
 import styles from "./Signup.module.scss";
 import * as Yup from "yup";
-import { ReactComponent as EyeClose } from "../../../assets/auth-svg/eye-close.svg";
-import { ReactComponent as EyeOpen } from "../../../assets/auth-svg/eye-open.svg";
-// import PhoneInput from "react-phone-input-2";
-// import "react-phone-input-2/lib/style.css";
-
-// import "react-phone-number-input/style.css";
-// import PhoneInput from "react-phone-number-input";
 import PhoneInputField from "./PhoneInput/PhoneInput";
 import { authThunk } from "../../../store/slices/authSlice";
-import { useAppDispatch, useAppSelector } from "../../../hooks";
+import { useAppDispatch } from "../../../hooks";
 import { useNavigate } from "react-router-dom";
 import NameInput from "../AuthComponents/NameInput/NameInput";
 import SurnameInput from "../AuthComponents/SurnameInput/SurnameInput";
-import CreatePassword from "../AuthComponents/CreatePassword/CreatePassword";
-
-export interface FormValues {
-  phone: string;
-  password: string;
-  first_name: string;
-  last_name: string;
-  password2: string;
-}
+import CreatePasswordInput from "../AuthComponents/CreatePasswordInput/CreatePasswordInput";
+import RepeatPasswordInput from "../AuthComponents/RepeatPasswordInput/RepeatPasswordInput";
 
 const SignupSchema = Yup.object().shape({
   first_name: Yup.string()
@@ -48,20 +34,17 @@ const SignupSchema = Yup.object().shape({
     .required("Подтвердите пароль"),
 });
 
+export interface FormValues {
+  phone: string;
+  password: string;
+  first_name: string;
+  last_name: string;
+  password2: string;
+}
+
 const Signup: React.FC = () => {
-  const [show, setShow] = useState(false);
-  const [show2, setShow2] = useState(false);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-
-  // function eyeHandler(e: { stopPropagation: () => void }) {
-  //   e.stopPropagation();
-  //   setShow(!show);
-  // }
-  // function eyeHandler2(e: { stopPropagation: () => void }) {
-  //   e.stopPropagation();
-  //   setShow2(!show2);
-  // }
 
   const initialValues: FormValues = {
     first_name: "",
@@ -71,17 +54,20 @@ const Signup: React.FC = () => {
     password2: "",
   };
 
+  const onSubmit = (values: FormValues) => {
+    dispatch(authThunk(values));
+    localStorage.setItem("user", JSON.stringify(values));
+    navigate("/confirm");
+  };
+
   return (
     <div className={styles.signup}>
       <div className="container">
         <Formik
           initialValues={initialValues}
           validationSchema={SignupSchema}
-          onSubmit={(values, actions) => {
-            dispatch(authThunk(values));
-            navigate("/confirm");
-            localStorage.setItem("user", JSON.stringify(values));
-            actions.setSubmitting(false);
+          onSubmit={(values) => {
+            onSubmit(values);
           }}
         >
           <Form className={styles.form}>
@@ -90,7 +76,7 @@ const Signup: React.FC = () => {
               <div className={styles.inputWrapper}>
                 <Field
                   className={styles.formItem}
-                  // id="first_name"
+                  id="first_name"
                   name="first_name"
                   placeholder="Имя"
                   component={NameInput}
@@ -134,7 +120,7 @@ const Signup: React.FC = () => {
                   className={styles.formItem}
                   type="password"
                   id="password"
-                  component={CreatePassword}
+                  component={CreatePasswordInput}
                   name="password"
                   placeholder="Придумайте пароль"
                 />
@@ -147,22 +133,12 @@ const Signup: React.FC = () => {
               <div className={styles.inputWrapper}>
                 <Field
                   className={styles.formItem}
-                  type={show2 ? "text" : "password"}
+                  type="password"
                   id="password2"
                   name="password2"
+                  component={RepeatPasswordInput}
                   placeholder="Повторите пароль"
                 />
-                {/* {show2 ? (
-                  <EyeOpen
-                    onClick={eyeHandler2}
-                    className={styles.eyeHandler}
-                  />
-                ) : (
-                  <EyeClose
-                    onClick={eyeHandler2}
-                    className={styles.eyeHandler}
-                  />
-                )} */}
                 <ErrorMessage
                   component="p"
                   className={styles.errorMessage}
