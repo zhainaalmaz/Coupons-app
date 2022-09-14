@@ -33,7 +33,7 @@ const Card = ({ it }: Props) => {
 
   const state = isAuth ? AuthFavoriteItems : favoriteItems;
   const isFavorite = state.find((el: any) => el.id === it.id);
-
+  
   const onAddFavoriteHandler = (e: React.MouseEvent<HTMLElement>) => {
     e.stopPropagation();
     e.preventDefault();

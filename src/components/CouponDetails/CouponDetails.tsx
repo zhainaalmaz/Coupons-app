@@ -9,6 +9,7 @@ import { ReactComponent as FavoritedIcon } from "../../assets/card/favorited.svg
 type Props = {
   coupon: ICoupon;
   isFavorite: boolean;
+  favoriteHandler: any;
 };
 
 interface ILocation {
@@ -55,7 +56,7 @@ interface ISimilar {
   title: string;
 }
 
-const CouponDetailsPage = ({ coupon, isFavorite }: Props) => {
+const CouponDetailsPage = ({ coupon, isFavorite, favoriteHandler }: Props) => {
   return (
     <div className={styles.coupon}>
       <div className={styles.heading}>
@@ -104,8 +105,8 @@ const CouponDetailsPage = ({ coupon, isFavorite }: Props) => {
 
           <div className={styles.buttons}>
             <button className={styles.buttonBuy}>Купить купон</button>
-            <button className={styles.buttonFavorite}>
-              {isFavorite ? <FavoritedIcon /> : <FavoriteIcon />}
+            <button onClick={favoriteHandler} className={styles.buttonFavorite}>
+              {isFavorite ? <FavoriteIcon /> : <FavoritedIcon />}
             </button>
           </div>
         </div>
