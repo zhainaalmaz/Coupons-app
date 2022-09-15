@@ -40,15 +40,22 @@ const CouponDetailsPage = () => {
     (state) => state.usersCoupons.usersCoupons
   );
 
+  console.log(usersCoupons);
+  
   const currentUser = usersCoupons.find(
     (item: any) => item.token === user?.access
   );
   let isBought = false;
+  let isActivated = false;
 
   if (currentUser) {
     console.log(currentUser);
 
     isBought = currentUser.boughtCoupons.some(
+      (item: ICoupon) => item.id === coupon.id
+    );
+
+    isActivated = currentUser.activatedCoupons.some(
       (item: ICoupon) => item.id === coupon.id
     );
   }
@@ -71,7 +78,11 @@ const CouponDetailsPage = () => {
       return;
     }
 
-    if (user) {
+    if(isActivated) {
+      navigate("/my-coupons")
+    }
+
+    if (user && !isActivated) {
       isBought
         ? dispatch(activateUsersCoupon(coupon))
         : dispatch(buyUsersCoupon(coupon));
@@ -93,6 +104,7 @@ const CouponDetailsPage = () => {
             coupon={coupon}
             isFavorite={isFavorite}
             isBought={isBought}
+            isActivated={isActivated}
             favoriteHandler={favoriteHandler}
             couponHandler={couponHandler}
           />

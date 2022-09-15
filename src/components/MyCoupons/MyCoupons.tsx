@@ -1,36 +1,37 @@
 import { Divider } from "@mui/material";
-import axios from "axios";
-import { FC, useEffect, useState } from "react";
+import { FC, useState } from "react";
+import { Link } from "react-router-dom";
+import { useAppSelector } from "../../hooks";
+import Card from "../../UI/Card/Card";
 import Profile from "../../UI/Profile/Profile";
 import BreadCrumps from "../BreadCrumps/BreadCrumps";
+import { Icoupon } from "../../pages/MainPage/Main";
 import styles from "./MyCoupons.module.scss";
 
 const MyCoupons: FC = () => {
   const [active, setActive] = useState<string>("button1");
   const [data, setData] = useState([]);
 
-  const getMyCoupons = async () => {
-    const token =
-      localStorage.getItem("currentUser") &&
-      JSON.parse(localStorage.getItem("currentUser") || "");
-    return axios({
-      url: "http://185.178.44.117/api/v1/coupons/my-stocks/?status=expired",
-      headers: {
-        Authorization: "Bearer " + token.access,
-      },
-    }).then((response) => {
-      return response.data;
-    });
-  };
-  useEffect(() => {
-    getMyCoupons();
-  }, []);
+  const user =
+    localStorage.getItem("currentUser") &&
+    JSON.parse(localStorage.getItem("currentUser") || "");
+
+  const state = useAppSelector((state) => state.usersCoupons.usersCoupons);
+
+  const myCoupons = state.find((item: any) => item.token === user.access);
+
+  console.log(myCoupons, "my");
 
   const myCouponsHandler = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     const { id } = e.target as HTMLButtonElement;
     setActive(id);
+    if (id === "button1") {
+      setData(myCoupons.boughtCoupons);
+    } else if (id === "button2") {
+      setData(myCoupons.activatedCoupons);
+    }
   };
 
   return (
@@ -71,6 +72,17 @@ const MyCoupons: FC = () => {
                 >
                   Истекшие
                 </button>
+              </div>
+              <div className={styles.myCoupons}>
+                {data.length > 0 ? (
+                  data.map((item: Icoupon) => (
+                    <Link to={"/coupon/" + item.id} key={item.id}>
+                      <Card it={item} />
+                    </Link>
+                  ))
+                ) : (
+                  <div>Список пуст</div>
+                )}
               </div>
             </div>
           </div>

@@ -11,6 +11,7 @@ type Props = {
   isFavorite: boolean;
   favoriteHandler: any;
   isBought: boolean | ICoupon;
+  isActivated: boolean | ICoupon;
   couponHandler: any;
 };
 
@@ -64,6 +65,7 @@ const CouponDetailsPage = ({
   favoriteHandler,
   couponHandler,
   isBought,
+  isActivated,
 }: Props) => {
   return (
     <div className={styles.coupon}>
@@ -113,7 +115,14 @@ const CouponDetailsPage = ({
           </div>
 
           <div className={styles.buttons}>
-            {isBought ? (
+            {isActivated ? (
+              <button
+                onClick={couponHandler}
+                className={styles.buttonMyCoupons}
+              >
+                Мои купоны
+              </button>
+            ) : isBought ? (
               <button onClick={couponHandler} className={styles.buttonActivate}>
                 Активирвать купон
               </button>
@@ -122,6 +131,7 @@ const CouponDetailsPage = ({
                 Купить купон
               </button>
             )}
+
             <button onClick={favoriteHandler} className={styles.buttonFavorite}>
               {isFavorite ? <FavoriteIcon /> : <FavoritedIcon />}
             </button>

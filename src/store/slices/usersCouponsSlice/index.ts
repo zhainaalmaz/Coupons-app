@@ -41,7 +41,7 @@ const usersCouponsSlice = createSlice({
       if (usersCoupons) {
         const newUsersCoupons: any = { ...usersCoupons };
         newUsersCoupons.boughtCoupons.push(action.payload);
-        const filteredCoupons: object[] = [...state.usersCoupons].filter(
+        const filteredCoupons: object[] = state.usersCoupons.filter(
           (item: IUsersCoupons) => item.token !== user.access
         );
         filteredCoupons.push(newUsersCoupons);
@@ -61,25 +61,22 @@ const usersCouponsSlice = createSlice({
 
       if (usersCoupons) {
         const newUsersCoupons: any = { ...usersCoupons };
-        newUsersCoupons.activatedCoupons.push(action.payload);
 
-        newUsersCoupons.boughtCoupons.filter(
+        newUsersCoupons.activatedCoupons.push(action.payload);
+        newUsersCoupons.boughtCoupons = newUsersCoupons.boughtCoupons.filter(
           (item: any) => item.id !== action.payload.id
         );
-        console.log(newUsersCoupons, "filteredUsers");
 
-        const filteredUsersCoupons: object[] = [...state.usersCoupons].filter(
+        const filteredUsersCoupons: object[] = state.usersCoupons.filter(
           (item: IUsersCoupons) => item.token !== user.access
         );
-
         filteredUsersCoupons.push(newUsersCoupons);
-        console.log(filteredUsersCoupons, "end");
 
+        state.usersCoupons = filteredUsersCoupons;
         localStorage.setItem(
           "usersCoupons",
           JSON.stringify(filteredUsersCoupons)
         );
-        state = { ...state, usersCoupons: filteredUsersCoupons };
       }
     },
   },
