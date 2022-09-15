@@ -30,6 +30,7 @@ const usersCouponsSlice = createSlice({
         state.usersCoupons.push({
           token: user.access,
           boughtCoupons: [action.payload],
+          activatedCoupons: [],
         });
         localStorage.setItem(
           "usersCoupons",
@@ -38,24 +39,49 @@ const usersCouponsSlice = createSlice({
       }
 
       if (usersCoupons) {
-        const newUsersCoupons: any = {...usersCoupons};
+        const newUsersCoupons: any = { ...usersCoupons };
         newUsersCoupons.boughtCoupons.push(action.payload);
+        const filteredCoupons: object[] = [...state.usersCoupons].filter(
+          (item: IUsersCoupons) => item.token !== user.access
+        );
+        filteredCoupons.push(newUsersCoupons);
 
-        console.log(newUsersCoupons, 'A_SD_ASD_AS_D')
+        localStorage.setItem("usersCoupons", JSON.stringify(filteredCoupons));
+        state = { ...state, usersCoupons: filteredCoupons };
+      }
+    },
+    activateUsersCoupon: (state, action) => {
+      const user =
+        localStorage.getItem("currentUser") &&
+        JSON.parse(localStorage.getItem("currentUser") || "");
 
-        state.usersCoupons.filter(
+      const usersCoupons = state.usersCoupons.find(
+        (item: IUsersCoupons) => item.token === user.access
+      );
+
+      if (usersCoupons) {
+        const newUsersCoupons: any = { ...usersCoupons };
+        newUsersCoupons.activatedCoupons.push(action.payload);
+
+        newUsersCoupons.boughtCoupons.filter(
+          (item: any) => item.id !== action.payload.id
+        );
+        console.log(newUsersCoupons, "filteredUsers");
+
+        const filteredUsersCoupons: object[] = [...state.usersCoupons].filter(
           (item: IUsersCoupons) => item.token !== user.access
         );
 
-        state.usersCoupons.push(newUsersCoupons);
+        filteredUsersCoupons.push(newUsersCoupons);
+        console.log(filteredUsersCoupons, "end");
 
         localStorage.setItem(
           "usersCoupons",
-          JSON.stringify(state.usersCoupons)
+          JSON.stringify(filteredUsersCoupons)
         );
+        state = { ...state, usersCoupons: filteredUsersCoupons };
       }
     },
-    activateUsersCoupon: (state, action) => {},
   },
 });
 

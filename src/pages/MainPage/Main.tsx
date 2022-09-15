@@ -99,7 +99,7 @@ const Main = () => {
         {mainImg.img.map((it: ImainImg) => {
           return (
             <>
-              <div className="mainImg">
+              <div className="mainImg" key={it.image}>
                 <img src={it.image} alt="Image" />
               </div>
             </>

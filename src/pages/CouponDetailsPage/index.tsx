@@ -18,7 +18,7 @@ import {
 const CouponDetailsPage = () => {
   const { id } = useParams();
   const dispatch = useAppDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const { coupon, status } = useAppSelector((state) => state.couponDetails);
 
   const user =
@@ -39,10 +39,19 @@ const CouponDetailsPage = () => {
   const usersCoupons = useAppSelector(
     (state) => state.usersCoupons.usersCoupons
   );
-  console.log(usersCoupons);
 
-  const isBought = usersCoupons.some((item: ICoupon) => item.id === coupon.id);
-  console.log(isBought);
+  const currentUser = usersCoupons.find(
+    (item: any) => item.token === user?.access
+  );
+  let isBought = false;
+
+  if (currentUser) {
+    console.log(currentUser);
+
+    isBought = currentUser.boughtCoupons.some(
+      (item: ICoupon) => item.id === coupon.id
+    );
+  }
 
   const favoriteHandler = (e: React.MouseEvent<HTMLElement>) => {
     e.stopPropagation();
@@ -58,13 +67,15 @@ const CouponDetailsPage = () => {
     e.preventDefault();
 
     if (!user) {
-      navigate("/sign-in")
-      return
+      navigate("/sign-in");
+      return;
     }
 
-    isBought
-      ? dispatch(activateUsersCoupon(coupon))
-      : dispatch(buyUsersCoupon(coupon));
+    if (user) {
+      isBought
+        ? dispatch(activateUsersCoupon(coupon))
+        : dispatch(buyUsersCoupon(coupon));
+    }
   };
 
   useEffect(() => {
