@@ -32,11 +32,14 @@ const checkSlice = createSlice({
                 state.status = "loading"
             }).addCase(checkThunk.fulfilled, (state, action) => {
                 state.status = "fulfilled"
-
+                console.log('fulfilled');
+                
                 state.statusCode = action.payload.message
             }).addCase(checkThunk.rejected, (state, action) => {
                 state.status = "rejected"
                 state.error = action.error.message
+                console.log('rejected');
+                
                 console.log('confirm-error:', action.error.message)
             })
     },

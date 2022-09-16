@@ -9,6 +9,8 @@ import ComfirmInput, {
   FormValues,
 } from "../../AuthComponents/ConfirmInput/ComfirmInput";
 import AuthButton from "../../../UI/authButton/AuthButton";
+import { checkThunk } from "../../../../store/slices/checkSlice";
+import { recoveryPasswordConfirmThunk } from "../../../../store/slices/recoveryPasswordSlise";
 
 const ConfirmSchema = Yup.object().shape({
   confirmation_code: Yup.string()
@@ -28,21 +30,20 @@ const initialValues: IConfCode = {
 const RecoveryPasswordConfirm = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { status, error } = useAppSelector((state) => state.confirm);
-  const user = JSON.parse(localStorage.getItem("user") || "");
+  const { status, error } = useAppSelector((state) => state.recoveryRassword.recoveryPasswordConfirm);
+  const user = JSON.parse(localStorage.getItem("userPhone") || "");
 
   useEffect(() => {
     if (status === "fulfilled") {
+
       navigate("/recovery-password/confirm/create-password");
     }
   }, [status]);
 
   const onSubmit = (values: FormValues) => {
-    // console.log(user);
-    // console.log(values.confirmation_code);
 
     dispatch(
-      confirmThunk({
+      recoveryPasswordConfirmThunk({
         ...user,
         confirmation_code: values.confirmation_code,
       })

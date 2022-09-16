@@ -72,17 +72,36 @@ export function changePassword(data: object) {
     return response.data
   })
 }
-export function recoveryPassword(data: object) {
-  const token = JSON.parse(localStorage.getItem('currentUser') || "")
-  console.log(token);
 
+export function changePhone(data: object) {
+  const token = JSON.parse(localStorage.getItem('currentUser') || "")
   return axios({
-    method: 'put',
-    url: BASE_URL + 'users/recovery-password/',
+    method: 'post',
+    url: BASE_URL + 'users/change-old-phone/',
     data: data,
     headers: {
       'Authorization': "Bearer " + token.access,
     }
+  }).then((response) => {
+    return response.data
+  })
+}
+
+export function recoveryPassword(data: object) {
+  return axios({
+    method: 'put',
+    url: BASE_URL + 'users/recovery-password/',
+    data: data,
+  }).then((response) => {
+    return response.data
+  })
+}
+
+export function recoveryPasswordConfirm(data: object) {
+  return axios({
+    method: 'post',
+    url: BASE_URL + 'users/recovery-password-confirm/',
+    data: data,
   }).then((response) => {
     return response.data
   })

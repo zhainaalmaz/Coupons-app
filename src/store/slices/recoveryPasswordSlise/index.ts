@@ -1,14 +1,25 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { recoveryPassword } from "../../../api/api";
+import { recoveryPassword, recoveryPasswordConfirm } from "../../../api/api";
 
 interface IInitialState {
     status: string;
     error?: string;
 }
 
-const initialState: IInitialState = {
-    status: 'loading',
-    error: ''
+interface IState {
+    recoveryPassword: IInitialState,
+    recoveryPasswordConfirm: IInitialState
+}
+
+const initialState: IState = {
+    recoveryPassword: {
+        status: 'loading',
+        error: '',
+    },
+    recoveryPasswordConfirm: {
+        status: 'loading',
+        error: '',
+    }
 };
 
 export const recoveryPasswordThunk = createAsyncThunk(
@@ -18,6 +29,15 @@ export const recoveryPasswordThunk = createAsyncThunk(
         return response
     }
 )
+export const recoveryPasswordConfirmThunk = createAsyncThunk(
+    'recoveryConfirmPassword',
+    async (data: object) => {
+        const response = await recoveryPasswordConfirm(data)
+        return response
+    }
+)
+
+
 
 const recoveryPasswordSlise = createSlice({
     name: "recoveryPassword",
@@ -26,23 +46,44 @@ const recoveryPasswordSlise = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(recoveryPasswordThunk.pending, (state) => {
-                state.status = "loading"
+                state.recoveryPassword.status = "loading"
             }).addCase(recoveryPasswordThunk.fulfilled, (state, action) => {
-                state.status = "fulfilled"
-                state.error = action.meta.requestStatus
+                state.recoveryPassword.status = "fulfilled"
+                state.recoveryPassword.error = action.meta.requestStatus
                 console.log('fulfilled');
 
                 // localStorage.setItem('currentUser', JSON.stringify(action.payload))
 
             }).addCase(recoveryPasswordThunk.rejected, (state, action) => {
-                state.status = "rejected"
-                state.error = action.error.message
-                console.log(state.status);
-                console.log(state.error);
+                state.recoveryPassword.status = "rejected"
+                state.recoveryPassword.error = action.error.message
+                console.log(state.recoveryPassword.status);
+                console.log(state.recoveryPassword.error);
 
 
                 // Request failed with status code 400
             })
+
+
+            .addCase(recoveryPasswordConfirmThunk.pending, (state) => {
+                state.recoveryPasswordConfirm.status = "loading"
+            }).addCase(recoveryPasswordConfirmThunk.fulfilled, (state, action) => {
+                state.recoveryPasswordConfirm.status = "fulfilled"
+                state.recoveryPasswordConfirm.error = action.meta.requestStatus
+                console.log('fulfilled');
+
+                // localStorage.setItem('currentUser', JSON.stringify(action.payload))
+
+            }).addCase(recoveryPasswordConfirmThunk.rejected, (state, action) => {
+                state.recoveryPasswordConfirm.status = "rejected"
+                state.recoveryPasswordConfirm.error = action.error.message
+                console.log(state.recoveryPasswordConfirm.status);
+                console.log(state.recoveryPasswordConfirm.error);
+
+
+                // Request failed with status code 400
+            })
+
     },
 
 })

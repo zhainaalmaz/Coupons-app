@@ -28,7 +28,7 @@ const Enter: React.FC = () => {
   const dispatch = useAppDispatch();
   const { error, status } = useAppSelector((state) => state.login);
 
-   const user =  JSON.parse(localStorage.getItem("user") || "")
+   const user =  JSON.parse(localStorage.getItem("userPhone") || "")
 
 
   useEffect(() => {

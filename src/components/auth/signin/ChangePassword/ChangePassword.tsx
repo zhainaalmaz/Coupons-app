@@ -4,10 +4,10 @@ import React, { useEffect, useState } from "react";
 import styles from "./ChangePassword.module.scss";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../../hooks";
-import { changePasswordThunk } from "../../../../store/slices/changePasswordSlise/changePasswordSlice";
 import AuthButton from "../../../UI/authButton/AuthButton";
 import { ReactComponent as EyeClose } from "../../../../assets/auth-svg/eye-close.svg";
 import { ReactComponent as EyeOpen } from "../../../../assets/auth-svg/eye-open.svg";
+import { changePasswordThunk } from "../../../../store/slices/changePasswordSlise";
 
 interface IPassword {
   old_password: string;

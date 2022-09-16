@@ -7,8 +7,8 @@ import * as Yup from "yup";
 import AuthButton from "../../../UI/authButton/AuthButton";
 import RepeatPasswordInput from "../../AuthComponents/RepeatPasswordInput/RepeatPasswordInput";
 import CreatePasswordInput from "../../AuthComponents/CreatePasswordInput/CreatePasswordInput";
-import { recoveryPasswordThunk } from "../../../../store/slices/recoveryPasswordSlise";
 import { IProps } from "../ChangePassword/ChangePassword";
+import { recoveryPasswordThunk } from "../../../../store/slices/recoveryPasswordSlise";
 
 export interface FormValues {
   password: string;
@@ -31,7 +31,7 @@ const RecoveryPasswordCreatePassword: React.FC<IProps> = ({ setTitle }) => {
   const confirmation_code = JSON.parse(
     localStorage.getItem("confirmation_code") || ""
   );
-  const user = JSON.parse(localStorage.getItem("user") || "");
+  const user = JSON.parse(localStorage.getItem("userPhone") || "");
 
   const initialValues: FormValues = {
     password: "",
