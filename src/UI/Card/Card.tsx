@@ -44,55 +44,64 @@ const Card = ({ it }: Props) => {
       dispatch(addFavorite(it));
     }
   };
-
+    console.log(it.discount_percent, "card")
   return (
-    <div className={styles.contentBox}>
-      <div onClick={onAddFavoriteHandler} className={styles.favoriteIcon}>
-        {isFavorite ? <FavoriteIcon /> : <FavoritedIcon />}
-      </div>
-      <div className={styles.couponLogoBox}>
-        <img
-          className={styles.couponLogoIMG}
-          src={it.preview_image || defaultpreview}
-          alt=""
-        />
-      </div>
-      <div className={styles.companyInfo}>
-        <img className={styles.companyLogo} src={it.company_logo} alt="" />
-        <p className={styles.companyTitile}>{it.company_name}</p>
-      </div>
-      <div className={styles.cardInfoBox}>
-        <div
-          dangerouslySetInnerHTML={{ __html: it.conditions }}
-          className={styles.description}
-        ></div>
-        <div className={styles.cardPriceBox}>
-          <div className={styles.price}>
-            <div className={styles.priceSVG}>
-              <DiscountIcon />
+    <>
+        {
+            <div className={styles.contentBox}>
+            <div className={styles.discount}>
+                {it.discount_percent}%
             </div>
-            <div className="priceContent">
-              <p className={styles.priceContentText}>Цена скидки с купоном:</p>
-              <div className={styles.priceContentPrice}>
-                {it.price}
-                <span className={styles.priceContentSpan}>{it.old_price}</span>
-              </div>
+            <div onClick={onAddFavoriteHandler} className={styles.favoriteIcon}>
+                {isFavorite ? <FavoriteIcon/> : <FavoritedIcon/>}
             </div>
-          </div>
-          <div className={styles.price}>
-            <div className={styles.priceSVG}>
-              <PriceIcon />
+            <div className={styles.couponLogoBox}>
+                <img
+                    className={styles.couponLogoIMG}
+                    src={it.preview_image || defaultpreview}
+                    alt=""
+                />
             </div>
-            <div className="priceContent">
-              <p className={styles.priceContentText}>Цена за купон:</p>
-              <div className={styles.priceContentPrice}>
-                {it.price_for_coupon}
-              </div>
+            <div className={styles.companyInfo}>
+                <img className={styles.companyLogo} src={it.company_logo} alt=""/>
+                <p className={styles.companyTitile}>{it.company_name}</p>
             </div>
-          </div>
+            <div className={styles.cardInfoBox}>
+                <div
+                    dangerouslySetInnerHTML={{__html: it.conditions}}
+                    className={styles.description}
+                ></div>
+                <div className={styles.cardPriceBox}>
+                    <div className={styles.price}>
+                        <div className={styles.priceSVG}>
+                            <DiscountIcon/>
+                        </div>
+                        <div className="priceContent">
+                            <p className={styles.priceContentText}>Цена скидки с купоном:</p>
+                            <div className={styles.priceContentPrice}>
+                                {it.price}
+                                <span className={styles.priceContentSpan}>{it.old_price}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div className={styles.price}>
+                        <div className={styles.priceSVG}>
+                            <PriceIcon/>
+                        </div>
+                        <div className="priceContent">
+                            <p className={styles.priceContentText}>Цена за купон:</p>
+                            <div className={styles.priceContentPrice}>
+                                {it.price_for_coupon}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
+
+
+        }
+    </>
   )
 }
 export default Card;

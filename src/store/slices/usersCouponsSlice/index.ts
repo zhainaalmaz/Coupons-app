@@ -30,6 +30,7 @@ const usersCouponsSlice = createSlice({
         state.usersCoupons.push({
           token: user.access,
           boughtCoupons: [action.payload],
+          activatedCoupons: [],
         });
         localStorage.setItem(
           "usersCoupons",
@@ -38,24 +39,46 @@ const usersCouponsSlice = createSlice({
       }
 
       if (usersCoupons) {
-        const newUsersCoupons: any = {...usersCoupons};
+        const newUsersCoupons: any = { ...usersCoupons };
         newUsersCoupons.boughtCoupons.push(action.payload);
-
-        console.log(newUsersCoupons, 'A_SD_ASD_AS_D')
-
-        state.usersCoupons.filter(
+        const filteredCoupons: object[] = state.usersCoupons.filter(
           (item: IUsersCoupons) => item.token !== user.access
         );
+        filteredCoupons.push(newUsersCoupons);
 
-        state.usersCoupons.push(newUsersCoupons);
+        localStorage.setItem("usersCoupons", JSON.stringify(filteredCoupons));
+        state = { ...state, usersCoupons: filteredCoupons };
+      }
+    },
+    activateUsersCoupon: (state, action) => {
+      const user =
+        localStorage.getItem("currentUser") &&
+        JSON.parse(localStorage.getItem("currentUser") || "");
 
+      const usersCoupons = state.usersCoupons.find(
+        (item: IUsersCoupons) => item.token === user.access
+      );
+
+      if (usersCoupons) {
+        const newUsersCoupons: any = { ...usersCoupons };
+
+        newUsersCoupons.activatedCoupons.push(action.payload);
+        newUsersCoupons.boughtCoupons = newUsersCoupons.boughtCoupons.filter(
+          (item: any) => item.id !== action.payload.id
+        );
+
+        const filteredUsersCoupons: object[] = state.usersCoupons.filter(
+          (item: IUsersCoupons) => item.token !== user.access
+        );
+        filteredUsersCoupons.push(newUsersCoupons);
+
+        state.usersCoupons = filteredUsersCoupons;
         localStorage.setItem(
           "usersCoupons",
-          JSON.stringify(state.usersCoupons)
+          JSON.stringify(filteredUsersCoupons)
         );
       }
     },
-    activateUsersCoupon: (state, action) => {},
   },
 });
 

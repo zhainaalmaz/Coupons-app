@@ -18,10 +18,10 @@ const initialState: CouponState = {
     status: "idle"
 };
 
-export const getCouponsAsync = createAsyncThunk<any, void, {}>(
+export const getCouponsAsync = createAsyncThunk<any, number, {}>(
     'coupons/getCoupons',
-    async () => {
-        const response = await getCoupons();
+    async (num:number) => {
+        const response = await getCoupons( num );
         return response.data;
     }
 );

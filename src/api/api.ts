@@ -9,8 +9,8 @@ export function getContactInfo() {
   return axios.get(BASE_URL + "info/networks");
 }
 
-export function getCoupons() {
-  return axios.get(BASE_URL + "coupons");
+export function getCoupons(num:number) {
+  return axios.get(BASE_URL + "coupons/category/1/?tags=" + num);
 }
 
 export function searchCoupons(params: string) {

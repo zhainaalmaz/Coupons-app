@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { join } from "path";
 import { login } from "../../../api/api";
 
 interface IInitialState {
@@ -28,7 +29,14 @@ const loginSlice = createSlice({
       .addCase(loginThunk.fulfilled, (state, action) => {
         state.status = "fulfilled";
         state.error = action.meta.requestStatus;
-        localStorage.setItem("currentUser", JSON.stringify(action.payload));
+
+        const localToken = { ...action.payload }.access.split(".");
+        const token = localToken[0]
+
+        localStorage.setItem(
+          "currentUser",
+          JSON.stringify({ ...action.payload, access: token })
+        );
       })
       .addCase(loginThunk.rejected, (state, action) => {
         state.status = "rejected";

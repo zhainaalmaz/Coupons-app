@@ -8,8 +8,8 @@
 # testing
 /coverage
 
-src/components/categories/categories.module.css
-src/components/categories/categories.module.css.map
+src/components/Categories/categories.module.css
+src/components/Categories/categories.module.css.map
 
 src/pages/MainPage/Main.module.css
 src/pages/MainPage/Main.module.css.map
