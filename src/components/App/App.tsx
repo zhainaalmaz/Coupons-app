@@ -22,9 +22,9 @@ import Signin from "../auth/signin/Signin";
 import Enter from "../auth/signin/Enter/Enter";
 import ChangePassword from "../auth/signin/ChangePassword/ChangePassword";
 
-import MyCoupons from "../MyCoupons/MyCoupons";
 import CouponDetailsPage from "../../pages/CouponDetailsPage";
 import ProfilePage from "../../pages/ProfilePage";
+import MyCouponsPage from "../../pages/MyCouponsPage";
 
 function App() {
   return (
@@ -50,7 +50,7 @@ function App() {
         <Route path={"favorites"} element={<FavoritesPage />} />
         <Route path={"confidential"} element={<Confidential />} />
         <Route path={"coupon/:id"} element={<CouponDetailsPage />} />
-        <Route path={"my-coupons"} element={<MyCoupons />} />
+        <Route path={"my-coupons"} element={<MyCouponsPage />} />
         <Route path="searchpage/:searchValue" element={<SearchPage />} />
 
         <Route path="*" element={<Error />} />
