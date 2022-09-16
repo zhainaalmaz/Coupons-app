@@ -1,5 +1,5 @@
 import { Divider } from "@mui/material";
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useAppSelector } from "../../hooks";
 import Card from "../../UI/Card/Card";
@@ -17,7 +17,6 @@ const MyCoupons: FC = () => {
     JSON.parse(localStorage.getItem("currentUser") || "");
 
   const state = useAppSelector((state) => state.usersCoupons.usersCoupons);
-
   const myCoupons = state.find((item: any) => item.token === user.access);
 
   console.log(myCoupons, "my");
@@ -27,12 +26,18 @@ const MyCoupons: FC = () => {
   ) => {
     const { id } = e.target as HTMLButtonElement;
     setActive(id);
-    if (id === "button1") {
-      setData(myCoupons.boughtCoupons);
-    } else if (id === "button2") {
-      setData(myCoupons.activatedCoupons);
-    }
+    
   };
+
+  useEffect(() => {
+    if (active === "button1") {
+      setData(myCoupons.boughtCoupons);
+    } else if (active === "button2") {
+      setData(myCoupons.activatedCoupons);
+    } else {
+      setData([])
+    }
+  }, [active])
 
   return (
     <>
