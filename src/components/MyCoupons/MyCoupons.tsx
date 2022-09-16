@@ -19,14 +19,11 @@ const MyCoupons: FC = () => {
   const state = useAppSelector((state) => state.usersCoupons.usersCoupons);
   const myCoupons = state.find((item: any) => item.token === user.access);
 
-  console.log(myCoupons, "my");
-
   const myCouponsHandler = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     const { id } = e.target as HTMLButtonElement;
     setActive(id);
-    
   };
 
   useEffect(() => {
@@ -35,9 +32,9 @@ const MyCoupons: FC = () => {
     } else if (active === "button2") {
       setData(myCoupons.activatedCoupons);
     } else {
-      setData([])
+      setData([]);
     }
-  }, [active])
+  }, [active]);
 
   return (
     <>

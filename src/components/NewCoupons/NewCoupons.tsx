@@ -34,8 +34,11 @@ const NewCoupons: FC = () => {
   const [data, setData] = useState({ results: [] as any[] });
   const [activeButtonId, setActiveButtonId] = useState(4);
   const tags = useAppSelector((state) => state.tag);
+  const [limit, setLimit] = useState(8);
 
-  console.log(tags);
+  const countClickHandler = () => {
+    setLimit((limit) => limit + 8);
+  };
 
   const subCategoryHandler = async (id: number) => {
     try {
@@ -53,6 +56,12 @@ const NewCoupons: FC = () => {
   useEffect(() => {
     subCategoryHandler(4);
   }, []);
+
+  useEffect(() => {
+    if(limit > 8) {
+      setLimit(8)
+    }
+  }, [data])
 
   return (
     <div className={styles.layout}>
@@ -73,17 +82,17 @@ const NewCoupons: FC = () => {
         ))}
       </div>
       <div className={styles.coupons}>
-        {data.results.length === 0 ? (
-          <div>В данной категории нет товаров</div>
-        ) : (
-          data?.results?.map((item: Icoupon) => (
+        {data?.results?.length > 0 ? (
+          data.results.slice(0, limit).map((item: Icoupon) => (
             <Link to={"/coupon/" + item.id} key={item.id}>
-              <Card it={item}  />
+              <Card it={item} />
             </Link>
           ))
+        ) : (
+          <div>В данной категории нет товаров</div>
         )}
       </div>
-      {data.results.length >= 8 && (
+      {data.results.length >= limit && (
         <div className={styles.coupons_button}>
           <CouponsButton
             backgroundColor="#4B5FA5"
@@ -91,7 +100,7 @@ const NewCoupons: FC = () => {
             radius="12px"
             padding="11.5px 20px"
             fontSize="13px"
-            onClick={() => console.log("еще")}
+            onClick={countClickHandler}
             children="Загрузить еще"
           />
         </div>
