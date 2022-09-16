@@ -4,6 +4,7 @@ import CouponsButton from "../../UI/CoupunsButton/CouponsButton";
 import { useAppSelector } from "../../hooks";
 import Card from "../../UI/Card/Card";
 import { Link } from "react-router-dom";
+import Skeleton from "../../UI/Skeleton/Skeleton";
 
 interface Itags {
   data: never[];
@@ -34,17 +35,20 @@ const NewCoupons: FC = () => {
   const [data, setData] = useState({ results: [] as any[] });
   const [activeButtonId, setActiveButtonId] = useState(4);
   const tags = useAppSelector((state) => state.tag);
-
+    const [isLoading, setIsLoading] = useState(true)
   console.log(tags);
 
   const subCategoryHandler = async (id: number) => {
+      setIsLoading(true)
     try {
+
       const response = await fetch(
         `http://185.178.44.117/api/v1/coupons/subcategory/${id}`
       );
       const result = await response.json();
       setData(result);
       setActiveButtonId(id);
+      setTimeout(() => setIsLoading(false), 500)
     } catch (error) {
       console.log(error);
     }
@@ -77,6 +81,9 @@ const NewCoupons: FC = () => {
           <div>В данной категории нет товаров</div>
         ) : (
           data?.results?.map((item: Icoupon) => (
+                 isLoading ?
+              <Skeleton/>
+              :
             <Link to={"/coupon/" + item.id} key={item.id}>
               <Card it={item}  />
             </Link>
