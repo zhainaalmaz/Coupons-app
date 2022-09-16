@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from "react";
-import { useAppDispatch, useAppSelector } from "../../hooks";
-import { getCouponsAsync } from "../../store/slices/couponsSlice";
-import { getCategoriesAsync } from "../../store/slices/categoriesSlice/categoriesSlice";
-import Card from "../../UI/Card/Card";
-import styles from "./Main.module.scss";
-import Categories from "../../components/Categories/categories";
-import Carousel from "../../components/Carusel/Carousel";
-import { getMainImgAsinc } from "../../store/slices/mainImgSlice/MainImgSlice";
-import { Link, useNavigate } from "react-router-dom";
-import { categoriesColors } from "../../data";
+import React, { useEffect, useState } from 'react';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { getCouponsAsync } from '../../store/slices/couponsSlice';
+import { getCategoriesAsync } from '../../store/slices/CategoriesSlice/categoriesSlice';
+import Card from '../../UI/Card/Card';
+import styles from './Main.module.scss';
+import Categories from '../../components/categories/categories';
+import Carousel from '../../components/Carusel/Carousel';
+import { getMainImgAsinc } from '../../store/slices/MainImgSlice/MainImgSlice';
+import { Link, useNavigate } from 'react-router-dom';
+import { categoriesColors } from '../../data';
 
 export interface Icoupon {
   company_logo: string;
@@ -41,7 +41,7 @@ const Main = () => {
   const navigate = useNavigate();
 
   const navigateCupons = () => {
-    navigate("/new-coupons");
+    navigate('/new-coupons');
   };
 
   const [toggleCategoriesId, setToggleCategoriesId] = useState<
@@ -82,7 +82,7 @@ const Main = () => {
         {coupons.coupon &&
           coupons.coupon.slice(0, 8).map((it: Icoupon) => {
             return (
-              <Link to={"/coupon/" + it.id} key={it.id}>
+              <Link to={'/coupon/' + it.id} key={it.id}>
                 <Card it={it} />
               </Link>
             );

@@ -1,9 +1,9 @@
-import React, { FC, useEffect, useState } from "react";
-import styles from "./NewCoupons.module.scss";
-import CouponsButton from "../../UI/CoupunsButton/CouponsButton";
-import { useAppSelector } from "../../hooks";
-import Card from "../../UI/Card/Card";
-import { Link } from "react-router-dom";
+import React, { FC, useEffect, useState } from 'react';
+import styles from './NewCoupons.module.scss';
+import CouponsButton from '../../UI/CoupunsButton/CouponsButton';
+import { useAppSelector } from '../../hooks';
+import Card from '../../UI/Card/Card';
+import { Link } from 'react-router-dom';
 
 interface Itags {
   data: never[];
@@ -62,8 +62,8 @@ const NewCoupons: FC = () => {
           <CouponsButton
             key={item.id}
             id={item.id}
-            backgroundColor={activeButtonId === item.id ? "#4B5FA5" : "#EDF1FD"}
-            color={activeButtonId === item.id ? "white" : "#4B5FA5"}
+            backgroundColor={activeButtonId === item.id ? '#4B5FA5' : '#EDF1FD'}
+            color={activeButtonId === item.id ? 'white' : '#4B5FA5'}
             radius="12px"
             fontSize="13px"
             padding="8px 16px"
@@ -77,8 +77,8 @@ const NewCoupons: FC = () => {
           <div>В данной категории нет товаров</div>
         ) : (
           data?.results?.map((item: Icoupon) => (
-            <Link to={"/coupon/" + item.id} key={item.id}>
-              <Card it={item}  />
+            <Link to={'/coupon/' + item.id} key={item.id}>
+              <Card it={item} />
             </Link>
           ))
         )}
@@ -91,7 +91,7 @@ const NewCoupons: FC = () => {
             radius="12px"
             padding="11.5px 20px"
             fontSize="13px"
-            onClick={() => console.log("еще")}
+            onClick={() => console.log('еще')}
             children="Загрузить еще"
           />
         </div>
