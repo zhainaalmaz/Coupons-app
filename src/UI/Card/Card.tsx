@@ -44,7 +44,6 @@ const Card = ({ it }: Props) => {
       dispatch(addFavorite(it));
     }
   };
-    console.log(it.discount_percent, "card")
   return (
     <>
         {
