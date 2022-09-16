@@ -8,7 +8,7 @@ interface Props {
     color: string;
     icon: ReactNode;
   };
-  setToggleCategoriesId: (toggleCategoriesId: number | boolean) => void;
+  setToggleCategoriesId: (toggleCategoriesId: number) => void;
   handleChangeCategories: any;
   toggleCategoriesId: number | boolean;
 }
@@ -20,7 +20,7 @@ const Categories = ({
   toggleCategoriesId,
   handleChangeCategories,
 }: Props) => {
-  const choosed = toggleCategoriesId === it.id ? it.id : false;
+  const choosed = toggleCategoriesId === it.id ? it.id : 0;
 
   return (
     <div

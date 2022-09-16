@@ -4,6 +4,7 @@ import CouponsButton from "../../UI/CoupunsButton/CouponsButton";
 import { useAppSelector } from "../../hooks";
 import Card from "../../UI/Card/Card";
 import { Link } from "react-router-dom";
+import Skeleton from "../../UI/Skeleton/Skeleton";
 
 interface Itags {
   data: never[];
@@ -39,8 +40,10 @@ const NewCoupons: FC = () => {
   const countClickHandler = () => {
     setLimit((limit) => limit + 8);
   };
+  const [isLoading, setIsLoading] = useState(true);
 
   const subCategoryHandler = async (id: number) => {
+    setIsLoading(true);
     try {
       const response = await fetch(
         `http://185.178.44.117/api/v1/coupons/subcategory/${id}`
@@ -48,6 +51,7 @@ const NewCoupons: FC = () => {
       const result = await response.json();
       setData(result);
       setActiveButtonId(id);
+      setTimeout(() => setIsLoading(false), 500);
     } catch (error) {
       console.log(error);
     }
@@ -58,10 +62,10 @@ const NewCoupons: FC = () => {
   }, []);
 
   useEffect(() => {
-    if(limit > 8) {
-      setLimit(8)
+    if (limit > 8) {
+      setLimit(8);
     }
-  }, [data])
+  }, [data]);
 
   return (
     <div className={styles.layout}>
@@ -82,14 +86,18 @@ const NewCoupons: FC = () => {
         ))}
       </div>
       <div className={styles.coupons}>
-        {data?.results?.length > 0 ? (
-          data.results.slice(0, limit).map((item: Icoupon) => (
-            <Link to={"/coupon/" + item.id} key={item.id}>
-              <Card it={item} />
-            </Link>
-          ))
-        ) : (
+        {data.results.length === 0 ? (
           <div>В данной категории нет товаров</div>
+        ) : (
+          data?.results?.map((item: Icoupon) =>
+            isLoading ? (
+              <Skeleton />
+            ) : (
+              <Link to={"/coupon/" + item.id} key={item.id}>
+                <Card it={item} />
+              </Link>
+            )
+          )
         )}
       </div>
       {data.results.length >= limit && (
