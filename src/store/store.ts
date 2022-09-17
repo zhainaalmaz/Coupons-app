@@ -4,7 +4,7 @@ import couponSlice from "./slices/couponsSlice";
 import confidentialSlice from "./slices/confidentialSlice";
 
 import contactSlice from "./slices/contactSlice";
-import categoriesSlice from "./slices/categoriesSlice/categoriesSlice";
+import categoriesSlice from "./slices/CategoriesSlice/categoriesSlice";
 import helpInfoSlice from "./slices/helpInfoSlice/helpInfoSlice";
 import searchSlice from "./slices/searchSlice";
 import authSlice from "./slices/authSlice";
@@ -14,8 +14,8 @@ import checkSlice from "./slices/checkSlice";
 import favoriteSlice from "./slices/favoriteSlice/favoriteSlice";
 import couponDetailsSlice from "./slices/couponDetailsSlice";
 
-import carouselSice from "./slices/carouselSlice/CarouselSlice";
-import mainImgSlice from "./slices/mainImgSlice/MainImgSlice";
+import carouselSice from "./slices/CarouselSlice/CarouselSlice";
+import mainImgSlice from "./slices/MainImgSlice/MainImgSlice";
 import changePasswordSlice from "./slices/changePasswordSlise/changePasswordSlice";
 import userSlice from "./slices/userSlice";
 
