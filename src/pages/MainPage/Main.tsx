@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { getCouponsAsync } from "../../store/slices/couponsSlice";
-import { getCategoriesAsync } from "../../store/slices/CategoriesSlice/categoriesSlice";
+import { getCategoriesAsync } from "../../store/slices/categoriesSlice/categoriesSlice";
 import Card from "../../UI/Card/Card";
 import styles from "./Main.module.scss";
 import Categories from "../../components/Categories/categories";
 import Carousel from "../../components/Carusel/Carousel";
-import { getMainImgAsinc } from "../../store/slices/MainImgSlice/MainImgSlice";
+import { getMainImgAsinc } from "../../store/slices/mainImgSlice/MainImgSlice";
 import { Link, useNavigate } from "react-router-dom";
 import { categoriesColors } from "../../data";
+import Skeleton from "../../UI/Skeleton/Skeleton";
 
 export interface Icoupon {
   company_logo: string;
@@ -44,20 +45,18 @@ const Main = () => {
     navigate("/new-coupons");
   };
 
-  const [toggleCategoriesId, setToggleCategoriesId] = useState<
-    number | boolean
-  >(1);
+  const [toggleCategoriesId, setToggleCategoriesId] = useState<number>(1);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(getCouponsAsync());
+    dispatch(getCouponsAsync(toggleCategoriesId));
     dispatch(getCategoriesAsync());
     dispatch(getMainImgAsinc());
-  }, [dispatch]);
+  }, [dispatch, toggleCategoriesId]);
 
   const { coupons, categories, mainImg } = useAppSelector((state) => state);
-  const handleChangeCategories = (id: number | boolean) => {
-    setToggleCategoriesId(toggleCategoriesId === id ? false : id);
+  const handleChangeCategories = (id: number) => {
+    setToggleCategoriesId(toggleCategoriesId === id ? 0 : id);
   };
 
   return (
@@ -81,9 +80,11 @@ const Main = () => {
       <div className={styles.cardFlexContainer}>
         {coupons.coupon &&
           coupons.coupon.slice(0, 8).map((it: Icoupon) => {
-            return (
-              <Link to={"/coupon/" + it.id}>
-                <Card key={it.id} it={it} />
+            return coupons.status !== "idle" ? (
+              <Skeleton key={it.id} />
+            ) : (
+              <Link to={"/coupon/" + it.id} key={it.id}>
+                <Card it={it} />
               </Link>
             );
           })}
@@ -99,7 +100,7 @@ const Main = () => {
         {mainImg.img.map((it: ImainImg) => {
           return (
             <>
-              <div className="mainImg">
+              <div className="mainImg" key={it.image}>
                 <img src={it.image} alt="Image" />
               </div>
             </>

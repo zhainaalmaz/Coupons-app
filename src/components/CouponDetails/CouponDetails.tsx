@@ -3,9 +3,16 @@ import { Link } from "react-router-dom";
 import Card from "../../UI/Card/Card";
 import styles from "./CouponDetails.module.scss";
 import defaultImage from "../../assets/couponsImg/defoltIMG.png";
+import { ReactComponent as FavoriteIcon } from "../../assets/card/favorite.svg";
+import { ReactComponent as FavoritedIcon } from "../../assets/card/favorited.svg";
 
 type Props = {
   coupon: ICoupon;
+  isFavorite: boolean;
+  favoriteHandler: any;
+  isBought: boolean | ICoupon;
+  isActivated: boolean | ICoupon;
+  couponHandler: any;
 };
 
 interface ILocation {
@@ -14,7 +21,7 @@ interface ILocation {
   geolocation: string;
 }
 
-interface ICoupon {
+export interface ICoupon {
   id: number;
   title: string;
   description: string;
@@ -52,7 +59,14 @@ interface ISimilar {
   title: string;
 }
 
-const CouponDetailsPage = ({ coupon }: Props) => {
+const CouponDetailsPage = ({
+  coupon,
+  isFavorite,
+  favoriteHandler,
+  couponHandler,
+  isBought,
+  isActivated,
+}: Props) => {
   return (
     <div className={styles.coupon}>
       <div className={styles.heading}>
@@ -65,6 +79,9 @@ const CouponDetailsPage = ({ coupon }: Props) => {
             />
           </div>
           <div className={styles.images}></div>
+
+          <p dangerouslySetInnerHTML={{ __html: coupon.conditions }}></p>
+          <p dangerouslySetInnerHTML={{ __html: coupon.description }}></p>
         </div>
         <div className={styles.info}>
           <div className={styles.company}>
@@ -83,22 +100,54 @@ const CouponDetailsPage = ({ coupon }: Props) => {
             <span className={styles.descriptionInfo}>{coupon.title}</span>
             <span className={styles.descriptionInfo}>{coupon.title}</span>
           </div>
+
+          <div className={styles.prices}>
+            <div className={styles.priceForCoupon}>
+              Цена за купон <span>от {coupon.price_for_coupon} сом</span>
+            </div>
+            <div className={styles.priceWithCoupon}>
+              Цена с купоном
+              <span>
+                от {coupon.price} сом
+                {coupon.old_price && <small>{coupon.old_price} сом</small>}
+              </span>
+            </div>
+          </div>
+
+          <div className={styles.buttons}>
+            {isActivated ? (
+              <button
+                onClick={couponHandler}
+                className={styles.buttonMyCoupons}
+              >
+                Мои купоны
+              </button>
+            ) : isBought ? (
+              <button onClick={couponHandler} className={styles.buttonActivate}>
+                Активирвать купон
+              </button>
+            ) : (
+              <button onClick={couponHandler} className={styles.buttonBuy}>
+                Купить купон
+              </button>
+            )}
+
+            <button onClick={favoriteHandler} className={styles.buttonFavorite}>
+              {isFavorite ? <FavoriteIcon /> : <FavoritedIcon />}
+            </button>
+          </div>
         </div>
       </div>
-      <div className={styles.content}></div>
-
-      <p dangerouslySetInnerHTML={{ __html: coupon.conditions }}></p>
-      <p dangerouslySetInnerHTML={{ __html: coupon.description }}></p>
 
       <div className={styles.similarTitle}>Похожие товары</div>
       <div className={styles.similar_products}>
         {coupon.similar_products &&
           coupon.similar_products.map((product: ISimilar, index) => {
             return (
-              <Link to={"/coupon/" + product.id}>
-                <Card it={product} key={index} />
+              <Link to={"/coupon/" + product.id} key={index}>
+                <Card it={product} />
               </Link>
-            )
+            );
           })}
       </div>
 

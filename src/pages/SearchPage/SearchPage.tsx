@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { searchCoupons } from "../../api/api";
 import Card from "../../UI/Card/Card";
@@ -6,6 +6,7 @@ import { ISearchItem } from "../../components/Search/Search";
 import styles from "./SearchPage.module.scss";
 import { useClickOutside } from "../../hooks";
 import BreadCrumps from "../../components/BreadCrumps/BreadCrumps";
+import Skeleton from "../../UI/Skeleton/Skeleton";
 
 const SearchPage = () => {
   const params = useParams();
@@ -15,18 +16,21 @@ const SearchPage = () => {
   const [sort, setSort] = useState("lowPrice");
   const modalRef = useRef<HTMLInputElement>(null);
   const [count, setCount] = useState(8);
+  const [isLoading, setIsLoading] = useState(true)
 
-  const generateMoreCoupns = () => {
+    const generateMoreCoupns = () => {
     setCount((count) => count + 8);
   };
 
   useEffect(() => {
     async function search() {
+        setIsLoading(true)
       if (searchItem) {
         const response = await searchCoupons(searchItem);
         setSearchedCoupons(
           response.data.results.sort((a: any, b: any) => +a.price - +b.price)
         );
+          setTimeout(() => setIsLoading(false), 500)
       }
     }
     search();
@@ -106,9 +110,12 @@ const SearchPage = () => {
             <>
               <div className={styles.cardFlexContainer}>
                 {searchedCoupons.slice(0, count).map((it: ISearchItem) => (
-                  <Link to={"/coupon/" + it.id}>
-                    <Card key={it.id} it={it} />
-                  </Link>
+                    isLoading ?
+                        <Skeleton key={it.id} />
+                        :
+                        <Link to={"/coupon/" + it.id} key={it.id}>
+                            <Card it={it}  />
+                        </Link>
                 ))}
               </div>
               {count < searchedCoupons.length && (

@@ -1,9 +1,10 @@
-import React, { FC, useEffect, useState } from "react";
-import styles from "./NewCoupons.module.scss";
-import CouponsButton from "../../UI/CoupunsButton/CouponsButton";
-import { useAppSelector } from "../../hooks";
-import Card from "../../UI/Card/Card";
-import { Link } from "react-router-dom";
+import React, { FC, useEffect, useState } from 'react';
+import styles from './NewCoupons.module.scss';
+import CouponsButton from '../../UI/CoupunsButton/CouponsButton';
+import { useAppSelector } from '../../hooks';
+import Card from '../../UI/Card/Card';
+import { Link } from 'react-router-dom';
+import Skeleton from '../../UI/Skeleton/Skeleton';
 
 interface Itags {
   data: never[];
@@ -34,10 +35,15 @@ const NewCoupons: FC = () => {
   const [data, setData] = useState({ results: [] as any[] });
   const [activeButtonId, setActiveButtonId] = useState(4);
   const tags = useAppSelector((state) => state.tag);
+  const [limit, setLimit] = useState(8);
 
-  console.log(tags);
+  const countClickHandler = () => {
+    setLimit((limit) => limit + 8);
+  };
+  const [isLoading, setIsLoading] = useState(true);
 
   const subCategoryHandler = async (id: number) => {
+    setIsLoading(true);
     try {
       const response = await fetch(
         `http://185.178.44.117/api/v1/coupons/subcategory/${id}`
@@ -45,6 +51,7 @@ const NewCoupons: FC = () => {
       const result = await response.json();
       setData(result);
       setActiveButtonId(id);
+      setTimeout(() => setIsLoading(false), 500);
     } catch (error) {
       console.log(error);
     }
@@ -54,6 +61,12 @@ const NewCoupons: FC = () => {
     subCategoryHandler(4);
   }, []);
 
+  useEffect(() => {
+    if (limit > 8) {
+      setLimit(8);
+    }
+  }, [data]);
+
   return (
     <div className={styles.layout}>
       <h1 className={styles.title}>Новые купоны</h1>
@@ -62,8 +75,8 @@ const NewCoupons: FC = () => {
           <CouponsButton
             key={item.id}
             id={item.id}
-            backgroundColor={activeButtonId === item.id ? "#4B5FA5" : "#EDF1FD"}
-            color={activeButtonId === item.id ? "white" : "#4B5FA5"}
+            backgroundColor={activeButtonId === item.id ? '#4B5FA5' : '#EDF1FD'}
+            color={activeButtonId === item.id ? 'white' : '#4B5FA5'}
             radius="12px"
             fontSize="13px"
             padding="8px 16px"
@@ -76,14 +89,18 @@ const NewCoupons: FC = () => {
         {data.results.length === 0 ? (
           <div>В данной категории нет товаров</div>
         ) : (
-          data?.results?.map((item: Icoupon) => (
-            <Link to={"/coupon/" + item.id}>
-              <Card it={item} key={item.id} />
-            </Link>
-          ))
+          data?.results?.map((item: Icoupon) =>
+            isLoading ? (
+              <Skeleton key={item.id} />
+            ) : (
+              <Link to={'/coupon/' + item.id} key={item.id}>
+                <Card it={item} />
+              </Link>
+            )
+          )
         )}
       </div>
-      {data.results.length >= 8 && (
+      {data.results.length >= limit && (
         <div className={styles.coupons_button}>
           <CouponsButton
             backgroundColor="#4B5FA5"
@@ -91,7 +108,7 @@ const NewCoupons: FC = () => {
             radius="12px"
             padding="11.5px 20px"
             fontSize="13px"
-            onClick={() => console.log("еще")}
+            onClick={countClickHandler}
             children="Загрузить еще"
           />
         </div>

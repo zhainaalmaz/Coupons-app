@@ -9,8 +9,8 @@ const initialState = {
     ? JSON.parse(localStorage.getItem('favoriteItems') || '')
     : ([] as IFavorite[]),
 
-  authFavoriteCoupons: localStorage.getItem('AuthFavoriteItems')
-    ? JSON.parse(localStorage.getItem('AuthFavoriteItems') || '')
+  authFavoriteCoupons: localStorage.getItem('favoriteItems')
+    ? JSON.parse(localStorage.getItem('favoriteItems') || '')
     : ([] as IFavorite[]),
 };
 
@@ -43,7 +43,7 @@ const favoriteSlice = createSlice({
     },
     removeFromFavorite: (state, action) => {
       // console.log();
-      
+
       const user =
         localStorage.getItem('currentUser') &&
         JSON.parse(localStorage.getItem('currentUser') || '');
@@ -66,10 +66,22 @@ const favoriteSlice = createSlice({
           'AuthFavoriteItems',
           JSON.stringify(state.authFavoriteCoupons)
         );
+        localStorage.setItem(
+          'favoriteItems',
+          JSON.stringify(state.authFavoriteCoupons)
+        );
       }
+    },
+    resetFavorites: (state) => {
+      state.favoriteCoupons = [];
+      state.authFavoriteCoupons = [];
+
+      localStorage.removeItem('favoriteItems');
+      localStorage.removeItem('AuthFavoriteItems');
     },
   },
 });
 
-export const { addFavorite, removeFromFavorite } = favoriteSlice.actions;
+export const { addFavorite, removeFromFavorite, resetFavorites } =
+  favoriteSlice.actions;
 export default favoriteSlice.reducer;
