@@ -13,7 +13,7 @@ interface InputWrapperProps {
 const HelpPage: FC = () => {
   const dispatch = useAppDispatch();
   const data = useAppSelector((state) => state.help.data);
-  const [expanded, setExpanded] = React.useState<string | false>("panel0");
+  const [expanded, setExpanded] = React.useState<string | false>("");
 
   const handleChange =
     (panel: string) => (event: React.SyntheticEvent, isExpanded: boolean) => {
@@ -22,7 +22,7 @@ const HelpPage: FC = () => {
 
   useEffect(() => {
     dispatch(asyncHelpInfo());
-  }, [dispatch]);
+  }, []);
 
   return (
     <>

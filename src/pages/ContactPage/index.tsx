@@ -19,7 +19,7 @@ const ContactPage = () => {
 
   useEffect(() => {
     dispatch(getContactAsync());
-  }, [dispatch]);
+  }, []);
 
   return (
     <>

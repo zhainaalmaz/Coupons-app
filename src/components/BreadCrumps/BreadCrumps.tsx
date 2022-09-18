@@ -8,6 +8,7 @@ function titleRussianCase(str: string) {
   if (str === "searchpage") return "Результаты поиска";
   if (str === "coupon") return "Купоны";
   if (str === "profile") return "Профиль";
+  if (str === "company") return "Компания";
   if (str === "favorites") return "Избранные";
   if (str === "my-coupons") return "Мои купоны";
   if (str === "about") return "О нас";
@@ -37,6 +38,14 @@ const BreadCrumps = () => {
             pathnames.map((value, index) => {
               const last = index === pathnames.length - 1;
               const to = `/${pathnames.slice(0, index + 1).join("/")}`;
+
+              if (pathnames.includes("company"))
+                return (
+                  <Typography style={{ color: "#4F70E2" }} key={to}>
+                    {titleRussianCase(value)}
+                  </Typography>
+                );
+
               return last ? (
                 <Typography style={{ color: "#4F70E2" }} key={to}>
                   {decodeURIComponent(value)}

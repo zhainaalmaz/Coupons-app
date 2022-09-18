@@ -1,5 +1,5 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useAppDispatch, useAppSelector } from "../../../../hooks";
 import AuthButton from "../../../../UI/AuthButton/AuthButton";
 import styles from "./Comfirm.module.scss";
@@ -7,7 +7,9 @@ import * as Yup from "yup";
 import { confirmThunk } from "../../../../store/slices/confirmSlice";
 import { loginThunk } from "../../../../store/slices/loginSlice";
 import { useNavigate } from "react-router-dom";
-import { setUser } from "../../../../store/slices/userSlice";
+import ComfirmInput, {
+  FormValues,
+} from "../../AuthComponents/ConfirmInput/ComfirmInput";
 
 const ConfirmSchema = Yup.object().shape({
   confirmation_code: Yup.string()
@@ -24,7 +26,11 @@ const initialValues: IConfCode = {
   confirmation_code: "",
 };
 
-const Confirm = () => {
+interface IProps {
+  setTitle: Function;
+}
+
+const Confirm: React.FC<IProps> = ({ setTitle }) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { statusCode, error } = useAppSelector((state) => state.confirm);
@@ -37,13 +43,22 @@ const Confirm = () => {
         password: user.password,
       })
     );
-    dispatch(setUser());
-    navigate("/login-success");
+    setTitle("Телефон подтвержден");
+    navigate("/success-page");
   };
 
   if (statusCode) {
     login();
   }
+
+  const onSubmit = (values: FormValues) => {
+    dispatch(
+      confirmThunk({
+        ...user,
+        confirmation_code: values.confirmation_code,
+      })
+    );
+  };
 
   return (
     <div className={styles.confirm}>
@@ -51,15 +66,7 @@ const Confirm = () => {
         <Formik
           initialValues={initialValues}
           validationSchema={ConfirmSchema}
-          onSubmit={(values, actions) => {
-            dispatch(
-              confirmThunk({
-                ...user,
-                confirmation_code: values.confirmation_code,
-              })
-            );
-            actions.setSubmitting(false);
-          }}
+          onSubmit={(values) => onSubmit(values)}
         >
           <Form className={styles.form}>
             <h3 className={styles.title}>Подтверждение номера телефона</h3>
@@ -72,6 +79,7 @@ const Confirm = () => {
             <div className={styles.inputsWrapper}>
               <Field
                 type="tel"
+                component={ComfirmInput}
                 name="confirmation_code"
                 className={styles.formItem}
                 placeholder="Введите код подтверждения"

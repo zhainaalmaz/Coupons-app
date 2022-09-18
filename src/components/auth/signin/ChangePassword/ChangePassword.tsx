@@ -1,13 +1,13 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import * as Yup from "yup";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./ChangePassword.module.scss";
 import { useNavigate } from "react-router-dom";
-import { useAppDispatch } from "../../../../hooks";
-import { changePasswordThunk } from "../../../../store/slices/changePasswordSlise/changePasswordSlice";
-import AuthButton from "../../../../UI/AuthButton/AuthButton";
+import { useAppDispatch, useAppSelector } from "../../../../hooks";
 import { ReactComponent as EyeClose } from "../../../../assets/auth-svg/eye-close.svg";
 import { ReactComponent as EyeOpen } from "../../../../assets/auth-svg/eye-open.svg";
+import { changePasswordThunk } from "../../../../store/slices/changePasswordSlise";
+import AuthButton from "../../../../UI/AuthButton/AuthButton";
 
 interface IPassword {
   old_password: string;
@@ -35,18 +35,27 @@ const passwordSchema = Yup.object().shape({
     .required("Подтвердите пароль"),
 });
 
-const ChangePassword = () => {
+export interface IProps {
+  setTitle: Function;
+}
+
+const ChangePassword: React.FC<IProps> = ({ setTitle }) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const [show, setShow] = useState(false);
   const [show2, setShow2] = useState(false);
+  const { status } = useAppSelector((state) => state.changePassword);
+
+  useEffect(() => {
+    setTitle("Пароль успешно изменен");
+    if (status === "fulfilled") navigate("/success-page");
+  }, [status]);
 
   return (
     <div className={styles.changePassword}>
       <div className="container">
         <div className={styles.wrapper}>
           <h3>Сменить пароль</h3>
-
           <Formik
             initialValues={initialValue}
             validationSchema={passwordSchema}
@@ -58,7 +67,6 @@ const ChangePassword = () => {
                   new_password_repeat: values.new_password_repeat,
                 })
               );
-
             }}
           >
             <Form className={styles.form}>
@@ -70,6 +78,7 @@ const ChangePassword = () => {
                     name="old_password"
                     placeholder="Текущий пароль"
                   />
+                  {status === "rejected" && <div className={styles.errorPassword}>Неверный пароль</div>}
                   <ErrorMessage
                     className={styles.errorMessage}
                     name="old_password"

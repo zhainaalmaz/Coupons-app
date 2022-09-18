@@ -2,10 +2,11 @@ import { ErrorMessage, Field, Form, Formik } from "formik";
 import React, { useEffect, useState } from "react";
 import styles from "./Enter.module.scss";
 import * as Yup from "yup";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../../hooks";
 import AuthButton from "../../../../UI/AuthButton/AuthButton";
 import { loginThunk } from "../../../../store/slices/loginSlice";
+import CreatePasswordInput from "../../AuthComponents/CreatePasswordInput/CreatePasswordInput";
 import { setUser } from "../../../../store/slices/userSlice";
 
 const EnterSchema = Yup.object().shape({
@@ -27,9 +28,7 @@ const Enter: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { error, status } = useAppSelector((state) => state.login);
-  const [userPhone, setUserPhone] = useState(
-    JSON.parse(localStorage.getItem("user") || "")
-  );
+  const user = JSON.parse(localStorage.getItem("userPhone") || "");
 
   useEffect(() => {
     if (status === "fulfilled") {
@@ -38,31 +37,33 @@ const Enter: React.FC = () => {
     }
   }, [status]);
 
+  const onSubmit = (values: IConfCode) => {
+    dispatch(
+      loginThunk({
+        phone: user?.phone,
+        password: values.password,
+      })
+    );
+  };
+
   return (
     <div className={styles.enter}>
       <div className={styles.wrapper}>
         <h3>Войдите, чтобы продолжить</h3>
-        <div>{userPhone.phone}</div>
+        <div className={styles.phone}>{user?.phone}</div>
         <Formik
           initialValues={initialValues}
           validationSchema={EnterSchema}
-          onSubmit={(values, actions) => {
-            dispatch(
-              loginThunk({
-                phone: userPhone.phone,
-                password: values.password,
-              })
-            );
-            actions.setSubmitting(false);
-          }}
+          onSubmit={(values) => onSubmit(values)}
         >
           <Form className={styles.form}>
             <div className={styles.inputsWrapper}>
               <Field
                 type="password"
                 name="password"
+                component={CreatePasswordInput}
                 className={styles.formItem}
-                placeholder="Введите код подтверждения"
+                placeholder="Введите пароль"
               />
               {error === "Request failed with status code 401" && (
                 <div className={styles.errorCode}>Неверный пароль.</div>
@@ -76,6 +77,9 @@ const Enter: React.FC = () => {
             <AuthButton type="submit">
               <p>Войти</p>
             </AuthButton>
+            <Link to="/recovery-password">
+              <div className={styles.recovery}>Не помню пароль</div>
+            </Link>
           </Form>
         </Formik>
       </div>

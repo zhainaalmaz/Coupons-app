@@ -25,13 +25,10 @@ const MyCoupons: FC = () => {
   };
 
   useEffect(() => {
-    if (active === "button1") {
-      setData(myCoupons.boughtCoupons);
-    } else if (active === "button2") {
-      setData(myCoupons.activatedCoupons);
-    } else {
-      setData([]);
-    }
+    if (!myCoupons) setData([]);
+    else if (active === "button1") setData(myCoupons.boughtCoupons);
+    else if (active === "button2") setData(myCoupons.activatedCoupons);
+    else if (active === "button3") setData([]);
   }, [active]);
 
   return (
@@ -70,7 +67,7 @@ const MyCoupons: FC = () => {
               </Link>
             ))
           ) : (
-            <div>Список пуст</div>
+            <div className={styles.empty}>Список пуст</div>
           )}
         </div>
       </div>

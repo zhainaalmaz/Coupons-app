@@ -52,12 +52,14 @@ const Main = () => {
     dispatch(getCouponsAsync(toggleCategoriesId));
     dispatch(getCategoriesAsync());
     dispatch(getMainImgAsinc());
-  }, [dispatch, toggleCategoriesId]);
+  }, [toggleCategoriesId]);
 
   const { coupons, categories, mainImg } = useAppSelector((state) => state);
   const handleChangeCategories = (id: number) => {
     setToggleCategoriesId(toggleCategoriesId === id ? 0 : id);
   };
+
+  const skeletons: number[] = [1, 2, 3, 4, 5, 6, 7, 8];
 
   return (
     <div className={styles.container}>
@@ -78,16 +80,19 @@ const Main = () => {
 
       <h3 className={styles.mainTitle}>Новые купоны</h3>
       <div className={styles.cardFlexContainer}>
-        {coupons.coupon &&
-          coupons.coupon.slice(0, 8).map((it: Icoupon) => {
-            return coupons.status !== "idle" ? (
-              <Skeleton key={it.id} />
-            ) : (
-              <Link to={"/coupon/" + it.id} key={it.id}>
-                <Card it={it} />
-              </Link>
-            );
-          })}
+        {coupons?.coupon?.length > 0
+          ? coupons.coupon.slice(0, 8).map((it: Icoupon) => {
+              return coupons.status !== "idle" ? (
+                <Skeleton key={it.id} />
+              ) : (
+                <Link to={"/coupon/" + it.id} key={it.id}>
+                  <Card it={it} />
+                </Link>
+              );
+            })
+          : skeletons.map((item: number) => {
+              return <Skeleton key={item} />;
+            })}
       </div>
 
       <button onClick={navigateCupons} className={styles.mainBtn}>

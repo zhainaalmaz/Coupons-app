@@ -1,34 +1,24 @@
-import {
-  Formik,
-  Form,
-  Field,
-  ErrorMessage,
-} from "formik";
-import React, { useState } from "react";
-import AuthButton from "../../../UI/AuthButton/AuthButton";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import React from "react";
 import styles from "./Signup.module.scss";
 import * as Yup from "yup";
-import { ReactComponent as EyeClose } from "../../../assets/auth-svg/eye-close.svg";
-import { ReactComponent as EyeOpen } from "../../../assets/auth-svg/eye-open.svg";
 import PhoneInputField from "./PhoneInput/PhoneInput";
 import { authThunk } from "../../../store/slices/authSlice";
-import { useAppDispatch, useAppSelector } from "../../../hooks";
+import { useAppDispatch } from "../../../hooks";
 import { useNavigate } from "react-router-dom";
-
-export interface FormValues {
-  phone: string;
-  password: string;
-  first_name: string;
-  last_name: string;
-  password2: string;
-}
+import NameInput from "../AuthComponents/NameInput/NameInput";
+import SurnameInput from "../AuthComponents/SurnameInput/SurnameInput";
+import CreatePasswordInput from "../AuthComponents/CreatePasswordInput/CreatePasswordInput";
+import RepeatPasswordInput from "../AuthComponents/RepeatPasswordInput/RepeatPasswordInput";
+import AuthButton from "../../../UI/AuthButton/AuthButton";
+import { setUser } from "../../../store/slices/userSlice";
 
 const SignupSchema = Yup.object().shape({
-    first_name: Yup.string()
+  first_name: Yup.string()
     .min(1, "Too Short!")
     .max(70, "Too Long!")
     .required("Введите имя"),
-    last_name: Yup.string()
+  last_name: Yup.string()
     .min(1, "Too Short!")
     .max(70, "Too Long!")
     .required("Введите фамилию"),
@@ -40,26 +30,22 @@ const SignupSchema = Yup.object().shape({
     .min(1, "Too Short!")
     .max(70, "Too Long!")
     .required("Введите пароль"),
-    password2: Yup.string()
+  password2: Yup.string()
     .oneOf([Yup.ref("password"), null], "Пароли должны совпадать")
     .required("Подтвердите пароль"),
 });
 
-const Signup: React.FC = () => {
-  const [show, setShow] = useState(false);
-  const [show2, setShow2] = useState(false);
-    const navigate = useNavigate()
-  const dispatch = useAppDispatch();
-   
+export interface FormValues {
+  phone: string;
+  password: string;
+  first_name: string;
+  last_name: string;
+  password2: string;
+}
 
-  function eyeHandler(e: { stopPropagation: () => void }) {
-    e.stopPropagation();
-    setShow(!show);
-  }
-  function eyeHandler2(e: { stopPropagation: () => void }) {
-    e.stopPropagation();
-    setShow2(!show2);
-  }
+const Signup: React.FC = () => {
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   const initialValues: FormValues = {
     first_name: "",
@@ -69,17 +55,21 @@ const Signup: React.FC = () => {
     password2: "",
   };
 
+  const onSubmit = (values: FormValues) => {
+    dispatch(authThunk(values));
+    localStorage.setItem("user", JSON.stringify(values));
+    dispatch(setUser());
+    navigate("/confirm");
+  };
+
   return (
     <div className={styles.signup}>
       <div className="container">
         <Formik
           initialValues={initialValues}
           validationSchema={SignupSchema}
-          onSubmit={(values, actions) => {
-            dispatch(authThunk(values));
-            navigate('/confirm')
-            localStorage.setItem('user', JSON.stringify(values))
-            actions.setSubmitting(false);
+          onSubmit={(values) => {
+            onSubmit(values);
           }}
         >
           <Form className={styles.form}>
@@ -91,6 +81,7 @@ const Signup: React.FC = () => {
                   id="first_name"
                   name="first_name"
                   placeholder="Имя"
+                  component={NameInput}
                 />
                 <ErrorMessage
                   component="p"
@@ -101,6 +92,7 @@ const Signup: React.FC = () => {
               <div className={styles.inputWrapper}>
                 <Field
                   className={styles.formItem}
+                  component={SurnameInput}
                   id="last_name"
                   name="last_name"
                   placeholder="Фамилия"
@@ -128,19 +120,12 @@ const Signup: React.FC = () => {
               <div className={styles.inputWrapper}>
                 <Field
                   className={styles.formItem}
-                  type={show ? "text" : "password"}
+                  type="password"
                   id="password"
+                  component={CreatePasswordInput}
                   name="password"
                   placeholder="Придумайте пароль"
                 />
-                {show ? (
-                  <EyeOpen onClick={eyeHandler} className={styles.eyeHandler} />
-                ) : (
-                  <EyeClose
-                    onClick={eyeHandler}
-                    className={styles.eyeHandler}
-                  />
-                )}
                 <ErrorMessage
                   component="p"
                   className={styles.errorMessage}
@@ -150,22 +135,12 @@ const Signup: React.FC = () => {
               <div className={styles.inputWrapper}>
                 <Field
                   className={styles.formItem}
-                  type={show2 ? "text" : "password"}
+                  type="password"
                   id="password2"
                   name="password2"
+                  component={RepeatPasswordInput}
                   placeholder="Повторите пароль"
                 />
-                {show2 ? (
-                  <EyeOpen
-                    onClick={eyeHandler2}
-                    className={styles.eyeHandler}
-                  />
-                ) : (
-                  <EyeClose
-                    onClick={eyeHandler2}
-                    className={styles.eyeHandler}
-                  />
-                )}
                 <ErrorMessage
                   component="p"
                   className={styles.errorMessage}

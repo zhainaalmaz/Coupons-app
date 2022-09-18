@@ -40,17 +40,18 @@ const CouponDetailsPage = () => {
     (state) => state.usersCoupons.usersCoupons
   );
 
-  console.log(usersCoupons);
-  
   const currentUser = usersCoupons.find(
     (item: any) => item.token === user?.access
   );
+
+  const navigateToCompany = () => {
+    navigate('/company/' + coupon.company_id)
+  }
+
   let isBought = false;
   let isActivated = false;
 
   if (currentUser) {
-    console.log(currentUser);
-
     isBought = currentUser.boughtCoupons.some(
       (item: ICoupon) => item.id === coupon.id
     );
@@ -107,6 +108,7 @@ const CouponDetailsPage = () => {
             isActivated={isActivated}
             favoriteHandler={favoriteHandler}
             couponHandler={couponHandler}
+            navigateToCompany={navigateToCompany}
           />
         )}
       </div>

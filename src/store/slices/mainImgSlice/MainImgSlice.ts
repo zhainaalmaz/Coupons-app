@@ -8,7 +8,7 @@ export interface mainImgState{
 
 const initialState: mainImgState = {
     img:[],
-    status: "idle"
+    status: "loading"
 }
 
 export const getMainImgAsinc = createAsyncThunk<any, void, {}>(

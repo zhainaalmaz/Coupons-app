@@ -1,0 +1,90 @@
+.changePhone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #e5e5e5;
+  padding: 100px 0;
+
+  .form {
+    width: 316px;
+    .description {
+      font-family: "Inter";
+      font-style: normal;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 21px;
+      color: #98949e;
+      margin-bottom: 24px;
+
+      width: 100%;
+    }
+    .inputsWrapper {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      gap: 28px;
+      width: 100%;
+    }
+    .inputWrapper {
+      width: 100%;
+      position: relative;
+    }
+    .formItem {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding-left: 16px;
+
+      width: 100%;
+      height: 44px;
+
+      background: #ffffff;
+      border: 1px solid #f7f1fe;
+      border-radius: 12px;
+    }
+    .formItem input {
+      padding: 13px;
+      border: none;
+      //   outline: none;
+      border-top-right-radius: 12px;
+      border-bottom-right-radius: 12px;
+    }
+    .eyeHandler {
+      position: absolute;
+      right: 20px;
+      top: 15px;
+      cursor: poin;
+    }
+    .errorMessage {
+      font-family: "Inter";
+      font-style: normal;
+      font-weight: 400;
+      font-size: 12px;
+      line-height: 14px;
+      color: red;
+      text-align: start;
+      position: absolute;
+      padding-left: 12px;
+    }
+    .errorPhone {
+      font-family: "Inter";
+      font-style: normal;
+      font-weight: 400;
+      font-size: 12px;
+      line-height: 14px;
+      color: red;
+      text-align: start;
+      position: absolute;
+      top: 56px;
+      padding-left: 12px;
+    }
+  }
+}
+
+@media screen and (max-width: 350px) {
+  .changePhone {
+    .form {
+      width: 100%;
+    }
+  }
+}

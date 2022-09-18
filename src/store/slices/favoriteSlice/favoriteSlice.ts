@@ -42,8 +42,6 @@ const favoriteSlice = createSlice({
       }
     },
     removeFromFavorite: (state, action) => {
-      // console.log();
-
       const user =
         localStorage.getItem('currentUser') &&
         JSON.parse(localStorage.getItem('currentUser') || '');

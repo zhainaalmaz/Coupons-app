@@ -1,5 +1,5 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./Signin.module.scss";
 import * as Yup from "yup";
 import { useAppDispatch, useAppSelector } from "../../../hooks";
@@ -13,7 +13,7 @@ const LoginSchema = Yup.object().shape({
   phone: Yup.string()
     .min(1, "Too Short!")
     .max(70, "Too Long!")
-    .required("*Введите номер")
+    .required("Введите номер")
     .matches(phoneRegExp, "Неправильно введен номер"),
 });
 
@@ -29,14 +29,19 @@ const Signin: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { error, statusCode } = useAppSelector((state) => state.check);
-  if (statusCode) {
-    navigate("/enter");
-  }
+  useEffect(() => {
+    console.log(statusCode);
+
+    if (statusCode) {
+      navigate("/enter");
+    }
+  }, [statusCode]);
+
   return (
     <div className={styles.signin}>
       <div className="container">
         <div className="wrapper">
-          <h3>Войдите, чтобы продолжить</h3>
+          <h3 className={styles.title}>Войдите, чтобы продолжить</h3>
 
           <Formik
             initialValues={initialValues}
@@ -47,7 +52,7 @@ const Signin: React.FC = () => {
                   phone: values.phone,
                 })
               );
-              localStorage.setItem("user", JSON.stringify(values));
+              localStorage.setItem("userPhone", JSON.stringify(values));
             }}
           >
             <Form className={styles.form}>

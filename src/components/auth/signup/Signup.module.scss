@@ -3,7 +3,6 @@
   background-color: #e5e5e5;
 
   * {
-    margin: 0;
     box-sizing: border-box;
   }
 
@@ -63,12 +62,7 @@
       position: absolute;
       padding-left: 12px;
     }
-    .eyeHandler {
-      position: absolute;
-      right: 20px;
-      top: 15px;
-      cursor: poin;
-    }
+
     .phoneInput {
       text-align: start;
       position: relative;

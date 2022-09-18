@@ -9,7 +9,7 @@
   border-radius: 12px;
   position: relative;
 }
-.discount{
+.discount {
   position: absolute;
   top: 0;
   left: 0;
@@ -17,7 +17,7 @@
   gap: 10px;
   width: 35px;
   height: 15px;
-  background: #E31B4B;
+  background: #e31b4b;
   border-radius: 8px 0px 6px 6px;
   display: flex;
   flex-direction: row;
@@ -79,7 +79,7 @@
 }
 .description {
   overflow-y: hidden;
-  width: 262px;
+  width: 90%;
   max-height: 42px;
   font-family: "Inter", sans-serif;
   font-style: normal;
@@ -98,13 +98,14 @@
 }
 .price {
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   align-items: center;
-  text-align: start;
-  flex-direction: row;
-  padding: 8px 20px;
   gap: 12px;
+
+  padding: 5px 10px;
+  width: 80%;
   height: 55px;
+
   border: 1px solid #f2f2f2;
   border-radius: 8px;
 }
@@ -162,11 +163,11 @@
   justify-content: space-between;
   margin-top: -15px;
   margin-bottom: 10px;
-
 }
 .cardPriceBox {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   gap: 8px 0;
-  margin: 0 auto;
 }

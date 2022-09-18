@@ -1,19 +1,9 @@
-.layout {
-  padding: 16px 0;
-  background-color: #e5e5e5;
-}
-
 .info {
   padding: 60px 24px;
   background: #ffffff;
   border-radius: 12px;
   max-width: 70%;
-}
-
-.wrapper {
-  display: flex;
-  gap: 10px;
-  min-height: 600px;
+  width: 100%;
 }
 
 .myCoupons {
@@ -24,10 +14,10 @@
   padding-top: 24px;
   gap: 30px 15px;
   @media (min-width: 800px) {
-    grid-template-columns: repeat(3, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   }
   @media (min-width: 1061px) {
-    grid-template-columns: repeat(3, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   }
   &_button {
     padding: 12px;
@@ -68,6 +58,10 @@
   padding: 5px 20px 7px;
 }
 
+.empty {
+  text-align: center;
+}
+
 @media (max-width: 992px) {
   .wrapper {
     display: flex;
@@ -77,8 +71,26 @@
   .info {
     padding: 30px 18px;
     max-width: 100%;
+    max-width: 100%;
+    width: unset;
     h2 {
       text-align: center;
     }
+  }
+
+  .buttons {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 568px) {
+  .buttons {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: unset;
   }
 }

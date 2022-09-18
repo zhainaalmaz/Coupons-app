@@ -16,15 +16,20 @@ const initialState: IInitialState = {
 export const confirmThunk = createAsyncThunk(
   "confirm",
   async (data: object) => {
-    const response = await confirm(data);
-    return response;
+    return await confirm(data);
   }
 );
 
 const confirmSlice = createSlice({
   name: "confirm",
   initialState,
-  reducers: {},
+  reducers: {
+    // resetStatusConfirm(state) {
+    //   state.statusCode = "";
+    //   state.status = "loading";
+    //   state.error = "";
+    // },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(confirmThunk.pending, (state) => {
@@ -37,9 +42,11 @@ const confirmSlice = createSlice({
       .addCase(confirmThunk.rejected, (state, action) => {
         state.status = "rejected";
         state.error = action.error.message;
+        console.log("error");
       });
   },
 });
 
 export const confirmAction = confirmSlice.actions;
+// export const { resetStatusConfirm } = confirmSlice.actions;
 export default confirmSlice.reducer;

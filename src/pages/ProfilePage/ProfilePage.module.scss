@@ -1,4 +1,17 @@
 .layout {
-    padding: 16px 0;
-    background-color: #e5e5e5;
+  padding: 16px 0;
+  background-color: #e5e5e5;
+}
+
+.wrapper {
+  display: flex;
+  gap: 10px;
+  min-height: 600px;
+}
+
+@media (max-width: 992px) {
+  .wrapper {
+    display: flex;
+    flex-direction: column;
   }
+}

@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import Card from "../../UI/Card/Card";
 import styles from "./CouponDetails.module.scss";
 import defaultImage from "../../assets/couponsImg/defoltIMG.png";
-import { ReactComponent as FavoriteIcon } from "../../assets/card/favorite.svg";
-import { ReactComponent as FavoritedIcon } from "../../assets/card/favorited.svg";
+import { ReactComponent as FavoriteIcon } from "../../assets/card/favorited.svg";
+import { ReactComponent as FavoritedIcon } from "../../assets/card/favorite-outline.svg";
 
 type Props = {
   coupon: ICoupon;
@@ -13,6 +13,7 @@ type Props = {
   isBought: boolean | ICoupon;
   isActivated: boolean | ICoupon;
   couponHandler: any;
+  navigateToCompany: () => void;
 };
 
 interface ILocation {
@@ -66,7 +67,10 @@ const CouponDetailsPage = ({
   couponHandler,
   isBought,
   isActivated,
+  navigateToCompany
 }: Props) => {
+  console.log(coupon);
+
   return (
     <div className={styles.coupon}>
       <div className={styles.heading}>
@@ -84,7 +88,7 @@ const CouponDetailsPage = ({
           <p dangerouslySetInnerHTML={{ __html: coupon.description }}></p>
         </div>
         <div className={styles.info}>
-          <div className={styles.company}>
+          <div className={styles.company} onClick={navigateToCompany}>
             <img
               className={styles.logo}
               src={coupon.company_logo}
@@ -133,7 +137,7 @@ const CouponDetailsPage = ({
             )}
 
             <button onClick={favoriteHandler} className={styles.buttonFavorite}>
-              {isFavorite ? <FavoriteIcon /> : <FavoritedIcon />}
+              {isFavorite ? <FavoritedIcon /> : <FavoriteIcon />}
             </button>
           </div>
         </div>
