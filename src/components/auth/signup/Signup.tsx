@@ -55,10 +55,11 @@ const Signup: React.FC = () => {
     password2: "",
   };
 
-  const onSubmit = (values: FormValues) => {
-    dispatch(authThunk(values));
-    localStorage.setItem("user", JSON.stringify(values));
-    dispatch(setUser());
+  const onSubmit = async (values: FormValues) => {
+    await localStorage.setItem("user", JSON.stringify(values));
+    await dispatch(authThunk(values));
+    await dispatch(setUser());
+
     navigate("/confirm");
   };
 
