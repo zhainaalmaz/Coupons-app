@@ -15,6 +15,7 @@ import {
 } from "../../store/slices/usersCouponsSlice";
 import CouponBuy from "../../forms/CouponBuy";
 import CouponActivate from "../../forms/CouponActivate";
+import CouponDetaulsSkeleton from "../../components/CouponDetails/CouponDetaulsSkeleton";
 
 const CouponDetailsPage = () => {
   const { id } = useParams();
@@ -112,7 +113,7 @@ const CouponDetailsPage = () => {
       <BreadCrumps />
       <div className="container">
         {status === "loading" ? (
-          <div>LOADING</div>
+          <CouponDetaulsSkeleton />
         ) : (
           <>
             <CouponDetails

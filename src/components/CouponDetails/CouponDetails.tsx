@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Card from "../../UI/Card/Card";
 import styles from "./CouponDetails.module.scss";
+import GoogleMapReact, { MapOptions } from "google-map-react";
 
 import defaultImage from "../../assets/couponsImg/defoltIMG.png";
 import { ReactComponent as FavoriteIcon } from "../../assets/card/favorited.svg";
@@ -14,6 +15,7 @@ import vk from "../../assets/card/vk.svg";
 import fb from "../../assets/card/fb.svg";
 import tg from "../../assets/card/tg.svg";
 import wa from "../../assets/card/wa.svg";
+import { Map } from "../../UI/Map";
 
 type Props = {
   coupon: ICoupon;
@@ -223,6 +225,10 @@ const CouponDetailsPage = ({
           </div>
         </>
       )}
+
+      <div style={{ width: "100%", height: 400, marginTop: 50 }}>
+        <Map />
+      </div>
 
       {coupon.map_locations && coupon.map_locations.length > 0 && (
         <div className={styles.map}>
