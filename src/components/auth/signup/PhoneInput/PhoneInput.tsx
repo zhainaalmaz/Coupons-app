@@ -2,7 +2,6 @@ import React from "react";
 import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
 import { FormValues } from "../Signup";
-// import styles from "./PhoneInput.module.scss";
 
 interface IFieldObject {
   name: string;

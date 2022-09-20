@@ -5,6 +5,10 @@
   background-color: #e5e5e5;
   padding: 100px 0;
 
+  * {
+    box-sizing: border-box;
+  }
+
   .title {
     margin-bottom: 23px;
   }
@@ -32,12 +36,10 @@
       background: #ffffff;
       border: 1px solid #f7f1fe;
       border-radius: 12px;
-      //   border-color: red;
     }
     .formItem input {
       padding: 13px;
       border: none;
-      //   outline: none;
       border-top-right-radius: 12px;
       border-bottom-right-radius: 12px;
     }
