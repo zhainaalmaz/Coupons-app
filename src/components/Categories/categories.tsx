@@ -1,7 +1,7 @@
-import React, { ReactNode } from 'react';
-import { Icategories } from '../../pages/MainPage/Main';
-import styles from './categories.module.scss';
-import { motion } from 'framer-motion';
+import React, { ReactNode } from "react";
+import { Icategories } from "../../pages/MainPage/Main";
+import styles from "./categories.module.scss";
+import { motion } from "framer-motion";
 
 interface Props {
   it: Icategories;
@@ -33,14 +33,14 @@ const Categories = ({
       }}
       className={styles.categoriesBox}
       whileHover={{
-        scale: 1.05,
+        scale: 0.97,
       }}
     >
       <div
         style={{
           border: `2px solid ${color.color}`,
-          transition: '1s',
-          background: `${!!choosed ? `${color.color}` : 'none'}`,
+          transition: "1s",
+          background: `${!!choosed ? `${color.color}` : "none"}`,
         }}
         className={
           !choosed ? styles.categoriesIconBox : styles.categoriesSvgBox
