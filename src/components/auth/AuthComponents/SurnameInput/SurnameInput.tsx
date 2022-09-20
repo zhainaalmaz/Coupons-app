@@ -21,6 +21,7 @@ const SurnameInput: React.FC<IProps> = ({
         type={type}
         onChange={onChange}
         className={className}
+        value={form.values.last_name}
         name={name}
         placeholder={placeholder}
       />

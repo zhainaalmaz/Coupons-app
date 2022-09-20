@@ -30,7 +30,18 @@ const changePhoneSlice = createSlice({
       })
       .addCase(changePhoneThunk.fulfilled, (state, action) => {
         state.status = "fulfilled";
-        console.log("fulfilled");
+        console.log(action.payload);
+        
+
+        // localStorage.setItem(
+        //   "currentUser",
+        //   JSON.stringify({
+        //     ...user,
+        //     first_name: response.data.first_name,
+        //     last_name: response.data.last_name,
+        //   })
+        // );
+
       })
       .addCase(changePhoneThunk.rejected, (state, action) => {
         state.status = "rejected";

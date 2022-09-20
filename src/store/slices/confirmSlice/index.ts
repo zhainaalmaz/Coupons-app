@@ -64,6 +64,17 @@ const confirmSlice = createSlice({
       .addCase(newPhoneConfirmThunk.fulfilled, (state, action) => {
         state.newPhoneConfirm.status = "fulfilled";
 
+        const newPhone = JSON.parse(localStorage.getItem("userPhone") || "")
+        const user = JSON.parse(localStorage.getItem("currentUser") || "")
+
+        localStorage.setItem(
+          "currentUser",
+          JSON.stringify({
+            ...user,
+            phone: newPhone
+          })
+        );
+
         state.newPhoneConfirm.statusCode = action.payload.message;
       })
       .addCase(newPhoneConfirmThunk.rejected, (state, action) => {

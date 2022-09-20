@@ -35,7 +35,6 @@ const NewPhoneConfirm: React.FC<IProps> = ({ setTitle }) => {
     (state) => state.confirm.newPhoneConfirm
   );
   const state = useAppSelector(state => state.confirm)
-  
   const phone = JSON.parse(localStorage.getItem("userPhone") || "");
 
   const onSubmit = (values: IConfCode) => {
@@ -45,12 +44,10 @@ const NewPhoneConfirm: React.FC<IProps> = ({ setTitle }) => {
         phone: phone,
       })
     );
+
   };
 
-  useEffect(() => {
-  console.log(statusCode);
-  console.log(state);
-  
+  useEffect(() => { 
 
     if (statusCode === "New phone is confirmed") {
       setTitle("Номер успешно изменен");

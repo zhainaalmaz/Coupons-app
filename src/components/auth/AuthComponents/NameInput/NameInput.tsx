@@ -40,6 +40,7 @@ const NameInput: React.FC<IProps> = ({
       <input
         type={type}
         name={name}
+        value={form.values?.first_name}
         onChange={onChange}
         placeholder={placeholder}
         className={className}

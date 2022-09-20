@@ -23,12 +23,12 @@ const usersCouponsSlice = createSlice({
         JSON.parse(localStorage.getItem("currentUser") || "");
 
       const usersCoupons = state.usersCoupons.find(
-        (item: IUsersCoupons) => item.token === user.access
+        (item: IUsersCoupons) => item.token === user.token
       );
 
       if (!usersCoupons) {
         state.usersCoupons.push({
-          token: user.access,
+          token: user.token,
           boughtCoupons: [action.payload],
           activatedCoupons: [],
         });
@@ -42,7 +42,7 @@ const usersCouponsSlice = createSlice({
         const newUsersCoupons: any = { ...usersCoupons };
         newUsersCoupons.boughtCoupons.push(action.payload);
         const filteredCoupons: object[] = state.usersCoupons.filter(
-          (item: IUsersCoupons) => item.token !== user.access
+          (item: IUsersCoupons) => item.token !== user.token
         );
         filteredCoupons.push(newUsersCoupons);
 
@@ -56,7 +56,7 @@ const usersCouponsSlice = createSlice({
         JSON.parse(localStorage.getItem("currentUser") || "");
 
       const usersCoupons = state.usersCoupons.find(
-        (item: IUsersCoupons) => item.token === user.access
+        (item: IUsersCoupons) => item.token === user.token
       );
 
       if (usersCoupons) {
@@ -68,7 +68,7 @@ const usersCouponsSlice = createSlice({
         );
 
         const filteredUsersCoupons: object[] = state.usersCoupons.filter(
-          (item: IUsersCoupons) => item.token !== user.access
+          (item: IUsersCoupons) => item.token !== user.token
         );
         filteredUsersCoupons.push(newUsersCoupons);
 

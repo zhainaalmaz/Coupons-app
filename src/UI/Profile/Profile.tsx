@@ -15,7 +15,7 @@ import { clearUser } from "../../store/slices/userSlice";
 import { useEffect } from "react";
 import { resetFavorites } from "../../store/slices/favoriteSlice/favoriteSlice";
 import { resetStatus } from "../../store/slices/checkSlice";
-// import { resetStatusConfirm } from "../../store/slices/confirmSlice";
+
 
 export default function Profile() {
   const user =
