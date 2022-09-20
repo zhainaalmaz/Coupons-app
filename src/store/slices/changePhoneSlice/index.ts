@@ -30,7 +30,6 @@ const changePhoneSlice = createSlice({
       })
       .addCase(changePhoneThunk.fulfilled, (state, action) => {
         state.status = "fulfilled";
-        console.log("fulfilled");
       })
       .addCase(changePhoneThunk.rejected, (state, action) => {
         state.status = "rejected";

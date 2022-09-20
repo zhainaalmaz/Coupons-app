@@ -15,7 +15,7 @@ const MyCoupons: FC = () => {
     JSON.parse(localStorage.getItem("currentUser") || "");
 
   const state = useAppSelector((state) => state.usersCoupons.usersCoupons);
-  const myCoupons = state.find((item: any) => item.token === user.access);
+  const myCoupons = state.find((item: any) => item.token === user.token);
 
   const myCouponsHandler = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>

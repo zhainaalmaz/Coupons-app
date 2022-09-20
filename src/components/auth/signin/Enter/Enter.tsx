@@ -12,8 +12,8 @@ import { setUser } from "../../../../store/slices/userSlice";
 const EnterSchema = Yup.object().shape({
   password: Yup.string()
     .min(1, "Слишком короткий пароль")
-    .max(6, "Слишком длинный пароль")
-    .required("Введите пароль"),
+    .max(6, "Слишком длинный пароль!")
+    .required("Введите код"),
 });
 
 interface IConfCode {

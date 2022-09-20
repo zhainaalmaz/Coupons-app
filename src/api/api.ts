@@ -156,3 +156,16 @@ export function newPhoneConfirm(data: object) {
   })
 }
 
+export function changeProfile(data: object) {
+  const token = JSON.parse(localStorage.getItem('currentUser') || "")
+  return axios({
+    method: 'put',
+    url: BASE_URL + 'users/profile/',
+    data: data,
+    headers: {
+      'Authorization': "Bearer " + token.access,
+    }
+  }).then((response) => response)
+}
+
+

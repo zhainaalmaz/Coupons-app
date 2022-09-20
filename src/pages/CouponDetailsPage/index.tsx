@@ -42,7 +42,7 @@ const CouponDetailsPage = () => {
   );
 
   const currentUser = usersCoupons.find(
-    (item: any) => item.token === user?.access
+    (item: any) => item.token === user?.token
   );
 
   const navigateToCompany = () => {

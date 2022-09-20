@@ -44,7 +44,7 @@ const Signin: React.FC = () => {
           <Formik
             initialValues={initialValues}
             validationSchema={LoginSchema}
-            onSubmit={(values, actions) => {
+            onSubmit={values => {
               dispatch(
                 checkThunk({
                   phone: values.phone,

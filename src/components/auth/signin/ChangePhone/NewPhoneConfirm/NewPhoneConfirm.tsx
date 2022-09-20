@@ -5,7 +5,8 @@ import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../../../hooks";
 import ComfirmInput from "../../../AuthComponents/ConfirmInput/ComfirmInput";
-import AuthButton from "../../../../../UI/AuthButton/AuthButton"
+
+import AuthButton from "../../../../../UI/AuthButton/AuthButton";
 import { newPhoneConfirmThunk } from "../../../../../store/slices/confirmSlice";
 
 const ConfirmSchema = Yup.object().shape({
@@ -33,8 +34,7 @@ const NewPhoneConfirm: React.FC<IProps> = ({ setTitle }) => {
   const { statusCode, error } = useAppSelector(
     (state) => state.confirm.newPhoneConfirm
   );
-  const state = useAppSelector(state => state.confirm)
-  
+  const state = useAppSelector((state) => state.confirm);
   const phone = JSON.parse(localStorage.getItem("userPhone") || "");
 
   const onSubmit = (values: IConfCode) => {

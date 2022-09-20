@@ -35,7 +35,7 @@ const loginSlice = createSlice({
 
         localStorage.setItem(
           "currentUser",
-          JSON.stringify({ ...action.payload, access: token })
+          JSON.stringify({ ...action.payload, token: token })
         );
       })
       .addCase(loginThunk.rejected, (state, action) => {

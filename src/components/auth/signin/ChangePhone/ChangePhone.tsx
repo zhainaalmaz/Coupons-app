@@ -39,14 +39,14 @@ const ChangePhone: React.FC<IProps> = () => {
         phone: values.phone,
       })
     );
-    localStorage.setItem("userPhone", JSON.stringify(values.phone))
+    localStorage.setItem("userPhone", JSON.stringify(values.phone));
   };
 
-  useEffect(()=>{
-    if(status === "rejected") {
-      navigate("/change-phone/confirm")
+  useEffect(() => {
+    if (status === "rejected") {
+      navigate("/change-phone/confirm");
     }
-  }, [status])
+  }, [status]);
 
   return (
     <div className={styles.changePhone}>
