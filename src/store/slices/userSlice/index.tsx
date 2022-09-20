@@ -4,8 +4,12 @@ export interface IUser {
   userName: string;
 }
 
+const user =
+        localStorage.getItem("currentUser") &&
+        JSON.parse(localStorage.getItem("currentUser") || "");
+
 const initialState: IUser = {
-  userName: "",
+  userName: user?.first_name,
 };
 
 export const userSlice = createSlice({
@@ -14,8 +18,8 @@ export const userSlice = createSlice({
   reducers: {
     setUser: (state) => {
       const user =
-        localStorage.getItem("user") &&
-        JSON.parse(localStorage.getItem("user") || "");
+        localStorage.getItem("currentUser") &&
+        JSON.parse(localStorage.getItem("currentUser") || "");
 
       state.userName = user.first_name;
     },

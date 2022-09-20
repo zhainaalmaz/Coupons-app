@@ -5,8 +5,9 @@ import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../../../hooks";
 import ComfirmInput from "../../../AuthComponents/ConfirmInput/ComfirmInput";
-import { newPhoneConfirmThunk } from "../../../../../store/slices/";
-import AuthButton from "../../../../../UI/AuthButton/AuthButton";
+
+import AuthButton from "../../../../../UI/AuthButton/AuthButton"
+import { newPhoneConfirmThunk } from "../../../../../store/slices/confirmSlice";
 
 const ConfirmSchema = Yup.object().shape({
   confirmation_code: Yup.string()

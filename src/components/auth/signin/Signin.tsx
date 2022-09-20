@@ -30,7 +30,6 @@ const Signin: React.FC = () => {
   const dispatch = useAppDispatch();
   const { error, statusCode } = useAppSelector((state) => state.check);
   useEffect(() => {
-    console.log(statusCode);
 
     if (statusCode) {
       navigate("/enter");
@@ -46,7 +45,7 @@ const Signin: React.FC = () => {
           <Formik
             initialValues={initialValues}
             validationSchema={LoginSchema}
-            onSubmit={(values, actions) => {
+            onSubmit={values => {
               dispatch(
                 checkThunk({
                   phone: values.phone,

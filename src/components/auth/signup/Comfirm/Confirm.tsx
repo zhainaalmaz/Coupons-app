@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import ComfirmInput, {
   FormValues,
 } from "../../AuthComponents/ConfirmInput/ComfirmInput";
+import { setUser } from "../../../../store/slices/userSlice";
 
 const ConfirmSchema = Yup.object().shape({
   confirmation_code: Yup.string()
@@ -33,7 +34,9 @@ interface IProps {
 const Confirm: React.FC<IProps> = ({ setTitle }) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { statusCode, error } = useAppSelector((state) => state.confirm);
+  const { statusCode, error } = useAppSelector(
+    (state) => state.confirm.loginConfirm
+  );
   const user = JSON.parse(localStorage.getItem("user") || "");
 
   const login = async () => {
@@ -43,6 +46,7 @@ const Confirm: React.FC<IProps> = ({ setTitle }) => {
         password: user.password,
       })
     );
+    dispatch(setUser());
     setTitle("Телефон подтвержден");
     navigate("/success-page");
   };

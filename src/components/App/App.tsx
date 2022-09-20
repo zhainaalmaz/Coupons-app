@@ -26,6 +26,7 @@ import RecoveryPassword from "../auth/signin/RecoveryPassword/RecoveryPassword";
 import RecoveryPasswordCreatePassword from "../auth/signin/RecoveryPasswordCreatePassword/RecoveryPasswordCreatePassword";
 import RecoveryPasswordConfirm from "../auth/signin/RecoveryPasswordConfirm/RecoveryPasswordConfirm";
 import ChangePhone from "../auth/signin/ChangePhone/ChangePhone";
+import NewPhoneConfirm from "../auth/signin/ChangePhone/NewPhoneConfirm/NewPhoneConfirm";
 
 import CouponDetailsPage from "../../pages/CouponDetailsPage";
 import ProfilePage from "../../pages/ProfilePage";
@@ -56,11 +57,16 @@ function App() {
           path={"change-phone"}
           element={<ChangePhone setTitle={setTitle} />}
         />
+        <Route
+          path={"/change-phone/confirm"}
+          element={<NewPhoneConfirm setTitle={setTitle} />}
+        />
         <Route path={"recovery-password"} element={<RecoveryPassword />} />
         <Route
           path={"recovery-password/confirm"}
           element={<RecoveryPasswordConfirm />}
         />
+
         <Route
           path={"recovery-password/confirm/create-password"}
           element={<RecoveryPasswordCreatePassword setTitle={setTitle} />}
