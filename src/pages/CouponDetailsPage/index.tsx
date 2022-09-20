@@ -14,13 +14,16 @@ import {
   buyUsersCoupon,
 } from "../../store/slices/usersCouponsSlice";
 import CouponBuy from "../../forms/CouponBuy";
+import CouponActivate from "../../forms/CouponActivate";
 
 const CouponDetailsPage = () => {
   const { id } = useParams();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const { coupon, status } = useAppSelector((state) => state.couponDetails);
-  const [isModal, setIsModal] = useState(true)
+  const newState = useAppSelector((state) => state.couponDetails);
+  const [isModalBuy, setIsModalBuy] = useState(false);
+  const [isModalActivate, setIsModalActivate] = useState(false);
 
   const user =
     localStorage.getItem("currentUser") &&
@@ -85,15 +88,24 @@ const CouponDetailsPage = () => {
     }
 
     if (user && !isActivated) {
-      isBought
-        ? dispatch(activateUsersCoupon(coupon))
-        : dispatch(buyUsersCoupon(coupon));
+      if (isBought) {
+        dispatch(activateUsersCoupon(coupon));
+        setIsModalActivate(!isModalActivate);
+      } else {
+        dispatch(buyUsersCoupon(coupon));
+        setIsModalBuy(!isModalBuy);
+      }
     }
   };
 
   useEffect(() => {
     dispatch(getCouponAsync(id));
   }, [id]);
+
+  console.log("DETAILS: ");
+  console.log(coupon);
+  console.log("newState");
+  console.log(newState);
 
   return (
     <>
@@ -112,7 +124,19 @@ const CouponDetailsPage = () => {
               couponHandler={couponHandler}
               navigateToCompany={navigateToCompany}
             />
-            {isModal && <CouponBuy />}
+            {isModalBuy && (
+              <CouponBuy
+                isModalBuy={isModalBuy}
+                setIsModalBuy={setIsModalBuy}
+              />
+            )}
+            {isModalActivate && (
+              <CouponActivate
+                isModalActivate={isModalActivate}
+                setIsModalActivate={setIsModalActivate}
+                coupon={coupon}
+              />
+            )}
           </>
         )}
       </div>

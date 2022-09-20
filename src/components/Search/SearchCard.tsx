@@ -12,7 +12,7 @@ type Props = {
 const SearchCard = ({ value, clearInput, setShowInput }: Props) => {
   const navigate = useNavigate();
   function checkDetails() {
-    navigate(`/details/${value.id}`);
+    navigate(`/coupon/${value.id}`);
     clearInput();
     setShowInput(false);
   }
