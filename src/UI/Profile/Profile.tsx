@@ -15,7 +15,6 @@ import { clearUser } from "../../store/slices/userSlice";
 import { useEffect } from "react";
 import { resetFavorites } from "../../store/slices/favoriteSlice/favoriteSlice";
 import { resetStatus } from "../../store/slices/checkSlice";
-// import { resetStatusConfirm } from "../../store/slices/confirmSlice";
 
 export default function Profile() {
   const user =
@@ -37,7 +36,7 @@ export default function Profile() {
     dispatch(resetFavorites());
 
     navigate("/");
-    window.location.reload()
+    window.location.reload();
   };
 
   return (
@@ -85,7 +84,7 @@ export default function Profile() {
           </MenuItem>
         </NavLink>
         <NavLink
-          to="/change-password"
+          to="/change-phone"
           className={({ isActive }) => (isActive ? styles.activeLink : "")}
         >
           <MenuItem>
@@ -96,7 +95,7 @@ export default function Profile() {
           </MenuItem>
         </NavLink>
         <NavLink
-          to="/change-phone"
+          to="/change-password"
           className={({ isActive }) => (isActive ? styles.activeLink : "")}
         >
           <MenuItem>

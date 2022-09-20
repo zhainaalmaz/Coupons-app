@@ -33,8 +33,6 @@ const ChangePhone: React.FC<IProps> = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { status, error } = useAppSelector((state) => state.changePhone);
-  console.log(status)
-  
   const onSubmit = (values: IPhone) => {
     dispatch(
       changePhoneThunk({

@@ -47,10 +47,6 @@ const NewPhoneConfirm: React.FC<IProps> = ({ setTitle }) => {
   };
 
   useEffect(() => {
-  console.log(statusCode);
-  console.log(state);
-  
-
     if (statusCode === "New phone is confirmed") {
       setTitle("Номер успешно изменен");
       navigate("/success-page");

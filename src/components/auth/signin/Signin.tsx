@@ -30,8 +30,6 @@ const Signin: React.FC = () => {
   const dispatch = useAppDispatch();
   const { error, statusCode } = useAppSelector((state) => state.check);
   useEffect(() => {
-    console.log(statusCode);
-
     if (statusCode) {
       navigate("/enter");
     }

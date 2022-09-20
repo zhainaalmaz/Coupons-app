@@ -69,7 +69,6 @@ const CouponDetailsPage = ({
   isActivated,
   navigateToCompany
 }: Props) => {
-  console.log(coupon);
 
   return (
     <div className={styles.coupon}>

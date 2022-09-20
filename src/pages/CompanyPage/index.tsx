@@ -10,7 +10,6 @@ const CompanyPage = () => {
   };
   const [companyInfo, setCompanyInfo] = useState({});
   const [isLoading, setIsLoading] = useState(true);
-  console.log(companyInfo);
 
   useEffect(() => {
     const getCompanyData = async () => {
