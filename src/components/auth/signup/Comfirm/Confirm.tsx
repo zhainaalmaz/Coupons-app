@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import ComfirmInput, {
   FormValues,
 } from "../../AuthComponents/ConfirmInput/ComfirmInput";
+import { setUser } from "../../../../store/slices/userSlice";
 
 const ConfirmSchema = Yup.object().shape({
   confirmation_code: Yup.string()
@@ -45,6 +46,7 @@ const Confirm: React.FC<IProps> = ({ setTitle }) => {
         password: user.password,
       })
     );
+    dispatch(setUser());
     setTitle("Телефон подтвержден");
     navigate("/success-page");
   };

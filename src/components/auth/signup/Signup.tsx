@@ -11,7 +11,6 @@ import SurnameInput from "../AuthComponents/SurnameInput/SurnameInput";
 import CreatePasswordInput from "../AuthComponents/CreatePasswordInput/CreatePasswordInput";
 import RepeatPasswordInput from "../AuthComponents/RepeatPasswordInput/RepeatPasswordInput";
 import AuthButton from "../../../UI/AuthButton/AuthButton";
-import { setUser } from "../../../store/slices/userSlice";
 
 const SignupSchema = Yup.object().shape({
   first_name: Yup.string()
@@ -55,10 +54,9 @@ const Signup: React.FC = () => {
     password2: "",
   };
 
-  const onSubmit = async (values: FormValues) => {
-    await localStorage.setItem("user", JSON.stringify(values));
-    await dispatch(authThunk(values));
-    await dispatch(setUser());
+  const onSubmit = (values: FormValues) => {
+    localStorage.setItem("user", JSON.stringify(values));
+    dispatch(authThunk(values));
 
     navigate("/confirm");
   };
