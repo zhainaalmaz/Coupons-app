@@ -141,3 +141,18 @@ export function recoveryPasswordConfirm(data: object) {
     return response.data;
   });
 }
+
+export function newPhoneConfirm(data: object) {
+  const token = JSON.parse(localStorage.getItem('currentUser') || "")
+  return axios({
+    method: 'post',
+    url: BASE_URL + 'users/new-phone-confirm/',
+    data: data,
+    headers: {
+      'Authorization': "Bearer " + token.access,
+    }
+  }).then((response) => {
+    return response.data
+  })
+}
+

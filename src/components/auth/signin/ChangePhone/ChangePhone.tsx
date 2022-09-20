@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./ChangePhone.module.scss";
 import * as Yup from "yup";
 import { ErrorMessage, Field, Form, Formik } from "formik";
@@ -33,14 +33,22 @@ const ChangePhone: React.FC<IProps> = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { status, error } = useAppSelector((state) => state.changePhone);
-
+  console.log(status)
+  
   const onSubmit = (values: IPhone) => {
     dispatch(
       changePhoneThunk({
         phone: values.phone,
       })
     );
+    localStorage.setItem("userPhone", JSON.stringify(values.phone))
   };
+
+  useEffect(()=>{
+    if(status === "rejected") {
+      navigate("/change-phone/confirm")
+    }
+  }, [status])
 
   return (
     <div className={styles.changePhone}>

@@ -29,6 +29,7 @@ export const recoveryPasswordThunk = createAsyncThunk(
     return response;
   }
 );
+
 export const recoveryPasswordConfirmThunk = createAsyncThunk(
   "recoveryConfirmPassword",
   async (data: object) => {

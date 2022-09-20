@@ -1,15 +1,12 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
-import React from "react";
-import { useAppDispatch, useAppSelector } from "../../../../hooks";
-import AuthButton from "../../../../UI/AuthButton/AuthButton";
-import styles from "./Comfirm.module.scss";
+import React, { useEffect } from "react";
+import styles from "./NewPhoneConfirm.module.scss";
 import * as Yup from "yup";
-import { confirmThunk } from "../../../../store/slices/confirmSlice";
-import { loginThunk } from "../../../../store/slices/loginSlice";
 import { useNavigate } from "react-router-dom";
-import ComfirmInput, {
-  FormValues,
-} from "../../AuthComponents/ConfirmInput/ComfirmInput";
+import { useAppDispatch, useAppSelector } from "../../../../../hooks";
+import ComfirmInput from "../../../AuthComponents/ConfirmInput/ComfirmInput";
+import AuthButton from "../../../../../UI/AuthButton/AuthButton"
+import { newPhoneConfirmThunk } from "../../../../../store/slices/confirmSlice";
 
 const ConfirmSchema = Yup.object().shape({
   confirmation_code: Yup.string()
@@ -30,37 +27,35 @@ interface IProps {
   setTitle: Function;
 }
 
-const Confirm: React.FC<IProps> = ({ setTitle }) => {
+const NewPhoneConfirm: React.FC<IProps> = ({ setTitle }) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { statusCode, error } = useAppSelector(
-    (state) => state.confirm.loginConfirm
+    (state) => state.confirm.newPhoneConfirm
   );
-  const user = JSON.parse(localStorage.getItem("user") || "");
+  const state = useAppSelector(state => state.confirm)
+  
+  const phone = JSON.parse(localStorage.getItem("userPhone") || "");
 
-  const login = async () => {
-    await dispatch(
-      loginThunk({
-        phone: user.phone,
-        password: user.password,
-      })
-    );
-    setTitle("Телефон подтвержден");
-    navigate("/success-page");
-  };
-
-  if (statusCode) {
-    login();
-  }
-
-  const onSubmit = (values: FormValues) => {
+  const onSubmit = (values: IConfCode) => {
     dispatch(
-      confirmThunk({
-        ...user,
+      newPhoneConfirmThunk({
         confirmation_code: values.confirmation_code,
+        phone: phone,
       })
     );
   };
+
+  useEffect(() => {
+  console.log(statusCode);
+  console.log(state);
+  
+
+    if (statusCode === "New phone is confirmed") {
+      setTitle("Номер успешно изменен");
+      navigate("/success-page");
+    }
+  }, [statusCode]);
 
   return (
     <div className={styles.confirm}>
@@ -73,7 +68,7 @@ const Confirm: React.FC<IProps> = ({ setTitle }) => {
           <Form className={styles.form}>
             <h3 className={styles.title}>Подтверждение номера телефона</h3>
             <div>
-              <p className={styles.number}> {user.phone}</p>
+              <p className={styles.number}> {phone}</p>
               <div className={styles.confirmationMessage}>
                 Неверный номер телефона?
               </div>
@@ -112,4 +107,4 @@ const Confirm: React.FC<IProps> = ({ setTitle }) => {
   );
 };
 
-export default Confirm;
+export default NewPhoneConfirm;
