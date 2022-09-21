@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation, Link as RouterLink, useParams } from "react-router-dom";
 import { Breadcrumbs, Typography, Link } from "@mui/material";
 import styles from "./BreadCrumps.module.scss";
+import { useAppSelector } from "../../hooks";
+import { getCompanyDetails } from "../../api/api";
 
 function titleRussianCase(str: string) {
   if (str === "confidential") return "Политика конфиденциальности";
@@ -22,6 +24,30 @@ const BreadCrumps = () => {
   let location = useLocation();
   const pathnames = location.pathname.split("/").filter((x) => x);
 
+  const { id } = useParams() as {
+    id: string;
+  };
+
+  interface ICompany {
+    company_name: string | null;
+  }
+
+  const [companyInfo, setCompanyInfo] = useState<ICompany>({
+    company_name: null,
+  });
+
+  const { coupon } = useAppSelector((state) => state.couponDetails);
+
+  useEffect(() => {
+    if (pathnames.includes("company")) {
+      const getCompanyData = async () => {
+        const response = await getCompanyDetails(id);
+        setCompanyInfo(response.data);
+      };
+      getCompanyData();
+    }
+  }, [id]);
+
   return (
     <div className="container">
       {pathnames.length > 0 && (
@@ -39,16 +65,10 @@ const BreadCrumps = () => {
               const last = index === pathnames.length - 1;
               const to = `/${pathnames.slice(0, index + 1).join("/")}`;
 
-              if (pathnames.includes("company"))
-                return (
-                  <Typography style={{ color: "#4F70E2" }} key={to}>
-                    {titleRussianCase(value)}
-                  </Typography>
-                );
-
               return last ? (
                 <Typography style={{ color: "#4F70E2" }} key={to}>
-                  {decodeURIComponent(value)}
+                  {pathnames.includes("company") && companyInfo?.company_name}
+                  {pathnames.includes("coupon") && coupon?.title}
                 </Typography>
               ) : (
                 <Typography style={{ color: "#4F70E2" }} key={index}>

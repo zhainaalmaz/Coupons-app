@@ -1,5 +1,5 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
-import React, { useEffect } from "react";
+import React, { useEffect, FC } from "react";
 import styles from "./NewPhoneConfirm.module.scss";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
@@ -28,7 +28,7 @@ interface IProps {
   setTitle: Function;
 }
 
-const NewPhoneConfirm: React.FC<IProps> = ({ setTitle }) => {
+const NewPhoneConfirm: FC<IProps> = ({ setTitle }) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { statusCode, error } = useAppSelector(

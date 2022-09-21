@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Hidden, IconButton, SwipeableDrawer } from "@mui/material";
 
 import CloseIcon from "@mui/icons-material/Close";
@@ -15,7 +15,7 @@ import { getContactAsync } from "../../store/slices/contactSlice";
 import { Link } from "react-router-dom";
 
 const Header = () => {
-  const [open, setOpen] = React.useState<boolean>(false);
+  const [open, setOpen] = useState<boolean>(false);
   const dispatch = useAppDispatch();
   const state = useAppSelector((state) => state.contacts);
 
