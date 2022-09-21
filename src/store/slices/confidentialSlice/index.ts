@@ -32,7 +32,6 @@ export const confidentialSlice = createSlice({
     .addCase(getConfidentialtAsync.pending , (state) => {
             state.isLoading = true
     }).addCase(getConfidentialtAsync.fulfilled, (state, action) => {
-        console.log(action.payload)
         state.isLoading = false
         state.title = action.payload.title
         state.description = action.payload.description

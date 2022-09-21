@@ -41,6 +41,11 @@ const Favorites = () => {
   const [limit, setLimit] = useState(0);
 
   useEffect(() => {
+    setState(user ? AuthFavoriteCoupons : favoriteCoupons);
+    console.log(state, "auth-cou");
+  }, [AuthFavoriteCoupons.length, favoriteCoupons]);
+
+  useEffect(() => {
     setLimit(8);
     applyFilters();
   }, []);

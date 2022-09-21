@@ -30,8 +30,6 @@ export const CouponDetailsState = createSlice({
       })
       .addCase(getCouponAsync.fulfilled, (state, action) => {
         state.status = "idle";
-        console.log("NEW ID !!!");
-
         state.coupon = action.payload;
       })
       .addCase(getCouponAsync.rejected, (state) => {

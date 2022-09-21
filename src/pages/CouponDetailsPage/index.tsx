@@ -103,11 +103,6 @@ const CouponDetailsPage = () => {
     dispatch(getCouponAsync(id));
   }, [id]);
 
-  console.log("DETAILS: ");
-  console.log(coupon);
-  console.log("newState");
-  console.log(newState);
-
   return (
     <>
       <BreadCrumps />

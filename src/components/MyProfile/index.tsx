@@ -43,7 +43,6 @@ const MyProfile = ({ user }: Props) => {
     first_name: user.first_name,
     last_name: user.last_name,
   };
-  console.log(initialValues);
   const onSubmit = async (values: IValues) => {
     const response = await changeProfile({
       first_name: values.first_name,

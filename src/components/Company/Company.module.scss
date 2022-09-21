@@ -1,24 +1,141 @@
 .header {
-    display: flex;
-    gap: 1em;
+  display: flex;
+  gap: 1em;
+  margin-bottom: 20px;
+
+  @media (max-width: 500px) {
+    flex-wrap: wrap;
+  }
+}
+
+.myCoupons {
+  display: grid;
+  margin-bottom: 35px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 300px));
+  place-content: center;
+  padding-top: 24px;
+  gap: 30px 15px;
+  @media (min-width: 800px) {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+  @media (min-width: 1061px) {
+    grid-template-columns: repeat(4, minmax(220px, 1fr));
+  }
+  &_button {
+    padding: 12px;
+    text-align: center;
+  }
+}
+
+.infoWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3em;
+}
+
+.footerBlock {
+  font-weight: 400;
+  font-size: 14px;
+  color: #171717;
+  margin-top: 20px;
+
+  h4 {
+    margin: 0 0 16px 0;
+  }
+
+  h5 {
+    margin: 0 0 16px 0;
+    font-size: 14px;
+  }
+
+  p {
+    width: 90%;
+    margin: 0 0 20px 0;
+
+    &:hover {
+      color: #4b5fa5;
+      cursor: pointer;
+    }
+  }
+
+  a,
+  span {
+    margin: 0 0 20px 0;
+
+    &:hover {
+      color: #4b5fa5;
+      cursor: pointer;
+    }
+  }
+}
+
+.footerInnerBlock {
+  display: flex;
+  align-items: center;
+
+  img {
+    margin: 0 10px 20px 0;
+  }
 }
 
 .title {
-    font-weight: bold;
-    font-size: 1.2rem;
-    margin-bottom: 1em;
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin-bottom: 1em;
 
-    &::first-letter {
-        text-transform: uppercase;
-    }
+  &::first-letter {
+    text-transform: uppercase;
+  }
 }
 
 .description {
-    line-height: 130%;
+  line-height: 130%;
 }
 
 .logo {
-    width: 200px;
-    height: 200px;
-    object-fit: cover;
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+}
+
+.buttons {
+  margin-top: 20px;
+  max-width: 250px;
+  background-color: #edf1fd;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 8px;
+  gap: 8px;
+
+  button {
+    background: transparent;
+    cursor: pointer;
+    border: none;
+    color: #4b5fa5;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 150%;
+    padding: 5px 32px;
+  }
+}
+
+.activeButton {
+  background: #ffffff !important;
+  border-radius: 8px;
+  padding: 5px 20px 7px;
+}
+
+.empty {
+  text-align: center;
+}
+
+@media (max-width: 992px) {
+  .buttons {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+  }
 }

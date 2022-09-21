@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Card from "../../UI/Card/Card";
 import styles from "./CouponDetails.module.scss";
-import GoogleMapReact, { MapOptions } from "google-map-react";
 
 import defaultImage from "../../assets/couponsImg/defoltIMG.png";
 import { ReactComponent as FavoriteIcon } from "../../assets/card/favorited.svg";
@@ -81,9 +80,14 @@ const CouponDetailsPage = ({
   navigateToCompany,
 }: Props) => {
   const regex = /\-/g;
-  console.log(coupon);
+
   const startDate = coupon?.start_active_date.replace(regex, ".");
   const endDate = coupon?.end_active_date.replace(regex, ".");
+
+  let geo: any = [42.9430169, 74.6447229];
+  if (coupon?.map_locations.length > 0) {
+    geo = coupon.map_locations[0]?.geolocation.split(",");
+  }
 
   return (
     <div className={styles.coupon}>
@@ -226,27 +230,9 @@ const CouponDetailsPage = ({
         </>
       )}
 
-      <div style={{ width: "100%", height: 400, marginTop: 50 }}>
-        <Map />
-      </div>
-
-      {coupon.map_locations && coupon.map_locations.length > 0 && (
-        <div className={styles.map}>
-          <div className={styles.geolocation}></div>
-          <div className={styles?.adresses}>
-            <div className={styles?.adress}>
-              {coupon.map_locations[0].address}
-            </div>
-            <div className={styles?.adress}>
-              {coupon.map_locations[0].address}
-            </div>
-            <div className={styles?.adress}>
-              {coupon.map_locations[0].address}
-            </div>
-            <div className={styles?.adress}>
-              {coupon.map_locations[0].address}
-            </div>
-          </div>
+      {geo && (
+        <div style={{ width: "100%", height: 400, marginTop: 50, maxHeight: 400, overflow: "hidden" }}>
+          <Map dol={geo[0]} shir={geo[1]} />
         </div>
       )}
     </div>

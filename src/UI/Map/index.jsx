@@ -1,5 +1,5 @@
 import { load } from "@2gis/mapgl";
-import React, {useMemo, useEffect} from "react"
+import React, { useEffect, useState } from "react";
 
 const MapWrapper = React.memo(
   () => {
@@ -10,22 +10,41 @@ const MapWrapper = React.memo(
   () => true
 );
 
-export const Map = () => {
+export const Map = ({ dol, shir }) => {
+  const [isAdded, setIsAdded] = useState(false);
+
   useEffect(() => {
     let map;
-    load().then((mapglAPI) => {
-      map = new mapglAPI.Map("map-container", {
-        center: [55.31878, 25.23584],
-        zoom: 13,
-        key: "a4fb5205-d166-4ab4-89a5-a0e737aeb099",
-      });
-    });
+    let marker;
+    if (!isAdded) {
+      if (!map) {
+        load().then((mapglAPI) => {
+          map = new mapglAPI.Map("map-container", {
+            center: [+shir, +dol],
+            zoom: 17,
+            key: "a4fb5205-d166-4ab4-89a5-a0e737aeb099",
+          });
 
-    return () => map && map.destroy();
+          marker = new mapglAPI.Marker(map, {
+            coordinates: [+shir, +dol],
+          });
+        });
+      }
+      setIsAdded(true);
+    }
+
+    return () => {
+      map && map.destroy();
+      marker && marker.destroy();
+    };
   }, []);
 
+  if (isAdded) {
+    <></>;
+  }
+
   return (
-    <div style={{ width: "100%", height: "100%" }}>
+    <div style={{ width: "100%", height: "100%", maxHeight: "400px" }}>
       <MapWrapper />
     </div>
   );
