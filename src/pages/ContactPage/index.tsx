@@ -12,10 +12,12 @@ import { ReactComponent as OdnoklassnikiIcon } from "../../assets/footerIcons/od
 import { ReactComponent as InstagramIcon } from "../../assets/footerIcons/instagram.svg";
 import { ReactComponent as LocationIcon } from "../../assets/navigator/location.svg";
 import BreadCrumps from "../../components/BreadCrumps/BreadCrumps";
+import { Map } from "../../UI/Map";
 
 const ContactPage = () => {
   const dispatch = useAppDispatch();
   const data = useAppSelector((state) => state.contacts);
+  console.log(data);
 
   useEffect(() => {
     dispatch(getContactAsync());
@@ -106,6 +108,18 @@ const ContactPage = () => {
                     </a>
                   </div>
                 </div>
+              </div>
+
+              <div
+                style={{
+                  width: "100%",
+                  height: 400,
+                  marginTop: 50,
+                  maxHeight: 400,
+                  overflow: "hidden",
+                }}
+              >
+                <Map dol={"42.87462"} shir={"74.56976"} />
               </div>
             </div>
           </div>

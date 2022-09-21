@@ -42,12 +42,14 @@ function App() {
       <ScrollToTop />
 
       <Routes>
+        {/* {routes.map(el => (
+          <Route path={el.path} element={el.component}/>
+        ))} */}
         <Route path={"/"} element={<Main />} />
         <Route path={"profile"} element={<ProfilePage />} />
         <Route path={"sign-up"} element={<Signup />} />
         <Route path={"enter"} element={<Enter />} />
         <Route path={"sign-in"} element={<Signin />} />
-        {/* <Route path={"login-success"} element={<LoginSuccess />} /> */}
 
         <Route
           path={"change-password"}

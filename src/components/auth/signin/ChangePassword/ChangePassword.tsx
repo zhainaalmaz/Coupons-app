@@ -24,11 +24,11 @@ const initialValue: IPassword = {
 const passwordSchema = Yup.object().shape({
   old_password: Yup.string()
     .min(1, "Too Short!")
-    .max(12, "Too Long!")
+    .max(15, "Too Long!")
     .required("Введите пароль"),
   new_password: Yup.string()
     .min(1, "Too Short!")
-    .max(12, "Too Long!")
+    .max(15, "Too Long!")
     .required("Повторите пароль"),
   new_password_repeat: Yup.string()
     .oneOf([Yup.ref("new_password"), null], "Пароли должны совпадать")
@@ -51,6 +51,22 @@ const ChangePassword: React.FC<IProps> = ({ setTitle }) => {
     if (status === "fulfilled") navigate("/success-page");
   }, [status]);
 
+  interface IValues {
+    old_password: string;
+    new_password: string;
+    new_password_repeat: string;
+  }
+
+  const submitHandler = (values: IValues) => {
+    dispatch(
+      changePasswordThunk({
+        old_password: values.old_password,
+        new_password: values.new_password,
+        new_password_repeat: values.new_password_repeat,
+      })
+    );
+  };
+
   return (
     <div className={styles.changePassword}>
       <div className="container">
@@ -59,15 +75,7 @@ const ChangePassword: React.FC<IProps> = ({ setTitle }) => {
           <Formik
             initialValues={initialValue}
             validationSchema={passwordSchema}
-            onSubmit={(values, actions) => {
-              dispatch(
-                changePasswordThunk({
-                  old_password: values.old_password,
-                  new_password: values.new_password,
-                  new_password_repeat: values.new_password_repeat,
-                })
-              );
-            }}
+            onSubmit={(values) => submitHandler(values)}
           >
             <Form className={styles.form}>
               <div className={styles.inputsWrapper}>
@@ -78,7 +86,9 @@ const ChangePassword: React.FC<IProps> = ({ setTitle }) => {
                     name="old_password"
                     placeholder="Текущий пароль"
                   />
-                  {status === "rejected" && <div className={styles.errorPassword}>Неверный пароль</div>}
+                  {status === "rejected" && (
+                    <div className={styles.errorPassword}>Неверный пароль</div>
+                  )}
                   <ErrorMessage
                     className={styles.errorMessage}
                     name="old_password"

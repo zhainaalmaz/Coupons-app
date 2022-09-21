@@ -13,7 +13,7 @@ import AuthButton from "../../../../UI/AuthButton/AuthButton";
 const ConfirmSchema = Yup.object().shape({
   confirmation_code: Yup.string()
     .min(1, "Too Short!")
-    .max(6, "Too Long!")
+    .max(15, "Too Long!")
     .required("Введите код"),
 });
 

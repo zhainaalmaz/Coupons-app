@@ -25,6 +25,10 @@ const initialValues: FormValue = {
   phone: "",
 };
 
+interface IValues {
+  phone: string
+}
+
 const Signin: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -35,6 +39,16 @@ const Signin: React.FC = () => {
     }
   }, [statusCode]);
 
+
+
+  const submitHandler = (values: IValues) => {
+    dispatch(
+      checkThunk({
+        phone: values.phone,
+      })
+    );
+    localStorage.setItem("userPhone", JSON.stringify(values));
+  };
   return (
     <div className={styles.signin}>
       <div className="container">
@@ -44,14 +58,7 @@ const Signin: React.FC = () => {
           <Formik
             initialValues={initialValues}
             validationSchema={LoginSchema}
-            onSubmit={values => {
-              dispatch(
-                checkThunk({
-                  phone: values.phone,
-                })
-              );
-              localStorage.setItem("userPhone", JSON.stringify(values));
-            }}
+            onSubmit={(values) => submitHandler(values)}
           >
             <Form className={styles.form}>
               <div className={styles.inputWrapper}>

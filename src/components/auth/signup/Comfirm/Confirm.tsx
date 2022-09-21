@@ -15,7 +15,7 @@ import { setUser } from "../../../../store/slices/userSlice";
 const ConfirmSchema = Yup.object().shape({
   confirmation_code: Yup.string()
     .min(1, "Too Short!")
-    .max(6, "Too Long!")
+    .max(15, "Too Long!")
     .required("Введите код"),
 });
 
@@ -46,7 +46,7 @@ const Confirm: React.FC<IProps> = ({ setTitle }) => {
         password: user.password,
       })
     );
-    dispatch(setUser());
+    await dispatch(setUser());
     setTitle("Телефон подтвержден");
     navigate("/success-page");
   };

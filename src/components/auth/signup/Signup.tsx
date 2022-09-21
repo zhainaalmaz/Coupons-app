@@ -54,10 +54,9 @@ const Signup: React.FC = () => {
     password2: "",
   };
 
-  const onSubmit = (values: FormValues) => {
+  const onSubmit = async (values: FormValues) => {
     localStorage.setItem("user", JSON.stringify(values));
-    dispatch(authThunk(values));
-
+    await dispatch(authThunk(values));
     navigate("/confirm");
   };
 
@@ -67,9 +66,7 @@ const Signup: React.FC = () => {
         <Formik
           initialValues={initialValues}
           validationSchema={SignupSchema}
-          onSubmit={(values) => {
-            onSubmit(values);
-          }}
+          onSubmit={(values) => onSubmit(values)}
         >
           <Form className={styles.form}>
             <h2 className={styles.heading}>Регистрация</h2>

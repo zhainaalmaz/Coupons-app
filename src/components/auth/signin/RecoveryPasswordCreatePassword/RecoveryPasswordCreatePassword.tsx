@@ -38,8 +38,8 @@ const RecoveryPasswordCreatePassword: React.FC<IProps> = ({ setTitle }) => {
     password2: "",
   };
 
-  const onSubmit = (values: FormValues) => {
-    dispatch(
+  const onSubmit = async (values: FormValues) => {
+    await dispatch(
       recoveryPasswordThunk({
         phone: user.phone,
         confirmation_code: confirmation_code,
@@ -57,9 +57,7 @@ const RecoveryPasswordCreatePassword: React.FC<IProps> = ({ setTitle }) => {
         <Formik
           initialValues={initialValues}
           validationSchema={SignupSchema}
-          onSubmit={(values) => {
-            onSubmit(values);
-          }}
+          onSubmit={(values) =>  onSubmit(values)}
         >
           <Form className={styles.form}>
             <h2 className={styles.heading}>Восстановление пароля</h2>
