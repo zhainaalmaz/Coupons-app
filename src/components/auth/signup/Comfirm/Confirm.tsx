@@ -97,7 +97,7 @@ const Confirm: React.FC<IProps> = ({ setTitle }) => {
             </div>
             <div>
               <AuthButton type="submit">
-                <p>Подтвердить</p>
+                <>Подтвердить</>
               </AuthButton>
             </div>
 

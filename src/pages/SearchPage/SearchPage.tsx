@@ -16,21 +16,21 @@ const SearchPage = () => {
   const [sort, setSort] = useState("lowPrice");
   const modalRef = useRef<HTMLInputElement>(null);
   const [count, setCount] = useState(8);
-  const [isLoading, setIsLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState(true);
 
-    const generateMoreCoupns = () => {
+  const generateMoreCoupns = () => {
     setCount((count) => count + 8);
   };
 
   useEffect(() => {
     async function search() {
-        setIsLoading(true)
+      setIsLoading(true);
       if (searchItem) {
         const response = await searchCoupons(searchItem);
         setSearchedCoupons(
           response.data.results.sort((a: any, b: any) => +a.price - +b.price)
         );
-          setTimeout(() => setIsLoading(false), 500)
+        setTimeout(() => setIsLoading(false), 500);
       }
     }
     search();
@@ -42,6 +42,8 @@ const SearchPage = () => {
   };
 
   useClickOutside(modalRef, setSortModal);
+
+  console.log(modalRef);
 
   function sortCoupons(_sort: string) {
     if (_sort === "alphabet") {
@@ -109,14 +111,15 @@ const SearchPage = () => {
           {searchedCoupons.length > 0 ? (
             <>
               <div className={styles.cardFlexContainer}>
-                {searchedCoupons.slice(0, count).map((it: ISearchItem) => (
-                    isLoading ?
-                        <Skeleton key={it.id} />
-                        :
-                        <Link to={"/coupon/" + it.id} key={it.id}>
-                            <Card it={it}  />
-                        </Link>
-                ))}
+                {searchedCoupons.slice(0, count).map((it: ISearchItem) =>
+                  isLoading ? (
+                    <Skeleton key={it.id} />
+                  ) : (
+                    <Link to={"/coupon/" + it.id} key={it.id}>
+                      <Card it={it} />
+                    </Link>
+                  )
+                )}
               </div>
               {count < searchedCoupons.length && (
                 <div className={styles.moreButtonBox}>
