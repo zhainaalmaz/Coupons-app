@@ -31,7 +31,7 @@ const loginSlice = createSlice({
         state.error = action.meta.requestStatus;
 
         const localToken = { ...action.payload }.access.split(".");
-        const token = localToken[0]
+        const token = localToken[0] + Date.now()
 
         localStorage.setItem(
           "currentUser",

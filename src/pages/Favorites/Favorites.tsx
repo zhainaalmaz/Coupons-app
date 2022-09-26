@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import BreadCrumps from "../../components/BreadCrumps/BreadCrumps";
 import { useAppSelector, useAutoFetchData } from "../../hooks";
@@ -35,12 +35,14 @@ const Favorites = () => {
     (state) => state.favorite.authFavoriteCoupons
   );
 
-  const [state, setState] = useState(
+  const [state, setState] = useState<any[]>(
     user ? AuthFavoriteCoupons : favoriteCoupons
   );
+  
   const [limit, setLimit] = useState(0);
+  const [sortModal, setSortModal] = useState(false);
 
-  console.log(state);
+  const ref = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     setState(user ? AuthFavoriteCoupons : favoriteCoupons);
@@ -48,7 +50,7 @@ const Favorites = () => {
 
   useEffect(() => {
     setLimit(8);
-    applyFilters();
+    applyFilters("alphabet");
   }, []);
 
   const changeLimit = (num: number) => {
@@ -57,22 +59,26 @@ const Favorites = () => {
 
   useAutoFetchData(changeLimit);
 
-  function applyFilters(_sorted = "name") {
-    const sortedState = state.slice().sort((a: Icoupon, b: Icoupon) => {
-      switch (_sorted) {
-        case "priceDesc":
-          return +b.price - +a.price;
-        case "priceAsc":
-          return +a.price - +b.price;
-        default:
-          return a.company_name.localeCompare(b.company_name);
-      }
-    });
-    setState(sortedState);
+  function applyFilters(sortedState: string) {
+    if (sortedState === "alphabet") {
+      setState(
+        [...state].sort((a, b) => a.company_name.localeCompare(b.company_name))
+      );
+    } else if (sortedState === "lowPrice") {
+      setState([...state].sort((a, b) => +a.price - +b.price));
+    } else if (sortedState === "highPrice") {
+      setState([...state].sort((a, b) => +b.price - +a.price));
+    }
+    setTimeout(() => setSortModal(false), 0);
   }
 
-  const handleChange = (sorted: any) => {
-    applyFilters(sorted.target.value);
+  const closeModal = (e: React.MouseEvent<HTMLElement>) => {
+    e.stopPropagation();
+    setSortModal(false);
+  };
+
+  const handleClick = (_sort: string) => {
+    applyFilters(_sort);
   };
 
   return (
@@ -83,29 +89,44 @@ const Favorites = () => {
           <div className={styles.header}>
             <h2>Избранное</h2>
 
-            {state.length > 0 && (
-              <div className={styles.select}>
-                <Select
-                  onChange={handleChange}
-                  label="Сортировать по"
-                  name="sort"
-                  options={[
-                    {
-                      label: "Name",
-                      value: "name",
-                    },
-                    {
-                      label: "Price High",
-                      value: "priceDesc",
-                    },
-                    {
-                      label: "Price Low",
-                      value: "priceAsc",
-                    },
-                  ]}
-                />
-              </div>
-            )}
+            <div
+              ref={ref}
+              onClick={() => setSortModal(true)}
+              className={styles.sort}
+            >
+              <p>Сортировать по</p>
+              <span>&#9660;</span>
+              {sortModal && (
+                <div className={styles.sortBox} onClick={(e) => closeModal(e)}>
+                  <div className={styles.sortBoxInner}>
+                    <div className={styles.sorts}>
+                      <p>Сортировать по</p>
+                    </div>
+                    <button
+                      onClick={() => {
+                        handleClick("alphabet");
+                      }}
+                    >
+                      По алфавиту
+                    </button>
+                    <button
+                      onClick={() => {
+                        handleClick("lowPrice");
+                      }}
+                    >
+                      По цене (низкая {">"} высокая)
+                    </button>
+                    <button
+                      onClick={() => {
+                        handleClick("highPrice");
+                      }}
+                    >
+                      По цене (высокая {">"} низкая)
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
           {state.length > 0 ? (
             <div className={styles.favorite_cards}>
