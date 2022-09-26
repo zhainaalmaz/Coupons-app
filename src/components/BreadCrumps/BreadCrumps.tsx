@@ -69,6 +69,7 @@ const BreadCrumps = () => {
                 <Typography style={{ color: "#4F70E2" }} key={to}>
                   {pathnames.includes("company") && companyInfo?.company_name}
                   {pathnames.includes("coupon") && coupon?.title}
+                  {pathnames.includes("searchpage") && decodeURI(pathnames[1])}
                 </Typography>
               ) : (
                 <Typography style={{ color: "#4F70E2" }} key={index}>
