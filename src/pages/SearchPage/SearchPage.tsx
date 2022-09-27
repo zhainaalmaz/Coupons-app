@@ -43,8 +43,6 @@ const SearchPage = () => {
 
   useClickOutside(modalRef, setSortModal);
 
-  console.log(modalRef);
-
   function sortCoupons(_sort: string) {
     if (_sort === "alphabet") {
       setSearchedCoupons(
