@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import BreadCrumps from "../../components/BreadCrumps/BreadCrumps";
-import { useAppSelector, useAutoFetchData } from "../../hooks";
+import { useAppSelector, useAutoFetchData, useClickOutside } from "../../hooks";
 import Card from "../../UI/Card/Card";
 import Select from "../../UI/Sort/SortItem";
 import styles from "./Favorites.module.scss";
@@ -38,7 +38,7 @@ const Favorites = () => {
   const [state, setState] = useState<any[]>(
     user ? AuthFavoriteCoupons : favoriteCoupons
   );
-  
+
   const [limit, setLimit] = useState(0);
   const [sortModal, setSortModal] = useState(false);
 
@@ -58,6 +58,7 @@ const Favorites = () => {
   };
 
   useAutoFetchData(changeLimit);
+  useClickOutside(ref, setSortModal);
 
   function applyFilters(sortedState: string) {
     if (sortedState === "alphabet") {
