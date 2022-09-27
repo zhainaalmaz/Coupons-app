@@ -22,8 +22,8 @@ const SuccessPage = ({ title }: IProps) => {
         <div className={styles.wrapper}>
           <Success />
           <h3>{title}</h3>
-          <p onClick={navigateHandler}>
-            <AuthButton type="submit">
+          <p className={styles.p} onClick={navigateHandler}>
+            <AuthButton  type="submit">
               <p>На главную</p>
             </AuthButton>
           </p>

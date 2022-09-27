@@ -17,7 +17,6 @@ import { Map } from "../../UI/Map";
 const ContactPage = () => {
   const dispatch = useAppDispatch();
   const data = useAppSelector((state) => state.contacts);
-  console.log(data);
 
   useEffect(() => {
     dispatch(getContactAsync());

@@ -57,6 +57,11 @@ const SearchPage = () => {
     }
     setTimeout(() => setSortModal(false), 0);
   }
+
+  const closeModal = (e: React.MouseEvent<HTMLElement>) => {
+    e.stopPropagation();
+    setSortModal(false);
+  };
   return (
     <>
       <BreadCrumps />
@@ -73,11 +78,10 @@ const SearchPage = () => {
               <p>Сортировать по</p>
               <span>&#9660;</span>
               {sortModal && (
-                <div className={styles.sortBox}>
+                <div className={styles.sortBox} onClick={(e) => closeModal(e)}>
                   <div className={styles.sortBoxInner}>
                     <div className={styles.sorts}>
                       <p>Сортировать по</p>
-                      <span>&#9660;</span>
                     </div>
                     <button
                       onClick={() => {
